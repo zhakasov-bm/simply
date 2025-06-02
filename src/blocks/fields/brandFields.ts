@@ -1,0 +1,23 @@
+import { Field } from 'payload'
+
+export const brandFields: Field[] = [
+  {
+    name: 'heading',
+    type: 'text',
+    required: true,
+  },
+  {
+    name: 'logos',
+    type: 'array',
+    label: 'Логотипы компаний',
+    minRows: 1,
+    fields: [
+      {
+        name: 'logo',
+        type: 'upload',
+        relationTo: 'media',
+        required: true,
+      },
+    ],
+  },
+]
