@@ -14,7 +14,6 @@ import TeamBlock from './components/TeamBlock'
 import CertificateBlock from './components/CertificateBlock'
 import ReviewsBlock from './components/ReviewsBlock'
 import BrandsBlock from './components/BrandsBlock'
-import { block } from 'sharp'
 
 export default async function HomePage() {
   const headers = await getHeaders()
