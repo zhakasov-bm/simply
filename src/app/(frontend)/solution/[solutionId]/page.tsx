@@ -3,11 +3,24 @@ import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import Image from 'next/image'
+import TeamBlock from '../../_components/TeamBlock'
+import ReviewBlock from '../../_components/ReviewsBlock'
+import CertificateBlock from '../../_components/CertificateBlock'
+import BrandsBlock from '../../_components/BrandsBlock'
+import InfoBlock from './_components/InfoBlock'
+import ProblemBlock from '../components/ProblemBlock'
+import LeadCaptureBlock from '../../_components/LeadCaptureBlock'
+import Hero from './_components/Hero'
+import WhyUsBlock from './_components/WhyUsBlock'
+import AvailableServices from './_components/AvailableServices'
+import { block } from 'sharp'
 
 export default async function SolutionPage({ params }: { params: { solutionId: string } }) {
   const { solutionId } = await params
 
   const payload = await getPayload({ config: configPromise })
+  const component = await payload.findGlobal({ slug: 'component' })
+  const formBlocks = component.globals.filter((block) => block.blockType === 'form')
 
   let solution: Solution | null = null
 
@@ -28,32 +41,18 @@ export default async function SolutionPage({ params }: { params: { solutionId: s
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 cursor-pointer">
-      <div className="bg-lightBG rounded-2xl p-6 flex">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-2xl">{solution.name}</h1>
-          <div className="flex flex-wrap w-full gap-2 py-2">
-            {solution.details?.map((item, i) => (
-              <span key={i} className="px-3 py-1 border border-black/20 rounded-2xl text-sm">
-                {item.name}
-              </span>
-            ))}
-          </div>
-        </div>
+    <div>
+      <Hero component={component} solution={solution} />
+      <LeadCaptureBlock block={formBlocks[0]} />
+      <BrandsBlock component={component} />
 
-        <div>
-          {typeof solution.icon === 'object' && solution.icon.url && (
-            <Image
-              src={solution.icon.url}
-              alt={solution.icon.alt}
-              width={200}
-              height={200}
-              className="contain"
-              draggable={false}
-            />
-          )}
-        </div>
-      </div>
+      <InfoBlock solution={solution} />
+      <ProblemBlock solution={solution} />
+      <AvailableServices component={component} />
+      <TeamBlock component={component} />
+      <ReviewBlock component={component} />
+      <WhyUsBlock component={component} />
+      <CertificateBlock component={component} />
     </div>
   )
 }

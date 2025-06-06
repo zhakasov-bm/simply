@@ -69,8 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    pages: Page;
     solutions: Solution;
+    cases: Case;
     forms: Form;
     'form-submissions': FormSubmission;
     'payload-locked-documents': PayloadLockedDocument;
@@ -81,8 +81,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    pages: PagesSelect<false> | PagesSelect<true>;
     solutions: SolutionsSelect<false> | SolutionsSelect<true>;
+    cases: CasesSelect<false> | CasesSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -92,8 +92,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    component: Component;
+  };
+  globalsSelect: {
+    component: ComponentSelect<false> | ComponentSelect<true>;
+  };
   locale: 'ru' | 'kz';
   user: User & {
     collection: 'users';
@@ -159,135 +163,47 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
+ * via the `definition` "solutions".
  */
-export interface Page {
+export interface Solution {
   id: string;
-  title: string;
+  name: string;
+  subtitle: string;
   slug: string;
-  layout: (
+  category: 'content' | 'pr' | 'brand' | 'website';
+  heading: string;
+  title?: string | null;
+  description?: string | null;
+  icon: string | Media;
+  details?:
     | {
-        heading: string;
-        subheading: string;
+        name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  titleWhy: string;
+  problem: {
+    title: string;
+    subtitle: string;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cases".
+ */
+export interface Case {
+  id: string;
+  heading: string;
+  cases?:
+    | {
+        category: ('content' | 'pr' | 'brand' | 'website')[];
         image: string | Media;
-        turing: string;
-        cta_button: {
-          label: string;
-          url: string;
-        };
         id?: string | null;
-        blockName?: string | null;
-        blockType: 'hero';
-      }
-    | {
-        heading: string;
-        content: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        statistics: {
-          title: string;
-          description: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'about';
-      }
-    | {
-        heading: string;
-        logos?:
-          | {
-              logo: string | Media;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'trusted-by';
-      }
-    | {
-        heading?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'services';
-      }
-    | {
-        heading: string;
-        form: string | Form;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'form';
-      }
-    | {
-        heading: string;
-        descriptions: {
-          title: string;
-          message: string;
-          id?: string | null;
-        }[];
-        certificates?:
-          | {
-              certificate: string | Media;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'certificate';
-      }
-    | {
-        heading: string;
-        reviews?:
-          | {
-              author: string;
-              position: string;
-              message: string;
-              avatar: string | Media;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'reviews';
-      }
-    | {
-        heading: string;
-        logos?:
-          | {
-              logo: string | Media;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'brands';
-      }
-    | {
-        heading: string;
-        description: string;
-        avatars?:
-          | {
-              avatar: string | Media;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'team';
-      }
-  )[];
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -467,62 +383,6 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "solutions".
- */
-export interface Solution {
-  id: string;
-  name: string;
-  slug: string;
-  category: 'content' | 'pr' | 'brand' | 'website';
-  description?: string | null;
-  icon: string | Media;
-  details?:
-    | {
-        name?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  layout: (
-    | {
-        heading: string;
-        logos?:
-          | {
-              logo: string | Media;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'brands';
-      }
-    | {
-        heading: string;
-        reviews?:
-          | {
-              author: string;
-              position: string;
-              message: string;
-              avatar: string | Media;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'reviews';
-      }
-    | {
-        heading: string;
-        form: string | Form;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'form';
-      }
-  )[];
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "form-submissions".
  */
 export interface FormSubmission {
@@ -554,12 +414,12 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'pages';
-        value: string | Page;
-      } | null)
-    | ({
         relationTo: 'solutions';
         value: string | Solution;
+      } | null)
+    | ({
+        relationTo: 'cases';
+        value: string | Case;
       } | null)
     | ({
         relationTo: 'forms';
@@ -646,148 +506,15 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages_select".
- */
-export interface PagesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  layout?:
-    | T
-    | {
-        hero?:
-          | T
-          | {
-              heading?: T;
-              subheading?: T;
-              image?: T;
-              turing?: T;
-              cta_button?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        about?:
-          | T
-          | {
-              heading?: T;
-              content?: T;
-              statistics?:
-                | T
-                | {
-                    title?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'trusted-by'?:
-          | T
-          | {
-              heading?: T;
-              logos?:
-                | T
-                | {
-                    logo?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        services?:
-          | T
-          | {
-              heading?: T;
-              id?: T;
-              blockName?: T;
-            };
-        form?:
-          | T
-          | {
-              heading?: T;
-              form?: T;
-              id?: T;
-              blockName?: T;
-            };
-        certificate?:
-          | T
-          | {
-              heading?: T;
-              descriptions?:
-                | T
-                | {
-                    title?: T;
-                    message?: T;
-                    id?: T;
-                  };
-              certificates?:
-                | T
-                | {
-                    certificate?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        reviews?:
-          | T
-          | {
-              heading?: T;
-              reviews?:
-                | T
-                | {
-                    author?: T;
-                    position?: T;
-                    message?: T;
-                    avatar?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        brands?:
-          | T
-          | {
-              heading?: T;
-              logos?:
-                | T
-                | {
-                    logo?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        team?:
-          | T
-          | {
-              heading?: T;
-              description?: T;
-              avatars?:
-                | T
-                | {
-                    avatar?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "solutions_select".
  */
 export interface SolutionsSelect<T extends boolean = true> {
   name?: T;
+  subtitle?: T;
   slug?: T;
   category?: T;
+  heading?: T;
+  title?: T;
   description?: T;
   icon?: T;
   details?:
@@ -796,46 +523,29 @@ export interface SolutionsSelect<T extends boolean = true> {
         name?: T;
         id?: T;
       };
-  layout?:
+  titleWhy?: T;
+  problem?:
     | T
     | {
-        brands?:
-          | T
-          | {
-              heading?: T;
-              logos?:
-                | T
-                | {
-                    logo?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        reviews?:
-          | T
-          | {
-              heading?: T;
-              reviews?:
-                | T
-                | {
-                    author?: T;
-                    position?: T;
-                    message?: T;
-                    avatar?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        form?:
-          | T
-          | {
-              heading?: T;
-              form?: T;
-              id?: T;
-              blockName?: T;
-            };
+        title?: T;
+        subtitle?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cases_select".
+ */
+export interface CasesSelect<T extends boolean = true> {
+  heading?: T;
+  cases?:
+    | T
+    | {
+        category?: T;
+        image?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1020,6 +730,341 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "component".
+ */
+export interface Component {
+  id: string;
+  globals: (
+    | {
+        heading: string;
+        subheading: string;
+        image: string | Media;
+        turing: string;
+        cta_button: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }
+    | {
+        heading: string;
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        statistics: {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'about';
+      }
+    | {
+        heading?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'services';
+      }
+    | {
+        heading: string;
+        description: string;
+        avatars?:
+          | {
+              avatar: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'team';
+      }
+    | {
+        heading: string;
+        form: string | Form;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'form';
+      }
+    | {
+        heading: string;
+        reviews?:
+          | {
+              author: string;
+              position: string;
+              message: string;
+              avatar: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'reviews';
+      }
+    | {
+        heading: string;
+        logos?:
+          | {
+              logo: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'trusted-by';
+      }
+    | {
+        heading: string;
+        descriptions: {
+          title: string;
+          message: string;
+          id?: string | null;
+        }[];
+        certificates?:
+          | {
+              certificate: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'certificate';
+      }
+    | {
+        heading: string;
+        logos?:
+          | {
+              logo: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'brands';
+      }
+    | {
+        heading: string;
+        items: {
+          title?: string | null;
+          description?: string | null;
+          icon: string | Media;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'why-us';
+      }
+    | {
+        heading: string;
+        services?:
+          | {
+              title: string;
+              description?: string | null;
+              icon: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'available-services';
+      }
+  )[];
+  statistics: {
+    text: string;
+    value: string;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "component_select".
+ */
+export interface ComponentSelect<T extends boolean = true> {
+  globals?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              image?: T;
+              turing?: T;
+              cta_button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        about?:
+          | T
+          | {
+              heading?: T;
+              content?: T;
+              statistics?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        services?:
+          | T
+          | {
+              heading?: T;
+              id?: T;
+              blockName?: T;
+            };
+        team?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              avatars?:
+                | T
+                | {
+                    avatar?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        form?:
+          | T
+          | {
+              heading?: T;
+              form?: T;
+              id?: T;
+              blockName?: T;
+            };
+        reviews?:
+          | T
+          | {
+              heading?: T;
+              reviews?:
+                | T
+                | {
+                    author?: T;
+                    position?: T;
+                    message?: T;
+                    avatar?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'trusted-by'?:
+          | T
+          | {
+              heading?: T;
+              logos?:
+                | T
+                | {
+                    logo?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        certificate?:
+          | T
+          | {
+              heading?: T;
+              descriptions?:
+                | T
+                | {
+                    title?: T;
+                    message?: T;
+                    id?: T;
+                  };
+              certificates?:
+                | T
+                | {
+                    certificate?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        brands?:
+          | T
+          | {
+              heading?: T;
+              logos?:
+                | T
+                | {
+                    logo?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'why-us'?:
+          | T
+          | {
+              heading?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'available-services'?:
+          | T
+          | {
+              heading?: T;
+              services?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  statistics?:
+    | T
+    | {
+        text?: T;
+        value?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

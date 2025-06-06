@@ -1,10 +1,9 @@
 'use client'
 
-import { Page } from '@/payload-types'
-import { RichText } from '@payloadcms/richtext-lexical/react'
+import { Component } from '@/payload-types'
 import { useState } from 'react'
 
-type LeadCaptureProps = Extract<Page['layout'][0], { blockType: 'form' }>
+type LeadCaptureProps = Extract<Component['globals'][0], { blockType: 'form' }>
 type FormState = {
   loading: boolean
   error: string | null

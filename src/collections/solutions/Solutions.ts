@@ -1,10 +1,11 @@
-import { BrandsBlock } from '@/blocks/BrandsBlock'
-import { FormBlock } from '@/blocks/FormBlock'
-import { ReviewsBlock } from '@/blocks/ReviewsBlock'
 import { CollectionConfig } from 'payload'
 
 export const Solutions: CollectionConfig = {
   slug: 'solutions',
+  labels: {
+    singular: 'Услуга',
+    plural: 'Услуги',
+  },
   admin: {
     useAsTitle: 'name',
   },
@@ -14,6 +15,11 @@ export const Solutions: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Название услуги',
+    },
+    {
+      name: 'subtitle',
+      type: 'text',
+      required: true,
     },
     {
       name: 'slug',
@@ -31,6 +37,16 @@ export const Solutions: CollectionConfig = {
         { label: 'Стратегия и Бренд', value: 'brand' },
         { label: 'Сайты и Технологии', value: 'website' },
       ],
+    },
+    {
+      name: 'heading',
+      type: 'text',
+      required: true,
+      label: 'Title of Block',
+    },
+    {
+      name: 'title',
+      type: 'text',
     },
     {
       name: 'description',
@@ -54,11 +70,27 @@ export const Solutions: CollectionConfig = {
       ],
     },
     {
-      name: 'layout',
-      type: 'blocks',
+      name: 'titleWhy',
+      type: 'text',
       required: true,
-      localized: true,
-      blocks: [BrandsBlock, ReviewsBlock, FormBlock],
+    },
+    {
+      name: 'problem',
+      type: 'array',
+      label: 'Проблемы',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'subtitle',
+          type: 'text',
+          required: true,
+        },
+      ],
+      required: true,
     },
   ],
 }
