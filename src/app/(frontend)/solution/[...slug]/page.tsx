@@ -45,7 +45,7 @@ export default async function SolutionPage({ params }: { params: { slug: string[
   let solutions: Solution[] = []
 
   try {
-    let solutionsRes = await payload.find({
+    const solutionsRes = await payload.find({
       collection: 'solutions',
       limit: 10,
     })

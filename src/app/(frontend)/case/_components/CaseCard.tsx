@@ -4,7 +4,7 @@ import Link from 'next/link'
 export function CaseCard({ item }: { item: Case }) {
   return (
     <Link
-      href={`/case/${item.id}`}
+      href={`/case/${item.slug}`}
       className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-cover bg-center group"
       style={{ backgroundImage: `url(${item.image?.url})` }}
     >

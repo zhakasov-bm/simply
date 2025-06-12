@@ -1,9 +1,9 @@
-import { Case } from '@/payload-types'
+import { Case, Solution } from '@/payload-types'
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import BrandsBlock from '../../_components/BrandsBlock'
-import Hero from '../../case/[caseId]/components/Hero'
+import Hero from './components/Hero'
 import OrderBLock from './components/OrderBlock'
 import ActionsBlock from './components/ActionsBlock'
 import ResultsBlock from './components/ResultsBlock'
@@ -13,31 +13,26 @@ import BGraphic from '../../_components/BGRaphic'
 import Header from '../../Header/Header'
 import Footer from '../../Footer/Footer'
 
-export default async function CasePage({ params }: { params: { caseId: string } }) {
-  const { caseId } = await params
+export default async function CasePage({ params }: { params: { slug: string } }) {
+  const caseId = params.slug[0]
 
   const payload = await getPayload({ config: configPromise })
   const component = await payload.findGlobal({ slug: 'component' })
   const formBlocks = component.globals.filter((block) => block.blockType === 'form')
   const navigation = await payload.findGlobal({ slug: 'navigation' })
 
-  let caseData: Case | null = null
+  const result = await payload.find({
+    collection: 'cases',
+    where: {
+      slug: {
+        equals: caseId,
+      },
+    },
+  })
 
-  try {
-    const res = await payload.findByID({
-      collection: 'cases',
-      id: caseId,
-    })
+  const caseData = result.docs[0]
 
-    caseData = res
-  } catch (err) {
-    console.error(err)
-    return notFound()
-  }
-
-  if (!caseData) {
-    return notFound()
-  }
+  if (!caseData) return notFound()
 
   let cases: Case[] = []
 
@@ -47,6 +42,18 @@ export default async function CasePage({ params }: { params: { caseId: string } 
       limit: 10,
     })
     cases = casesRes.docs
+  } catch (e) {
+    console.log(e)
+  }
+
+  let solutions: Solution[] = []
+
+  try {
+    const solutionsRes = await payload.find({
+      collection: 'solutions',
+      limit: 10,
+    })
+    solutions = solutionsRes.docs
   } catch (e) {
     console.log(e)
   }
@@ -67,7 +74,7 @@ export default async function CasePage({ params }: { params: { caseId: string } 
         type="simple"
         excludeId={caseData.id}
       />
-      <Footer nav={navigation} />
+      <Footer nav={navigation} solutions={solutions} />
     </div>
   )
 }
