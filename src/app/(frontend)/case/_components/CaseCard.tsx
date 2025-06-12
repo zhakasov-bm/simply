@@ -1,0 +1,24 @@
+import { Case } from '@/payload-types'
+import Link from 'next/link'
+
+export function CaseCard({ item }: { item: Case }) {
+  return (
+    <Link
+      href={`/case/${item.id}`}
+      className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-cover bg-center group"
+      style={{ backgroundImage: `url(${item.image?.url})` }}
+    >
+      <div className="flex gap-2 ml-6 pt-18 z-10 relative">
+        {item.tags?.map((t, i) => (
+          <span
+            key={i}
+            className="bg-white/20 px-3 py-1 rounded-full text-sm font-light border border-white/40 text-white"
+          >
+            {t.tag}
+          </span>
+        ))}
+      </div>
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
+    </Link>
+  )
+}

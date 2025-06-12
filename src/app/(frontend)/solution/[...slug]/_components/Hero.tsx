@@ -6,17 +6,9 @@ type Props = {
   solution: Solution
 }
 
-export default function InfoBlock({ component, solution }: Props) {
+export default function Hero({ component, solution }: Props) {
   return (
-    <section
-      className="container mx-auto py-20 flex flex-col items-center text-center"
-      style={{
-        backgroundImage: 'url("/wave.svg")',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center right',
-        backgroundSize: 'contain',
-      }}
-    >
+    <section className="container mx-auto py-20 flex flex-col items-center text-center">
       <div className="flex flex-col gap-4 max-w-5xl">
         <h1 className="text-6xl">{solution.name}</h1>
         <p className="text-2xl font-light">{solution.subtitle}</p>

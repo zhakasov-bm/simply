@@ -5,6 +5,7 @@ import { BrandsBlock } from '@/blocks/BrandsBlock'
 import { CertificateBlock } from '@/blocks/CertificateBlock'
 import { FormBlock } from '@/blocks/FormBlock'
 import { HeroBlock } from '@/blocks/HeroBlock'
+import { RequestFormBlock } from '@/blocks/RequestFormBlock'
 import { ReviewsBlock } from '@/blocks/ReviewsBlock'
 import { ServicesBlock } from '@/blocks/ServicesBlock'
 import { TeamBlock } from '@/blocks/TeamBlock'
@@ -33,6 +34,7 @@ export const Component: GlobalConfig = {
         BrandsBlock,
         WhyUsBlock,
         AvailableServices,
+        RequestFormBlock,
       ],
     },
     {

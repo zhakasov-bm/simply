@@ -93,9 +93,11 @@ export interface Config {
     defaultIDType: string;
   };
   globals: {
+    navigation: Navigation;
     component: Component;
   };
   globalsSelect: {
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
     component: ComponentSelect<false> | ComponentSelect<true>;
   };
   locale: 'ru' | 'kz';
@@ -197,13 +199,48 @@ export interface Solution {
 export interface Case {
   id: string;
   heading: string;
-  cases?:
+  subtitle: string;
+  slug: string;
+  title?: string | null;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  image: string | Media;
+  tags?:
     | {
-        category: ('content' | 'pr' | 'brand' | 'website')[];
-        image: string | Media;
+        tag: string;
         id?: string | null;
       }[]
     | null;
+  actionTitle: string;
+  actions?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  resultTitle: string;
+  results?:
+    | {
+        value: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  'result-image'?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -540,13 +577,34 @@ export interface SolutionsSelect<T extends boolean = true> {
  */
 export interface CasesSelect<T extends boolean = true> {
   heading?: T;
-  cases?:
+  subtitle?: T;
+  slug?: T;
+  title?: T;
+  description?: T;
+  image?: T;
+  tags?:
     | T
     | {
-        category?: T;
-        image?: T;
+        tag?: T;
         id?: T;
       };
+  actionTitle?: T;
+  actions?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  resultTitle?: T;
+  results?:
+    | T
+    | {
+        value?: T;
+        description?: T;
+        id?: T;
+      };
+  'result-image'?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -733,6 +791,32 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: string;
+  logo: string | Media;
+  links: {
+    label: string;
+    url: string;
+    id?: string | null;
+  }[];
+  contactTitle: string;
+  contacts: {
+    item?: string | null;
+    id?: string | null;
+  }[];
+  socialMedia: {
+    platform: 'telegram' | 'instagram' | 'facebook' | 'linkedin' | 'youtube';
+    url: string;
+    id?: string | null;
+  }[];
+  languageSwitcher?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "component".
  */
 export interface Component {
@@ -885,6 +969,19 @@ export interface Component {
         blockName?: string | null;
         blockType: 'available-services';
       }
+    | {
+        heading: string;
+        title: string;
+        contacts: {
+          item?: string | null;
+          icon: string | Media;
+          id?: string | null;
+        }[];
+        form: string | Form;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'request-form';
+      }
   )[];
   statistics: {
     text: string;
@@ -893,6 +990,38 @@ export interface Component {
   }[];
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  logo?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  contactTitle?: T;
+  contacts?:
+    | T
+    | {
+        item?: T;
+        id?: T;
+      };
+  socialMedia?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  languageSwitcher?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1051,6 +1180,22 @@ export interface ComponentSelect<T extends boolean = true> {
                     icon?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        'request-form'?:
+          | T
+          | {
+              heading?: T;
+              title?: T;
+              contacts?:
+                | T
+                | {
+                    item?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              form?: T;
               id?: T;
               blockName?: T;
             };

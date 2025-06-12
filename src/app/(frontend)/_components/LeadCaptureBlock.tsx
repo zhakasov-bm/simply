@@ -112,7 +112,7 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
 
             <button
               type="submit"
-              className="bg-primary text-black px-5 rounded-xl h-min-full cursor-pointer font-unbounded"
+              className="bg-primary text-black px-5 rounded-xl h-min-full cursor-pointer font-unbounded hover:bg-hover transition"
             >
               {block.form.submitButtonLabel || 'Submit'}
             </button>

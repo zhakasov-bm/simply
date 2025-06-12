@@ -1,24 +1,31 @@
 import Image from 'next/image'
 import { Component } from '@/payload-types'
+import UniversalButton from './UniversalButton'
 
 export default function HeroBlock({ component }: { component: Component }) {
   return (
-    <section
-      className=" py-30"
-      style={{
-        backgroundImage: 'url("wave.svg")',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center right',
-        backgroundSize: 'contain',
-      }}
-    >
+    <section className=" py-24">
       {component.globals.map((block, id) => {
         if (block.blockType === 'hero') {
           return (
             <div key={id} className="flex gap-4 container mx-auto">
               <div className="flex flex-col gap-8 flex-8/12">
-                <h1 className="lg:text-6xl font-medium mt-8 leading-tight">{block.heading}</h1>
-                <div className="bg-gray-950 rounded-2xl px-9 pb-15 h-full flex flex-col gap-4 justify-end relative overflow-hidden">
+                <h1 className="lg:text-[64px] font-medium leading-tight">{block.heading}</h1>
+
+                <div
+                  className="h-full px-9 pb-15 flex flex-col gap-4 justify-end overflow-hidden relative rounded-2xl"
+                  style={{
+                    backgroundImage: 'url("bg-hero.svg")',
+                    width: '100%',
+                    height: '100%',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                  }}
+                >
+                  <div className="absolute flex top-2 left-0">
+                    <Image src="/btn.svg" alt="btn_graphic" width={60} height={60} />
+                    <UniversalButton label="Погрузиться в креатив" className="w-[360px]" />
+                  </div>
                   <Image
                     src="/graphic.png"
                     alt="graphic"

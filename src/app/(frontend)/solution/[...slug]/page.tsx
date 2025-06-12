@@ -13,35 +13,50 @@ import LeadCaptureBlock from '../../_components/LeadCaptureBlock'
 import Hero from './_components/Hero'
 import WhyUsBlock from './_components/WhyUsBlock'
 import AvailableServices from './_components/AvailableServices'
-import { block } from 'sharp'
+import Header from '../../Header/Header'
+import BGraphic from '../../_components/BGRaphic'
+import Footer from '../../Footer/Footer'
+import TrustedByBlock from '../../_components/TrustedByBlock'
+import RequestFormBlock from '../../_components/RequestFormBlock'
 
-export default async function SolutionPage({ params }: { params: { solutionId: string } }) {
-  const { solutionId } = await params
+export default async function SolutionPage({ params }: { params: { slug: string[] } }) {
+  const solutionId = params.slug[0] // Get the first segment of the slug
 
   const payload = await getPayload({ config: configPromise })
+  const navigation = await payload.findGlobal({ slug: 'navigation' })
   const component = await payload.findGlobal({ slug: 'component' })
   const formBlocks = component.globals.filter((block) => block.blockType === 'form')
+  const requestForm = component.globals.find((block) => block.blockType === 'request-form')
 
-  let solution: Solution | null = null
+  const result = await payload.find({
+    collection: 'solutions',
+    where: {
+      slug: {
+        equals: solutionId,
+      },
+    },
+  })
+
+  const solution = result.docs[0]
+
+  if (!solution) return notFound()
+
+  let solutions: Solution[] = []
 
   try {
-    const res = await payload.findByID({
+    let solutionsRes = await payload.find({
       collection: 'solutions',
-      id: solutionId,
+      limit: 10,
     })
-
-    solution = res
-  } catch (err) {
-    console.error(err)
-    return notFound()
-  }
-
-  if (!solution) {
-    return notFound()
+    solutions = solutionsRes.docs
+  } catch (e) {
+    console.log(e)
   }
 
   return (
     <div>
+      <BGraphic />
+      <Header nav={navigation} />
       <Hero component={component} solution={solution} />
       <LeadCaptureBlock block={formBlocks[0]} />
       <BrandsBlock component={component} />
@@ -49,10 +64,13 @@ export default async function SolutionPage({ params }: { params: { solutionId: s
       <InfoBlock solution={solution} />
       <ProblemBlock solution={solution} />
       <AvailableServices component={component} />
-      <TeamBlock component={component} />
-      <ReviewBlock component={component} />
+
       <WhyUsBlock component={component} />
       <CertificateBlock component={component} />
+      <TrustedByBlock component={component} />
+      <ReviewBlock component={component} />
+      {requestForm && <RequestFormBlock block={requestForm} />}
+      <Footer nav={navigation} solutions={solutions} />
     </div>
   )
 }

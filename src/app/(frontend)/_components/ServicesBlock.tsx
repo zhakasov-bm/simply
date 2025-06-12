@@ -41,7 +41,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       <div className="flex mb-8">
         <button
           onClick={() => setSelectedCategory('all')}
-          className={`flex-1 py-2 font-light border-b transition text-center ${
+          className={`flex-1 py-2 font-light border-b text-center transition-colors duration-300 ease-in-out ${
             selectedCategory === 'all' ? ' font-normal border-black' : 'font-light border-gray-300'
           }`}
         >
@@ -52,7 +52,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`flex-1 py-2 font-light border-b transition text-center ${
+            className={`flex-1 py-2 font-light border-b text-center transition-colors duration-300 ease-in-out${
               selectedCategory === cat ? ' font-normal border-black' : 'font-light border-gray-300'
             }`}
           >
@@ -64,7 +64,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       <div className="grid grid-cols-2 gap-4">
         {filteredSolutions.map((solution) => (
           <Link
-            href={`/solution/${solution.id}`}
+            href={`/solution/${solution.slug}`}
             key={solution.id}
             className="w-full bg-lightBG rounded-2xl p-6 flex justify-between items-start group"
           >
