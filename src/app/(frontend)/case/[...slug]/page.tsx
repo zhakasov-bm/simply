@@ -13,7 +13,7 @@ import BGraphic from '../../_components/BGRaphic'
 import Header from '../../Header/Header'
 import Footer from '../../Footer/Footer'
 
-export default async function CasePage({ params }: { params: { slug: string } }) {
+export default async function CasePage({ params }: { params: { slug: string[] } }) {
   const caseId = params.slug[0]
 
   const payload = await getPayload({ config: configPromise })
