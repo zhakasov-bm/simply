@@ -189,6 +189,12 @@ export interface Solution {
     subtitle: string;
     id?: string | null;
   }[];
+  titleQA: string;
+  questions: {
+    question?: string | null;
+    answer?: string | null;
+    id?: string | null;
+  }[];
   updatedAt: string;
   createdAt: string;
 }
@@ -566,6 +572,14 @@ export interface SolutionsSelect<T extends boolean = true> {
     | {
         title?: T;
         subtitle?: T;
+        id?: T;
+      };
+  titleQA?: T;
+  questions?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
         id?: T;
       };
   updatedAt?: T;

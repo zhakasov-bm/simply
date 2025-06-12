@@ -92,5 +92,20 @@ export const Solutions: CollectionConfig = {
       ],
       required: true,
     },
+    {
+      name: 'titleQA',
+      type: 'text',
+      defaultValue: 'Частые вопросы',
+      required: true,
+    },
+    {
+      name: 'questions',
+      type: 'array',
+      fields: [
+        { name: 'question', type: 'text' },
+        { name: 'answer', type: 'text' },
+      ],
+      required: true,
+    },
   ],
 }

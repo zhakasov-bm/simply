@@ -18,6 +18,7 @@ import BGraphic from '../../_components/BGRaphic'
 import Footer from '../../Footer/Footer'
 import TrustedByBlock from '../../_components/TrustedByBlock'
 import RequestFormBlock from '../../_components/RequestFormBlock'
+import QABlock from './_components/QABlock'
 
 export default async function SolutionPage({ params }: { params: { slug: string[] } }) {
   const solutionId = params.slug[0] // Get the first segment of the slug
@@ -70,6 +71,7 @@ export default async function SolutionPage({ params }: { params: { slug: string[
       <TrustedByBlock component={component} />
       <ReviewBlock component={component} />
       {requestForm && <RequestFormBlock block={requestForm} />}
+      <QABlock solution={solution} />
       <Footer nav={navigation} solutions={solutions} />
     </div>
   )
