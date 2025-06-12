@@ -1,5 +1,4 @@
 import { Component, Solution } from '@/payload-types'
-import Image from 'next/image'
 
 type Props = {
   component: Component

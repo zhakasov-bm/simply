@@ -107,5 +107,10 @@ export const Solutions: CollectionConfig = {
       ],
       required: true,
     },
+    {
+      name: 'Lead',
+      type: 'richText',
+      required: true,
+    },
   ],
 }

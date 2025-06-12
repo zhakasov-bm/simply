@@ -37,7 +37,7 @@ export default async function HomePage() {
   let solutions: Solution[] = []
 
   try {
-    let solutionsRes = await payload.find({
+    const solutionsRes = await payload.find({
       collection: 'solutions',
       limit: 10,
     })
@@ -49,7 +49,7 @@ export default async function HomePage() {
   let cases: Case[] = []
 
   try {
-    let casesRes = await payload.find({
+    const casesRes = await payload.find({
       collection: 'cases',
       limit: 10,
     })

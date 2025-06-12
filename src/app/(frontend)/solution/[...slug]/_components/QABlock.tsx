@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { Solution } from '@/payload-types'
 import { FaPlus, FaMinus } from 'react-icons/fa'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import UniversalButton from '@/app/(frontend)/_components/UniversalButton'
 
 export default function QABlock({ solution }: { solution: Solution }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -39,6 +41,10 @@ export default function QABlock({ solution }: { solution: Solution }) {
           )
         })}
       </div>
+      <div className="bg-greenBG rounded-2xl items-center text-center py-12 px-40 mt-20">
+        <RichText data={solution.Lead} />
+      </div>
+      <UniversalButton label="Заказать" className="my-6 w-full" />
     </section>
   )
 }

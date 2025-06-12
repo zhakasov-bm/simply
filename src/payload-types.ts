@@ -195,6 +195,21 @@ export interface Solution {
     answer?: string | null;
     id?: string | null;
   }[];
+  Lead: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -582,6 +597,7 @@ export interface SolutionsSelect<T extends boolean = true> {
         answer?: T;
         id?: T;
       };
+  Lead?: T;
   updatedAt?: T;
   createdAt?: T;
 }
