@@ -92,7 +92,7 @@ export default function RequestFormBlock({ block }: { block: RequestFormProps })
       <div
         className="flex"
         style={{
-          backgroundImage: 'url("contact-graphic.svg")',
+          backgroundImage: 'url("/contact-graphic.svg")',
           width: '100%',
           height: '100%',
           backgroundRepeat: 'no-repeat',

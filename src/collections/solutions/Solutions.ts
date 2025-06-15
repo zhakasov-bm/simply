@@ -1,4 +1,6 @@
 import { CollectionConfig } from 'payload'
+import { fieldsIfHasSubservices } from './fields/fieldsIfHasSubservices'
+import { commonFieldsIfNoSubservices } from './fields/commonFieldsIfNoSubservices'
 
 export const Solutions: CollectionConfig = {
   slug: 'solutions',
@@ -39,29 +41,9 @@ export const Solutions: CollectionConfig = {
       ],
     },
     {
-      name: 'heading',
-      type: 'text',
-      required: true,
-      label: 'Title of Block',
-    },
-    {
-      name: 'title',
-      type: 'text',
-    },
-    {
-      name: 'description',
-      type: 'textarea',
-    },
-    {
-      name: 'icon',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
-    {
       name: 'details',
       type: 'array',
-      label: 'Подуслуги',
+      label: 'Deatils',
       fields: [
         {
           name: 'name',
@@ -69,6 +51,19 @@ export const Solutions: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'servicesTitle',
+      type: 'text',
+      defaultValue: 'Какие услуги можно заказать у нас?',
+      required: true,
+    },
+    {
+      name: 'hasSubservices',
+      type: 'checkbox',
+      label: 'Подуслуги',
+    },
+    ...fieldsIfHasSubservices,
+    ...commonFieldsIfNoSubservices,
     {
       name: 'titleWhy',
       type: 'text',

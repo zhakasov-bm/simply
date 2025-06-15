@@ -16,11 +16,23 @@ body {
     font-family: var(--font-unbounded);
 }
 
+/* h1 {
+  font-family: var(--font-unbounded);
+  @apply text-4xl font-bold mb-6;
+} */
+
+
 .path {
     clip-path: path("M 10,40 L 70,40 A 10,10 0,0,0 80,30 L 80,10 A 10,10 0,0,1 90,0 L 140,0 A 10,10 0,0,1 150,10 L 150,190 A 10,10 0,0,1 140,200 L 10,200 A 10,10 0,0,1 0,190 L 0,50 A 10,10 0,0,1 10,40 Z");
 }
 
   /* Headings */
+
+
+  .payload-richtext h2 {
+    @apply text-4xl mb-4;
+  }
+
   .payload-richtext h3 {
     @apply text-2xl mb-4;
   }

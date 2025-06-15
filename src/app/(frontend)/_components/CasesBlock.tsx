@@ -84,11 +84,16 @@ export default function CasesBlock({ heading, cases, type = 'slider', excludeId 
 
       {/* Simple Type */}
       {type === 'simple' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4">
-          {filteredCases.slice(0, 3).map((item) => (
-            <CaseCard key={item.id} item={item} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4">
+            {filteredCases.slice(0, 3).map((item) => (
+              <CaseCard key={item.id} item={item} />
+            ))}
+          </div>
+          <div className="flex justify-center pt-10">
+            <UniversalButton label="Смотреть все кейсы" to="/case" />
+          </div>
+        </>
       )}
 
       {/* Load More Type */}

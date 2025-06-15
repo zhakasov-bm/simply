@@ -1,5 +1,5 @@
 import { getPayload } from 'payload'
-import React, { Suspense } from 'react'
+import React from 'react'
 import { fileURLToPath } from 'url'
 import { Solution, Case } from '@/payload-types'
 
@@ -15,16 +15,13 @@ import ReviewsBlock from './_components/ReviewsBlock'
 import BrandsBlock from './_components/BrandsBlock'
 import ServicesBlock from './_components/ServicesBlock'
 import CasesBlock from './_components/CasesBlock'
-import Header from './Header/Header'
 import BGraphic from './_components/BGRaphic'
 import RequestFormBlock from './_components/RequestFormBlock'
-import Footer from './Footer/Footer'
 
 export default async function HomePage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const component = await payload.findGlobal({ slug: 'component' })
-  const navigation = await payload.findGlobal({ slug: 'navigation' })
 
   const serviceBlock = component.globals.find((block) => block.blockType === 'services')
   const heading = serviceBlock?.heading || ''
@@ -61,7 +58,6 @@ export default async function HomePage() {
   return (
     <div>
       <BGraphic />
-      <Header nav={navigation} />
       <HeroBlock component={component} />
       <AboutUsBlock component={component} />
       <ServicesBlock heading={heading} solutions={solutions} />
@@ -74,7 +70,6 @@ export default async function HomePage() {
       <TeamBlock component={component} />
       <ReviewsBlock component={component} />
       {requestForm && <RequestFormBlock block={requestForm} />}
-      <Footer solutions={solutions} nav={navigation} />
     </div>
   )
 }

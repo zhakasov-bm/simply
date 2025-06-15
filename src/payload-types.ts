@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     solutions: Solution;
+    subservices: Subservice;
     cases: Case;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -82,6 +83,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     solutions: SolutionsSelect<false> | SolutionsSelect<true>;
+    subservices: SubservicesSelect<false> | SubservicesSelect<true>;
     cases: CasesSelect<false> | CasesSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -173,13 +175,43 @@ export interface Solution {
   subtitle: string;
   slug: string;
   category: 'content' | 'pr' | 'brand' | 'website';
-  heading: string;
-  title?: string | null;
-  description?: string | null;
-  icon: string | Media;
   details?:
     | {
         name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  servicesTitle: string;
+  hasSubservices?: boolean | null;
+  whyServiceTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  whyList?:
+    | {
+        title: string;
+        icon: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  heading?: string | null;
+  title?: string | null;
+  description?: string | null;
+  icon?: (string | null) | Media;
+  availableServices?:
+    | {
+        title: string;
         id?: string | null;
       }[]
     | null;
@@ -210,6 +242,64 @@ export interface Solution {
     };
     [k: string]: unknown;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subservices".
+ */
+export interface Subservice {
+  id: string;
+  name: string;
+  subtitle: string;
+  slug: string;
+  service: string | Solution;
+  heading: string;
+  title?: string | null;
+  description?: string | null;
+  icon: string | Media;
+  serviceTitle: string;
+  services: {
+    name?: string | null;
+    icon?: (string | null) | Media;
+    id?: string | null;
+  }[];
+  titleQA: string;
+  questions: {
+    question?: string | null;
+    answer?: string | null;
+    id?: string | null;
+  }[];
+  additionalBlocks?:
+    | {
+        header: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        designType: 'layout1' | 'layout2';
+        steps: {
+          title?: string | null;
+          description?: string | null;
+          icon?: (string | null) | Media;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'seoblock';
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -476,6 +566,10 @@ export interface PayloadLockedDocument {
         value: string | Solution;
       } | null)
     | ({
+        relationTo: 'subservices';
+        value: string | Subservice;
+      } | null)
+    | ({
         relationTo: 'cases';
         value: string | Case;
       } | null)
@@ -571,14 +665,30 @@ export interface SolutionsSelect<T extends boolean = true> {
   subtitle?: T;
   slug?: T;
   category?: T;
-  heading?: T;
-  title?: T;
-  description?: T;
-  icon?: T;
   details?:
     | T
     | {
         name?: T;
+        id?: T;
+      };
+  servicesTitle?: T;
+  hasSubservices?: T;
+  whyServiceTitle?: T;
+  whyList?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        id?: T;
+      };
+  heading?: T;
+  title?: T;
+  description?: T;
+  icon?: T;
+  availableServices?:
+    | T
+    | {
+        title?: T;
         id?: T;
       };
   titleWhy?: T;
@@ -598,6 +708,58 @@ export interface SolutionsSelect<T extends boolean = true> {
         id?: T;
       };
   Lead?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subservices_select".
+ */
+export interface SubservicesSelect<T extends boolean = true> {
+  name?: T;
+  subtitle?: T;
+  slug?: T;
+  service?: T;
+  heading?: T;
+  title?: T;
+  description?: T;
+  icon?: T;
+  serviceTitle?: T;
+  services?:
+    | T
+    | {
+        name?: T;
+        icon?: T;
+        id?: T;
+      };
+  titleQA?: T;
+  questions?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  additionalBlocks?:
+    | T
+    | {
+        seoblock?:
+          | T
+          | {
+              header?: T;
+              designType?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -987,20 +1149,6 @@ export interface Component {
       }
     | {
         heading: string;
-        services?:
-          | {
-              title: string;
-              description?: string | null;
-              icon: string | Media;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'available-services';
-      }
-    | {
-        heading: string;
         title: string;
         contacts: {
           item?: string | null;
@@ -1188,21 +1336,6 @@ export interface ComponentSelect<T extends boolean = true> {
           | {
               heading?: T;
               items?:
-                | T
-                | {
-                    title?: T;
-                    description?: T;
-                    icon?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        'available-services'?:
-          | T
-          | {
-              heading?: T;
-              services?:
                 | T
                 | {
                     title?: T;

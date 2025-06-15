@@ -1,13 +1,19 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { Solution } from '@/payload-types'
+import { useState } from 'react'
+import { Solution, Subservice } from '@/payload-types'
 import { FaPlus, FaMinus } from 'react-icons/fa'
-import { RichText } from '@payloadcms/richtext-lexical/react'
-import UniversalButton from '@/app/(frontend)/_components/UniversalButton'
 
-export default function QABlock({ solution }: { solution: Solution }) {
+type Props = {
+  solution?: Solution
+  subservice?: Subservice
+}
+
+export default function QABlock({ solution, subservice }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const content = solution || subservice
+  if (!content) return null
 
   const toggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index))
@@ -15,9 +21,9 @@ export default function QABlock({ solution }: { solution: Solution }) {
 
   return (
     <section className="container mx-auto py-20">
-      <h1 className="text-4xl pb-12 text-center">{solution.titleQA}</h1>
+      <h1 className="text-4xl pb-12 text-center">{content.titleQA}</h1>
       <div className="flex flex-col gap-4">
-        {solution.questions?.map((item, index) => {
+        {content.questions?.map((item, index) => {
           const isOpen = openIndex === index
 
           return (
@@ -41,10 +47,6 @@ export default function QABlock({ solution }: { solution: Solution }) {
           )
         })}
       </div>
-      <div className="bg-greenBG rounded-2xl items-center text-center py-12 px-40 mt-20">
-        <RichText data={solution.Lead} />
-      </div>
-      <UniversalButton label="Заказать" className="my-6 w-full" />
     </section>
   )
 }

@@ -7,7 +7,7 @@ export default function BGraphic() {
         right: 0,
         width: '50vw',
         height: '100vh',
-        backgroundImage: 'url("wave.svg")',
+        backgroundImage: 'url("/wave.svg")',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top right',
         backgroundSize: 'contain',

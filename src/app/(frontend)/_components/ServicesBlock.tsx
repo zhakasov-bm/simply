@@ -24,10 +24,8 @@ export default function ServicesBlock({ heading, solutions }: Props) {
     website: 'Сайты и Технологии',
   }
 
-  // Категория тізімі — автоматты түрде unique мәндерді жинаймыз
   const categories = Array.from(new Set(solutions.map((s) => s.category)))
 
-  // Фильтрленген нәтижелер
   const filteredSolutions =
     selectedCategory === 'all'
       ? solutions
@@ -41,7 +39,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       <div className="flex mb-8">
         <button
           onClick={() => setSelectedCategory('all')}
-          className={`flex-1 py-2 font-light border-b text-center transition-colors duration-300 ease-in-out ${
+          className={`flex-1 py-2 font-light border-b text-center transition-colors duration-300 ease-in-out cursor-pointer ${
             selectedCategory === 'all' ? ' font-normal border-black' : 'font-light border-gray-300'
           }`}
         >
@@ -52,7 +50,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`flex-1 py-2 font-light border-b text-center transition-colors duration-300 ease-in-out${
+            className={`flex-1 py-2 font-light border-b text-center transition-colors duration-300 ease-in-out cursor-pointer ${
               selectedCategory === cat ? ' font-normal border-black' : 'font-light border-gray-300'
             }`}
           >
@@ -81,10 +79,10 @@ export default function ServicesBlock({ heading, solutions }: Props) {
 
             {/* Consistent image size container */}
             <div className="w-[200px] h-[200px] relative overflow-hidden">
-              {typeof solution.icon === 'object' && solution.icon.url && (
+              {typeof solution.icon === 'object' && solution.icon?.url && (
                 <Image
-                  src={solution.icon.url}
-                  alt={solution.icon.alt || ''}
+                  src={solution.icon?.url}
+                  alt={solution.icon?.alt || ''}
                   fill
                   className="object-contain transition-transform duration-300 group-hover:scale-105"
                   draggable={false}

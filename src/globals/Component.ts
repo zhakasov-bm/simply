@@ -1,6 +1,5 @@
 // payload/globals/team.ts
 import { AboutUsBlock } from '@/blocks/AboutUsBlock'
-import { AvailableServices } from '@/blocks/AvailableServices'
 import { BrandsBlock } from '@/blocks/BrandsBlock'
 import { CertificateBlock } from '@/blocks/CertificateBlock'
 import { FormBlock } from '@/blocks/FormBlock'
@@ -33,7 +32,6 @@ export const Component: GlobalConfig = {
         CertificateBlock,
         BrandsBlock,
         WhyUsBlock,
-        AvailableServices,
         RequestFormBlock,
       ],
     },

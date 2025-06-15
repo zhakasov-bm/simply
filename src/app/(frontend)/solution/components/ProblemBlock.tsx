@@ -1,5 +1,4 @@
-import { Component, Solution } from '@/payload-types'
-import Image from 'next/image'
+import { Solution } from '@/payload-types'
 
 export default function ProblemBlock({ solution }: { solution: Solution }) {
   return (
