@@ -20,6 +20,11 @@ import CasesBlock from '../../_components/CasesBlock'
 import WhyServiceNeeded from './_components/WhyServiceNeeded'
 import LeadBlock from '../components/LeadBlock'
 
+interface PageProps {
+  params: Promise<{ serviceSlug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
 export async function generateStaticParams() {
   const payload = await getPayload({ config })
   const res = await payload.find({ collection: 'solutions' })
@@ -29,8 +34,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function SolutionPage({ params }: { params: { serviceSlug: string } }) {
-  const slug = params.serviceSlug
+export default async function SolutionPage({ params }: PageProps) {
+  const { serviceSlug: slug } = await params
   if (!slug) return notFound()
 
   const payload = await getPayload({ config: configPromise })
