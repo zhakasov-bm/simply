@@ -12,10 +12,16 @@ import QABlock from '../_components/QABlock'
 import AdvantagesBlock from './components/AdvantagesBlock'
 import TarifBlock from './components/TarifBlock'
 
-export default async function PopolneniePage({ params }: { params: { serviceSlug: string } }) {
+interface PageProps {
+  params: Promise<{ serviceSlug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function PopolneniePage({ params }: PageProps) {
+  const { serviceSlug } = await params
   const targetSlug = 'performance-marketing'
 
-  if (params.serviceSlug !== targetSlug) {
+  if (serviceSlug !== targetSlug) {
     redirect(`/solution/${targetSlug}/popolnenie`)
   }
 
