@@ -1,10 +1,5 @@
 'use server'
 
-type SubmissionField = {
-  field: string
-  value: string
-}
-
 type SubmitFormArgs = {
   formId: string
   data: Record<string, FormDataEntryValue>

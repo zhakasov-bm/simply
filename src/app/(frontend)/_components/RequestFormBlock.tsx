@@ -12,8 +12,6 @@ type FormState = {
 }
 
 export default function RequestFormBlock({ block }: { block: RequestFormProps }) {
-  const [formData, setFormData] = useState({})
-
   const [formState, setFormState] = useState<FormState>({
     loading: false,
     error: null,

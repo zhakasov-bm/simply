@@ -11,8 +11,6 @@ type FormState = {
 }
 
 export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps }) {
-  const [formData, setFormData] = useState({})
-
   const [formState, setFormState] = useState<FormState>({
     loading: false,
     error: null,

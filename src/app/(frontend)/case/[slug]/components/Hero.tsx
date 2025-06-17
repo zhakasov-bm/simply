@@ -1,5 +1,4 @@
 import { Case } from '@/payload-types'
-import Link from 'next/link'
 
 export default function Hero({ caseData }: { caseData: Case }) {
   return (

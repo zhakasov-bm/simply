@@ -15,12 +15,13 @@ import RequestFormBlock from '@/app/(frontend)/_components/RequestFormBlock'
 import QABlock from '../_components/QABlock'
 import SeoBlock from './components/SeoBlock'
 
-export default async function SubservicePage({
-  params,
-}: {
-  params: { serviceSlug: string; subSlug: string }
-}) {
-  const { serviceSlug, subSlug } = params
+interface PageProps {
+  params: Promise<{ serviceSlug: string; subSlug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function SubservicePage({ params }: PageProps) {
+  const { serviceSlug, subSlug } = await params
 
   const payload = await getPayload({ config })
 
