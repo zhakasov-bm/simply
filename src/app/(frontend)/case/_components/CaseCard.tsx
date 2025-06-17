@@ -2,11 +2,13 @@ import { Case } from '@/payload-types'
 import Link from 'next/link'
 
 export function CaseCard({ item }: { item: Case }) {
+  const imageUrl = typeof item.image === 'string' ? item.image : item.image?.url
+
   return (
     <Link
       href={`/case/${item.slug}`}
       className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-cover bg-center group"
-      style={{ backgroundImage: `url(${item.image?.url})` }}
+      style={{ backgroundImage: `url(${imageUrl})` }}
     >
       <div className="flex gap-2 ml-6 pt-18 z-10 relative">
         {item.tags?.map((t, i) => (
