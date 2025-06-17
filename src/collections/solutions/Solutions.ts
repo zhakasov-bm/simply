@@ -30,6 +30,12 @@ export const Solutions: CollectionConfig = {
       unique: true,
     },
     {
+      name: 'icon',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
+    {
       name: 'category',
       type: 'select',
       required: true,

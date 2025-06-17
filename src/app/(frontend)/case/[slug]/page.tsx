@@ -16,8 +16,13 @@ export async function generateStaticParams() {
   return []
 }
 
-export default async function CasePage({ params }: { params: { slug: string } }) {
-  const slug = params.slug
+interface PageProps {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function CasePage({ params }: PageProps) {
+  const { slug } = await params
   if (!slug) return notFound()
 
   const payload = await getPayload({ config: configPromise })

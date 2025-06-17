@@ -1,14 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Unbounded:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Unbounded:wght@200..900&display=swap&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 @import "tailwindcss";
 
 @theme {
     --font-unbounded: "Unbounded", sans-serif;
     --font-inter: "Inter", sans-serif;
+    --font-montserrat: "Montserrat", sans-serif;
 
     --color-primary: #CCFE00;
     --color-lightBG: #F3F4F4;
     --color-greenBG: #F4FECD;
+    --color-blueBG: #CCD7F7;
     --color-hover: #DBFF48;
 }
 
@@ -37,6 +39,14 @@ body {
     @apply text-2xl mb-4;
   }
 
+  .payload-richtext h5 {
+    @apply text-xl mb-2;
+  }
+
   .payload-richtext p {
     @apply font-inter font-light text-lg;
+  }
+
+  .adv-richtext p {
+    @apply text-base font-normal text-black/80; /* Or use rem like 1rem */
   }

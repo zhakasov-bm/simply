@@ -22,7 +22,7 @@ export default function BrandsBlockBlock({ component, isLabel = false }: Props) 
                 gradientWidth={50} // Optional: width of the gradient
               >
                 {block.logos?.map((item, i) => (
-                  <div key={i} className="w-48 h-24 mx-8 relative flex-shrink-0">
+                  <div key={i} className="w-40 h-24 mx-8 relative flex-shrink-0">
                     {' '}
                     {/* Added mx-8 for horizontal spacing and flex-shrink-0 */}
                     {typeof item.logo === 'object' && item.logo.url && (

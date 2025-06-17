@@ -174,6 +174,7 @@ export interface Solution {
   name: string;
   subtitle: string;
   slug: string;
+  icon: string | Media;
   category: 'content' | 'pr' | 'brand' | 'website';
   details?:
     | {
@@ -208,7 +209,6 @@ export interface Solution {
   heading?: string | null;
   title?: string | null;
   description?: string | null;
-  icon?: (string | null) | Media;
   availableServices?:
     | {
         title: string;
@@ -259,7 +259,7 @@ export interface Subservice {
   title?: string | null;
   description?: string | null;
   icon: string | Media;
-  serviceTitle: string;
+  serviceTitle?: string | null;
   services: {
     name?: string | null;
     icon?: (string | null) | Media;
@@ -272,33 +272,104 @@ export interface Subservice {
     id?: string | null;
   }[];
   additionalBlocks?:
-    | {
-        header: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
+    | (
+        | {
+            header: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
               [k: string]: unknown;
+            };
+            designType: 'layout1' | 'layout2';
+            steps: {
+              title?: string | null;
+              description?: string | null;
+              icon?: (string | null) | Media;
+              id?: string | null;
             }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        designType: 'layout1' | 'layout2';
-        steps: {
-          title?: string | null;
-          description?: string | null;
-          icon?: (string | null) | Media;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'seoblock';
-      }[]
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'seoblock';
+          }
+        | {
+            advantagesTitle: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            advantages?:
+              | {
+                  advantage?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'advantagesblock';
+          }
+        | {
+            tarifTitle?: string | null;
+            tarifs?:
+              | {
+                  icon?: (string | null) | Media;
+                  type?: string | null;
+                  price?: string | null;
+                  commission?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'tarifblock';
+          }
+        | {
+            stepTitle?: string | null;
+            steps?:
+              | {
+                  icon?: (string | null) | Media;
+                  title?: string | null;
+                  message?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stepsblock';
+          }
+      )[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -664,6 +735,7 @@ export interface SolutionsSelect<T extends boolean = true> {
   name?: T;
   subtitle?: T;
   slug?: T;
+  icon?: T;
   category?: T;
   details?:
     | T
@@ -684,7 +756,6 @@ export interface SolutionsSelect<T extends boolean = true> {
   heading?: T;
   title?: T;
   description?: T;
-  icon?: T;
   availableServices?:
     | T
     | {
@@ -754,6 +825,50 @@ export interface SubservicesSelect<T extends boolean = true> {
                     title?: T;
                     description?: T;
                     icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        advantagesblock?:
+          | T
+          | {
+              advantagesTitle?: T;
+              advantages?:
+                | T
+                | {
+                    advantage?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        tarifblock?:
+          | T
+          | {
+              tarifTitle?: T;
+              tarifs?:
+                | T
+                | {
+                    icon?: T;
+                    type?: T;
+                    price?: T;
+                    commission?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stepsblock?:
+          | T
+          | {
+              stepTitle?: T;
+              steps?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    message?: T;
                     id?: T;
                   };
               id?: T;

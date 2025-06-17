@@ -1,5 +1,8 @@
 import { CollectionConfig } from 'payload'
 import { SeoBlock } from './blocks/SeoBlock'
+import { TarifBlock } from './blocks/popolnenie/TarifBlock'
+import { AdvantagesBlock } from './blocks/popolnenie/AdvantagesBlock'
+import { StepsBlock } from './blocks/popolnenie/StepsBlock'
 
 export const Subservices: CollectionConfig = {
   slug: 'subservices',
@@ -58,7 +61,6 @@ export const Subservices: CollectionConfig = {
       name: 'serviceTitle',
       type: 'text',
       defaultValue: 'Какие услуги мы можем вам оказать?',
-      required: true,
     },
     {
       name: 'services',
@@ -73,7 +75,7 @@ export const Subservices: CollectionConfig = {
           name: 'icon',
           type: 'upload',
           relationTo: 'media',
-          // defaultValue: 'simply-sticker.svg',
+          defaultValue: '684eae4c99f2b795a5ba8a2c',
         },
       ],
     },
@@ -95,7 +97,7 @@ export const Subservices: CollectionConfig = {
     {
       name: 'additionalBlocks',
       type: 'blocks',
-      blocks: [SeoBlock],
+      blocks: [SeoBlock, AdvantagesBlock, TarifBlock, StepsBlock],
     },
   ],
 }

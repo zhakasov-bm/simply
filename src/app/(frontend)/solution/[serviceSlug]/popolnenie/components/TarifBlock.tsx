@@ -1,0 +1,47 @@
+import Image from 'next/image'
+import { Subservice } from '@/payload-types'
+
+type Props = {
+  block: Extract<NonNullable<Subservice['additionalBlocks']>[number], { blockType: 'tarifblock' }>
+}
+
+export default function TarifBlock({ block }: Props) {
+  return (
+    <section className="container mx-auto py-20">
+      <h1 className="text-4xl pb-12 text-center">{block.tarifTitle}</h1>
+
+      <div className="grid grid-cols-3 gap-5">
+        {block.tarifs?.map((item, idx) => {
+          const isNoCommission = item.commission === 'Без комиссии'
+
+          return (
+            <div
+              key={idx}
+              className="p-8 rounded-2xl flex flex-col gap-2 border border-gray-200 items-center text-center"
+            >
+              {typeof item.icon === 'object' && item.icon?.url && (
+                <Image
+                  src={item.icon.url}
+                  alt={item.icon.alt || 'Icon'}
+                  width={0}
+                  height={10}
+                  sizes="auto"
+                  className="h-10 w-auto object-contain"
+                  draggable={false}
+                />
+              )}
+
+              <p className="text-xl font-medium pt-6">{item.type}</p>
+              <p className="text-base font-light">{item.price}</p>
+
+              <div className="bg-lightBG py-2 px-6 rounded-3xl text-base font-inter mt-4 flex items-center gap-2">
+                <span>{isNoCommission ? '🔥' : '💰'}</span>
+                <span>{item.commission}</span>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </section>
+  )
+}

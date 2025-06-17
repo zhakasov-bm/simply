@@ -16,12 +16,6 @@ export const commonFieldsIfNoSubservices: Field[] = [
     type: 'textarea',
   },
   {
-    name: 'icon',
-    type: 'upload',
-    relationTo: 'media',
-    required: true,
-  },
-  {
     name: 'availableServices',
     type: 'array',
     label: 'Доступные услуги (если нет подуслуг)',
