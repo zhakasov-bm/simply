@@ -16,7 +16,7 @@ const ProblemCard = ({
   className?: string
 }) => (
   <div
-    className={`flex flex-col gap-2 bg-blueBG rounded-2xl p-6 pt-24 overflow-hidden relative justify-end flex-1/3 ${className}`}
+    className={`flex flex-col gap-2 bg-blueBG rounded-2xl p-6 pt-16 overflow-hidden relative justify-end flex-1/3 ${className}`}
   >
     <div
       className="text-black/5 font-bold font-montserrat absolute top-10 right-0 leading-none"
@@ -42,7 +42,7 @@ const Connector = ({ src, className = '' }: { src: string; className?: string })
 
 export default function ProblemBlock({ solution }: { solution: Solution }) {
   return (
-    <section className="container mx-auto py-20">
+    <section className="container mx-auto py-20 px-16">
       <h1 className="text-4xl pb-12 text-center">{solution.titleWhy}</h1>
       {!solution.hasSubservices && (
         <div className="grid grid-cols-3 gap-5">
@@ -85,7 +85,7 @@ export default function ProblemBlock({ solution }: { solution: Solution }) {
             />
           </div>
 
-          <Connector src="/connector.svg" className="pt-80" />
+          <Connector src="/connector.svg" className="pt-70" />
 
           <ProblemCard
             number={4}

@@ -9,7 +9,7 @@ type Props = {
 
 export default function BrandsBlockBlock({ component, isLabel = false }: Props) {
   return (
-    <section className="py-4">
+    <section className="py-16">
       {component.globals.map((block, id) => {
         if (block.blockType === 'brands') {
           return (

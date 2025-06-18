@@ -11,7 +11,7 @@ export default function AvailableServices({
   const renderServices = () => {
     if (subservice) {
       return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
           {subservice.services?.map((service, id) => (
             <ServiceCard
               key={id}
@@ -31,7 +31,7 @@ export default function AvailableServices({
     }
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
         {!solution.hasSubservices &&
           solution.availableServices?.map((service, id) => (
             <ServiceCard key={id} name={service.title || ''} icon={null} />
@@ -44,7 +44,7 @@ export default function AvailableServices({
   }
 
   return (
-    <section className="container mx-auto py-20 flex flex-col items-center">
+    <section className="container mx-auto py-20 px-16 flex flex-col items-center">
       <h1 className="text-4xl pb-12">
         {subservice ? subservice.serviceTitle : solution.servicesTitle}
       </h1>

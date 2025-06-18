@@ -20,19 +20,19 @@ export default function QABlock({ solution, subservice }: Props) {
   }
 
   return (
-    <section className="container mx-auto py-20">
+    <section className="container mx-auto py-20 px-16">
       <h1 className="text-4xl pb-12 text-center">{content.titleQA}</h1>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {content.questions?.map((item, index) => {
           const isOpen = openIndex === index
 
           return (
-            <div key={index} className="bg-lightBG rounded-2xl p-6 transition-all duration-300">
+            <div key={index} className="bg-lightBG rounded-custom p-6 transition-all duration-500">
               <div
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggle(index)}
               >
-                <h2 className="text-lg font-medium">{item.question}</h2>
+                <h2 className="text-lg">{item.question}</h2>
                 {isOpen ? <FaMinus /> : <FaPlus />}
               </div>
 

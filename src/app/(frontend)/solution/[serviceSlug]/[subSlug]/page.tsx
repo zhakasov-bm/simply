@@ -77,8 +77,8 @@ export default async function SubservicePage({ params }: PageProps) {
       <TrustedByBlock component={component} />
 
       <ReviewBlock component={component} />
-      {requestFormBlock && <RequestFormBlock block={requestFormBlock} />}
       <QABlock subservice={sub} />
+      {requestFormBlock && <RequestFormBlock block={requestFormBlock} />}
     </div>
   )
 }

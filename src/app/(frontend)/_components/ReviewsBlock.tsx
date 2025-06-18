@@ -8,13 +8,13 @@ export default function ReviewBlock({ component }: { component: Component }) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
-      spacing: 16,
+      spacing: 12,
     },
     loop: true,
   })
 
   return (
-    <section className="my-40 relative">
+    <section className="relative my-24">
       <Image
         src="/cam1.png"
         alt="camera"
@@ -34,13 +34,13 @@ export default function ReviewBlock({ component }: { component: Component }) {
       {component.globals.map((block, id) => {
         if (block.blockType === 'reviews') {
           return (
-            <div key={id} className="flex flex-col container mx-auto">
+            <div key={id} className="flex flex-col container mx-auto px-16">
               <h1 className="text-4xl pb-12 text-center">{block.heading}</h1>
               <div ref={sliderRef} className="keen-slider flex justify-between overflow-hidden">
                 {block.reviews?.map((review, i) => (
                   <div
                     key={i}
-                    className="keen-slider__slide font-inter flex flex-col gap-20 bg-lightBG p-8 rounded-2xl"
+                    className="keen-slider__slide font-inter flex flex-col gap-20 bg-lightBG p-8 rounded-custom"
                   >
                     <p>{review.message}</p>
                     <div className="flex gap-3">

@@ -85,7 +85,7 @@ export default function RequestFormBlock({ block }: { block: RequestFormProps })
   }
 
   return (
-    <section className="container mx-auto py-40">
+    <section className="container mx-auto py-24 px-16">
       <h1 className="text-4xl text-center pb-12">{block.heading}</h1>
       <div
         className="flex"

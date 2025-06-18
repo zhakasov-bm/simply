@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function CertificateBlock({ component }: { component: Component }) {
   return (
-    <section className="container mx-auto my-40">
+    <section className="container mx-auto px-16 py-20">
       {component.globals.map((block, id) => {
         if (block.blockType === 'certificate') {
           return (

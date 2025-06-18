@@ -10,7 +10,7 @@ type SubserviceCardProps = {
 export const SubserviceCard = ({ sub, solutionSlug }: SubserviceCardProps) => (
   <Link
     href={`/solution/${solutionSlug}/${sub.slug}`}
-    className="flex p-10 pr-48 rounded-2xl bg-lightBG relative overflow-hidden group w-full"
+    className="flex p-10 pr-48 rounded-custom bg-lightBG relative overflow-hidden group w-full"
   >
     <div className="flex flex-col gap-2 z-10">
       <h1 className="text-2xl">{sub.name}</h1>

@@ -18,6 +18,12 @@ body {
     font-family: var(--font-unbounded);
 }
 
+@layer utilities {
+  .rounded-custom {
+    border-radius: 20px;
+  }
+}
+
 /* h1 {
   font-family: var(--font-unbounded);
   @apply text-4xl font-bold mb-6;
@@ -32,7 +38,7 @@ body {
 
 
   .payload-richtext h2 {
-    @apply text-4xl mb-4;
+    @apply text-4xl mb-4 leading-12;
   }
 
   .payload-richtext h3 {

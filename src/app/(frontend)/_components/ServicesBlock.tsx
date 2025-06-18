@@ -32,7 +32,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       : solutions.filter((s) => s.category === selectedCategory)
 
   return (
-    <section className="container mx-auto my-20">
+    <section className="container mx-auto my-20 px-16">
       <h1 className="text-4xl text-center mb-12">{heading}</h1>
 
       {/* Category Select */}
@@ -59,15 +59,15 @@ export default function ServicesBlock({ heading, solutions }: Props) {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3">
         {filteredSolutions.map((solution) => (
           <Link
             href={`/solution/${solution.slug}`}
             key={solution.id}
-            className="w-full bg-lightBG rounded-2xl p-6 flex justify-between items-start group"
+            className="w-full bg-lightBG rounded-custom p-6 flex justify-between items-start group"
           >
             <div className="flex flex-col gap-2">
-              <h1 className="text-2xl">{solution.name}</h1>
+              <h1 className="text-xl">{solution.name}</h1>
               <div className="flex flex-wrap w-full gap-2 pt-2 pb-10">
                 {solution.details?.map((item, i) => (
                   <span key={i} className="px-3 py-1 border border-black/20 rounded-2xl text-sm">
@@ -95,7 +95,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
 
       <Link href="/solution">
         <div
-          className="bg-primary rounded-2xl flex justify-between mt-5 cursor-pointer"
+          className="bg-primary rounded-custom flex justify-between mt-5 cursor-pointer"
           style={{
             backgroundImage: 'url("/bg-line.svg")',
             backgroundRepeat: 'no-repeat',
@@ -104,7 +104,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
           }}
         >
           <div className="flex flex-col gap-2 p-10">
-            <h1 className="text-2xl">Обслуживание брендов под ключ</h1>
+            <h1 className="text-xl">Обслуживание брендов под ключ</h1>
             <div className="flex flex-wrap w-full gap-2 py-2">
               {details?.map((item, i) => (
                 <span key={i} className="px-3 py-1 border border-black/20 rounded-2xl text-sm">

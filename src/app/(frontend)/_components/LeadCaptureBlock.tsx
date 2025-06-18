@@ -84,39 +84,41 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
   }
 
   return (
-    <section className="container mx-auto mt-40 mb-20 bg-lightBG rounded-3xl">
-      {typeof block?.form === 'object' && block?.form?.title === 'leadCaptureForm' && (
-        <div className="flex flex-col gap-6 py-10 px-8">
-          <h1 className="text-2xl text-center">{block.heading}</h1>
-          <form className="flex flex-wrap gap-2 items-stretch font-inter" onSubmit={handleSubmit}>
-            {block.form.fields?.map((field: any) => (
-              <div key={field.name} className="relative flex-1 min-w-[180px]">
-                <input
-                  id={field.name}
-                  type={field.blockType}
-                  name={field.name}
-                  required={field.required}
-                  placeholder=" "
-                  className="peer w-full rounded-lg px-3 pt-5 pb-2 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-                />
-                <label
-                  htmlFor={field.name}
-                  className="absolute left-3 top-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-lg peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs cursor-text"
-                >
-                  {field.label}
-                </label>
-              </div>
-            ))}
+    <section className="container mx-auto p-16">
+      <div className=" bg-lightBG rounded-custom">
+        {typeof block?.form === 'object' && block?.form?.title === 'leadCaptureForm' && (
+          <div className="flex flex-col gap-6 py-10 px-8">
+            <h1 className="text-2xl text-center">{block.heading}</h1>
+            <form className="flex flex-wrap gap-2 items-stretch font-inter" onSubmit={handleSubmit}>
+              {block.form.fields?.map((field: any) => (
+                <div key={field.name} className="relative flex-1 min-w-[180px]">
+                  <input
+                    id={field.name}
+                    type={field.blockType}
+                    name={field.name}
+                    required={field.required}
+                    placeholder=" "
+                    className="peer w-full rounded-lg px-3 pt-5 pb-2 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+                  />
+                  <label
+                    htmlFor={field.name}
+                    className="absolute left-3 top-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-lg peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs cursor-text"
+                  >
+                    {field.label}
+                  </label>
+                </div>
+              ))}
 
-            <button
-              type="submit"
-              className="bg-primary text-black px-5 rounded-xl h-min-full cursor-pointer font-unbounded hover:bg-hover transition"
-            >
-              {block.form.submitButtonLabel || 'Submit'}
-            </button>
-          </form>
-        </div>
-      )}
+              <button
+                type="submit"
+                className="bg-primary text-black px-5 rounded-xl h-min-full cursor-pointer font-unbounded hover:bg-hover transition"
+              >
+                {block.form.submitButtonLabel || 'Submit'}
+              </button>
+            </form>
+          </div>
+        )}
+      </div>
     </section>
   )
 }
