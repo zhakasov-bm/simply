@@ -18,6 +18,27 @@ body {
     font-family: var(--font-unbounded);
 }
 
+.container-class {
+  @apply container mx-auto my-20 px-8 lg:px-16
+}
+
+@media (max-width: 768px) {
+  h1 {
+    @apply text-[32px] text-center;
+  }
+
+  h1.special {
+    @apply text-5xl text-left leading-14;
+  }
+
+  h1.leadForm {
+    @apply text-[22px];
+  }
+  /* h3 {
+    @apply text-;
+  } */
+}
+
 @layer utilities {
   .rounded-custom {
     border-radius: 20px;

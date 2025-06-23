@@ -39,7 +39,7 @@ export default function CasesBlock({ heading, cases, type = 'slider', excludeId 
 
   return (
     <section
-      className="container mx-auto my-20 px-16"
+      className="container-class my-20"
       style={{
         backgroundImage: 'url("graphic.svg")',
         backgroundRepeat: 'no-repeat',
@@ -54,7 +54,7 @@ export default function CasesBlock({ heading, cases, type = 'slider', excludeId 
         <>
           <div ref={sliderRef} className="keen-slider">
             {groupedCases.map((group, i) => (
-              <div className="keen-slider__slide px-4" key={i}>
+              <div className="keen-slider__slide px-4 min-w-full sm:min-w-0" key={i}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                   {group.map((item) => (
                     <CaseCard key={item.id} item={item} />

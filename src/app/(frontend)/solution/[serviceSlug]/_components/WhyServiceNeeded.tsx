@@ -13,10 +13,10 @@ export default function WhyServiceNeeded({ solution }: { solution: Solution }) {
   ]
 
   return (
-    <section className="container mx-auto p-16">
+    <section className="container-class">
       {solution.whyServiceTitle && <RichText data={solution.whyServiceTitle} />}
 
-      <div className="flex gap-3 pt-8">
+      <div className="flex flex-col md:flex-row gap-3 pt-8">
         {items.slice(0, 3).map((item, i) => {
           const { bg, reverse } = cardStyles[i] || {}
           return (

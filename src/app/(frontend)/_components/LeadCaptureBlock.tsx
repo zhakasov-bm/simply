@@ -84,12 +84,15 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
   }
 
   return (
-    <section className="container mx-auto p-16">
+    <section className="container-class">
       <div className=" bg-lightBG rounded-custom">
         {typeof block?.form === 'object' && block?.form?.title === 'leadCaptureForm' && (
           <div className="flex flex-col gap-6 py-10 px-8">
-            <h1 className="text-2xl text-center">{block.heading}</h1>
-            <form className="flex flex-wrap gap-2 items-stretch font-inter" onSubmit={handleSubmit}>
+            <h1 className="text-2xl leadForm text-center">{block.heading}</h1>
+            <form
+              className="flex flex-col lg:flex-row gap-2 items-stretch font-inter"
+              onSubmit={handleSubmit}
+            >
               {block.form.fields?.map((field: any) => (
                 <div key={field.name} className="relative flex-1 min-w-[180px]">
                   <input
@@ -111,7 +114,7 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
 
               <button
                 type="submit"
-                className="bg-primary text-black px-5 rounded-xl h-min-full cursor-pointer font-unbounded hover:bg-hover transition"
+                className="bg-primary text-black px-5 rounded-xl py-4 lg:h-min-full cursor-pointer font-unbounded hover:bg-hover transition"
               >
                 {block.form.submitButtonLabel || 'Submit'}
               </button>

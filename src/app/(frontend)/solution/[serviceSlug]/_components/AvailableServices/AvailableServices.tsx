@@ -44,7 +44,7 @@ export default function AvailableServices({
   }
 
   return (
-    <section className="container mx-auto py-20 px-16 flex flex-col items-center">
+    <section className="container-class flex flex-col items-center">
       <h1 className="text-4xl pb-12">
         {subservice ? subservice.serviceTitle : solution.servicesTitle}
       </h1>

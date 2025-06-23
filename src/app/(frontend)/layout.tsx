@@ -7,8 +7,8 @@ import Footer from './Footer/Footer'
 import { Solution, Subservice } from '@/payload-types'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'Marketing agency',
+  title: 'Simply Digital',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

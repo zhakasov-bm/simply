@@ -6,22 +6,30 @@ import Image from 'next/image'
 
 export default function ReviewBlock({ component }: { component: Component }) {
   const [sliderRef] = useKeenSlider({
+    loop: true,
     slides: {
       perView: 3,
       spacing: 12,
     },
-    loop: true,
+    breakpoints: {
+      '(max-width: 768px)': {
+        slides: {
+          perView: 1.2, // show one full and part of next
+          spacing: 8,
+        },
+      },
+    },
   })
 
   return (
-    <section className="relative my-24">
+    <section className="relative my-24 mx-8">
       <Image
         src="/cam1.png"
         alt="camera"
         width={300}
         height={300}
         draggable={false}
-        className="absolute bottom select-none"
+        className="hidden md:absolute bottom select-none"
       />
       <Image
         src="/cam2.png"
@@ -29,18 +37,23 @@ export default function ReviewBlock({ component }: { component: Component }) {
         width={300}
         height={300}
         draggable={false}
-        className="absolute right-0 -bottom-20 h-auto z-1 select-none"
+        className="hidden md:absolute right-0 -bottom-20 h-auto z-1 select-none"
       />
       {component.globals.map((block, id) => {
         if (block.blockType === 'reviews') {
           return (
-            <div key={id} className="flex flex-col container mx-auto px-16">
+            <div key={id} className="flex flex-col container mx-auto lg:px-16">
+              {/* Gradient left blur */}
+              <div className="absolute top-0 left-0 h-full w-12 z-10 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none" />
+
+              {/* Gradient right blur */}
+              <div className="absolute top-0 right-0 h-full w-12 z-10 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none" />
               <h1 className="text-4xl pb-12 text-center">{block.heading}</h1>
               <div ref={sliderRef} className="keen-slider flex justify-between overflow-hidden">
                 {block.reviews?.map((review, i) => (
                   <div
                     key={i}
-                    className="keen-slider__slide font-inter flex flex-col gap-20 bg-lightBG p-8 rounded-custom"
+                    className="keen-slider__slide min-w-[80%] font-inter flex flex-col gap-20 bg-lightBG p-8 rounded-custom"
                   >
                     <p>{review.message}</p>
                     <div className="flex gap-3">

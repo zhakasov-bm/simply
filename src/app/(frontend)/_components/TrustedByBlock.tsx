@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function TrustedByBlock({ component }: { component: Component }) {
   return (
-    <section className="container mx-auto py-20 px-16">
+    <section className="hidden md:container mx-auto py-20 px-16">
       {component.globals.map((block, id) => {
         if (block.blockType === 'trusted-by') {
           return (

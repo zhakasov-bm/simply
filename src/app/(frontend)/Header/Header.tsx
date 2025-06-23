@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { Logo } from '../_components/Logo/Logo'
+import { Menu, X } from 'lucide-react'
+import { MobileMenu } from './MobileMenu'
 
 type NavProps = {
   nav: Navigation
@@ -15,6 +17,9 @@ type NavProps = {
 export default function Header({ nav, solutions, subservices }: NavProps) {
   const pathname = usePathname()
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
+  const [isMobileOpen, setIsMobileOpen] = useState(false)
+
+  const toggleMobileMenu = () => setIsMobileOpen((prev) => !prev)
 
   const renderSubservicesDropdown = (solution: Solution) => {
     const relatedSubs = subservices.filter(
@@ -53,7 +58,6 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
             >
               {solution.name}
             </Link>
-
             {hasSubs && renderSubservicesDropdown(solution)}
           </div>
         )
@@ -62,57 +66,73 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   )
 
   return (
-    <header className="container mx-auto flex justify-between items-center py-8">
+    <header className="container mx-auto flex justify-between fixed z-1000 bg-white md:static items-center py-5 px-8 md:px-0">
       <div className="flex gap-20 items-center">
         <Logo nav={nav} />
 
-        <nav className="flex gap-6 relative">
-          {nav.links?.map((link, idx) => {
-            const isActive = pathname === link.url || activeIdx === idx
+        {/* Desktop Menu */}
+        <div className="hidden md:flex">
+          <nav className="flex gap-6 relative">
+            {nav.links?.map((link, idx) => {
+              const isActive = pathname === link.url || activeIdx === idx
 
-            if (link.label === 'Услуги') {
+              if (link.label === 'Услуги') {
+                return (
+                  <div key={idx} className="relative group">
+                    <button
+                      onClick={() => setActiveIdx(idx)}
+                      className={`text-base ${isActive ? 'text-black' : 'text-black/40'} hover:text-black`}
+                    >
+                      {link.label}
+                    </button>
+                    {renderServicesDropdown()}
+                  </div>
+                )
+              }
+
               return (
-                <div key={idx} className="relative group">
-                  <button
-                    onClick={() => setActiveIdx(idx)}
-                    className={`text-base ${isActive ? 'text-black' : 'text-black/40'} hover:text-black`}
-                  >
-                    {link.label}
-                  </button>
-                  {renderServicesDropdown()}
-                </div>
+                <Link
+                  key={idx}
+                  href={link.url}
+                  onClick={() => setActiveIdx(idx)}
+                  className={`text-base hover:text-black ${isActive ? 'text-black' : 'text-black/40'}`}
+                >
+                  {link.label}
+                </Link>
               )
-            }
-
-            return (
-              <Link
-                key={idx}
-                href={link.url}
-                onClick={() => setActiveIdx(idx)}
-                className={`text-base hover:text-black ${isActive ? 'text-black' : 'text-black/40'}`}
-              >
-                {link.label}
-              </Link>
-            )
-          })}
-        </nav>
+            })}
+          </nav>
+        </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <span className="text-base font-medium">{nav.contacts?.[1]?.item}</span>
+      {/* Burger button (mobile only) */}
+      <button className="md:hidden z-50" onClick={toggleMobileMenu}>
+        {isMobileOpen ? '' : <Menu size={40} />}
+      </button>
 
-        {nav.languageSwitcher && (
-          <select className="py-1 text-base font-light">
-            <option value="ru">🇷🇺 RU</option>
-            <option value="kz">🇰🇿 KZ</option>
-            <option value="en">🇬🇧 EN</option>
-          </select>
-        )}
-
-        <button className="w-6 h-6 rounded-full border border-gray-400" title="Toggle Dark Mode">
-          🌓
-        </button>
+      {/* Mobile menu */}
+      <div
+        className={`
+          fixed top-0 right-0 h-full w-80 bg-white shadow-lg font-inter z-50 px-8 py-10 flex flex-col gap-4
+          transform transition-transform duration-300 ease-in-out
+          ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}
+          ${isMobileOpen ? '' : 'pointer-events-none'}
+        `}
+        style={{ visibility: isMobileOpen ? 'visible' : 'hidden' }}
+      >
+        <MobileMenu
+          nav={nav}
+          solutions={solutions}
+          subservices={subservices}
+          toggleMobileMenu={toggleMobileMenu}
+          isMobileOpen={isMobileOpen}
+        />
       </div>
+
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 bg-black/50 z-30 transition-opacity duration-300 ease-in-out ${isMobileOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+      ></div>
     </header>
   )
 }

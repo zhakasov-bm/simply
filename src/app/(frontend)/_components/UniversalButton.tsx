@@ -23,7 +23,7 @@ export default function UniversalButton({ label, to, className, onClick }: Unive
   return (
     <button
       onClick={handleClick}
-      className={`min-w-fit px-8 py-4 bg-primary rounded-2xl cursor-pointer hover:bg-hover transition ${className || ''}`}
+      className={`w-auto md:min-w-fit px-8 py-4 bg-primary rounded-2xl cursor-pointer hover:bg-hover transition ${className || ''}`}
     >
       {label}
     </button>

@@ -51,14 +51,16 @@ export default function Footer({ nav, solutions }: Props) {
 
   return (
     <footer className="py-8 border-t border-gray-100">
-      <div className="container mx-auto flex justify-between py-8">
+      <div className="container mx-auto flex flex-wrap justify-between px-8 py-8">
         <div className="flex flex-col gap-4">
           {/* Logo */}
-          <Logo nav={nav} />
+          <div className="hidden md:block">
+            <Logo nav={nav} />
+          </div>
 
           {/* Contact */}
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl py-2">{nav.contactTitle}</h1>
+            <h3 className="text-2xl py-2">{nav.contactTitle}</h3>
             {nav.contacts?.map((contact, id) => (
               <div key={id}>
                 <p className="font-light text-base text-gray-500">{contact.item}</p>
@@ -71,20 +73,20 @@ export default function Footer({ nav, solutions }: Props) {
             {nav.socialMedia?.map(({ platform, url }) => {
               const Icon = icons[platform]
               return (
-                <a key={platform} href={url} target="_blank" rel="noreferrer">
+                <Link key={platform} href={url} target="_blank" rel="noreferrer">
                   <Icon
                     size={48}
                     className="bg-lightBG rounded-xl p-3 hover:bg-gray-300 transition duration-300"
                   />
-                </a>
+                </Link>
               )
             })}
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex flex-col gap-2">
-          <h1 className="text-2xl py-2">Компания</h1>
+        <nav className="hidden md:flex flex-col gap-2">
+          <h3 className="text-2xl py-2">Компания</h3>
           {nav.links?.map((link, idx) => (
             <Link
               key={idx}
@@ -100,8 +102,8 @@ export default function Footer({ nav, solutions }: Props) {
         </nav>
 
         {/* Services */}
-        <div className="flex flex-col gap-4">
-          <h1 className="text-2xl py-2">Услуги</h1>
+        <div className="hidden pt-16 md:pt-0 md:flex flex-col gap-4">
+          <h3 className="text-2xl py-2">Услуги</h3>
 
           {Object.entries(groupedSolutions).map(([category, items]) => (
             <div key={category}>

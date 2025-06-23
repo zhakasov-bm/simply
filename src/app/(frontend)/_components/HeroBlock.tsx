@@ -2,20 +2,56 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Component } from '@/payload-types'
 import UniversalButton from './UniversalButton'
+import BGraphic from './BGRaphic'
 
 export default function HeroBlock({ component }: { component: Component }) {
   return (
-    <section className="py-24">
+    <section className="md:py-24">
       {component.globals.map((block, id) => {
         if (block.blockType === 'hero') {
           return (
-            <div key={id} className="flex gap-3 container mx-auto px-16">
+            <div key={id} className="flex gap-3 container mx-auto px-8 lg:px-16">
+              {/* Mobile */}
+              <div className="flex flex-col items-center justify-between gap-6 h-auto rounded-custom relative md:hidden ">
+                <h1 className="special pt-32">{block.heading}</h1>
+                <div className="flex w-full h-120 justify-center  z-10">
+                  {typeof block?.image === 'object' && block.image.url && (
+                    <>
+                      <Image
+                        src="/mobile-hero.svg"
+                        alt={block.image.alt}
+                        width={0}
+                        height={400}
+                        priority
+                        draggable={false}
+                        className="object-contain w-auto h-full"
+                      />
+                      <div className="absolute bottom-0 h-16 w-full z-10 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+                    </>
+                  )}{' '}
+                </div>
+                {/* <Image
+                  src="/graphic.png"
+                  alt="graphic"
+                  width={500}
+                  height={500}
+                  className="absolute top-[160px] w-[320px]"
+                  draggable={false}
+                /> */}
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center whitespace-nowrap z-20">
+                  <Image src="/btn.svg" alt="btn_graphic" width={60} height={60} />
+                  <UniversalButton label="Погрузиться в креатив" className="w-auto" />
+                </div>
+              </div>
+
               {/* Left */}
-              <div className="flex flex-col gap-16 flex-8/12">
-                <h1 className="lg:text-6xl font-medium leading-tight">{block.heading}</h1>
+              <div className="hidden md:flex flex-col gap-16 flex-8/12">
+                <h1 className="md:text-4xl lg:text-6xl font-medium leading-tight">
+                  {block.heading}
+                </h1>
 
                 <div
-                  className="h-full px-9 pb-15 flex flex-col gap-5 justify-end overflow-hidden relative rounded-custom"
+                  className="hidden h-full px-9 pb-15 md:flex flex-col gap-5 justify-end overflow-hidden lg:relative rounded-custom"
                   style={{
                     backgroundImage: 'url("/bg-hero.svg")',
                     width: '100%',
@@ -52,11 +88,11 @@ export default function HeroBlock({ component }: { component: Component }) {
               </div>
 
               {/* Right */}
-              <div className="flex flex-col gap-3 flex-4/12">
-                <div className="w-full h-[300px] bg-primary rounded-custom relative">
+              <div className="hidden md:flex flex-col gap-3 flex-4/12">
+                <div className="w-full md:h-[200px] lg:h-[300px] bg-primary rounded-custom relative">
                   {typeof block?.image === 'object' && block.image.url && (
                     <Image
-                      src="/hero-bala.svg"
+                      src={block.image.url}
                       alt={block.image.alt}
                       width={360}
                       height={300}
