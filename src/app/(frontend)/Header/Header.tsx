@@ -66,7 +66,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   )
 
   return (
-    <header className="container mx-auto flex justify-between fixed z-1000 bg-white md:static items-center py-5 px-8 md:px-0">
+    <header className="container mx-auto flex justify-between fixed z-[1000] bg-white md:bg-transparent md:static items-center py-4 md:py-5 px-8 md:px-0">
       <div className="flex gap-20 items-center">
         <Logo nav={nav} />
 

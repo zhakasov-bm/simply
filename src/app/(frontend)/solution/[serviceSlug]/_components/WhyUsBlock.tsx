@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function WhyUsBlock({ component }: { component: Component }) {
   return (
-    <section className="container mx-auto py-20 px-16">
+    <section className="container-class">
       {component.globals?.map((block, id) => {
         if (block.blockType === 'why-us') {
           return (

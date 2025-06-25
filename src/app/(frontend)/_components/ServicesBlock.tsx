@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useKeenSlider } from 'keen-slider/react'
 
 import { Solution } from '@/payload-types'
+import UniversalButton from './UniversalButton'
 
 type Props = {
   heading: string
@@ -14,17 +14,7 @@ type Props = {
 
 export default function ServicesBlock({ heading, solutions }: Props) {
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [sliderRef] = useKeenSlider({
-    slides: {
-      perView: 1.2,
-      spacing: 12,
-    },
-    breakpoints: {
-      '(min-width: 768px)': {
-        disabled: true,
-      },
-    },
-  })
+
   //Details for unique block
   const details = ['Бренд', 'Сопровождение', 'Мерч']
 
@@ -44,7 +34,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
 
   return (
     <section className="container-class my-20">
-      <h1 className="text-4xl text-center mb-12">{heading}</h1>
+      <h1 className="text-4xl text-center mb-8 md:mb-12">{heading}</h1>
 
       {/* Mobile Select */}
       <div className="block sm:hidden mb-8">
@@ -86,20 +76,21 @@ export default function ServicesBlock({ heading, solutions }: Props) {
         ))}
       </div>
 
-      <div ref={sliderRef} className="keen-slider md:grid grid-cols-2 gap-3">
+      {/* Card */}
+      <div className="flex overflow-x-auto hide-scrollbar md:grid grid-cols-2 gap-3 h-[280px] md:h-auto">
         {filteredSolutions.map((solution) => (
           <Link
             href={`/solution/${solution.slug}`}
             key={solution.id}
-            className="keen-slider__slide bg-lightBG rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group min-w-[80%]"
+            className="relative bg-lightBG rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group min-w-[80%] overflow-hidden"
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 z-10 md:pb-16 md:max-w-90">
               <h3 className="text-xl">{solution.name}</h3>
-              <div className="flex flex-wrap w-full gap-2 pt-2 pb-10">
+              <div className="flex flex-wrap w-full gap-1 md:gap-2 pt-2 pb-10">
                 {solution.details?.map((item, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 border border-black/20 rounded-custom text-xs md:text-sm"
+                    className="px-2 md:px-3 py-1 border border-black/20 bg-lightBG/20 backdrop-blur-[2px] rounded-custom text-[10px] md:text-sm"
                   >
                     {item.name}
                   </span>
@@ -107,9 +98,9 @@ export default function ServicesBlock({ heading, solutions }: Props) {
               </div>
             </div>
 
-            {/* Consistent image size container */}
-            <div className="w-[200px] h-full relative overflow-hidden">
-              {typeof solution.icon === 'object' && solution.icon?.url && (
+            {/* Image */}
+            {typeof solution.icon === 'object' && solution.icon?.url && (
+              <div className="absolute bottom-[-20px] -right-10 w-[200px] h-[200px] md:bottom-[-70px] md:right-[-40px] md:w-[300px] md:h-[300px] pointer-events-none">
                 <Image
                   src={solution.icon?.url}
                   alt={solution.icon?.alt || ''}
@@ -117,15 +108,15 @@ export default function ServicesBlock({ heading, solutions }: Props) {
                   className="object-contain transition-transform duration-300 group-hover:scale-105"
                   draggable={false}
                 />
-              )}
-            </div>
+              </div>
+            )}
           </Link>
         ))}
       </div>
 
       <Link href="/solution">
         <div
-          className="bg-primary rounded-custom flex justify-between mt-5 cursor-pointer"
+          className="relative bg-primary rounded-custom flex justify-between mt-5 cursor-pointer overflow-hidden h-[240px]"
           style={{
             backgroundImage: 'url("/bg-line.svg")',
             backgroundRepeat: 'no-repeat',
@@ -133,28 +124,35 @@ export default function ServicesBlock({ heading, solutions }: Props) {
             backgroundSize: 'contain',
           }}
         >
-          <div className="flex flex-col gap-2 p-10">
+          <div className="flex flex-col gap-2 p-6 md:p-10">
             <h3 className="text-xl">Обслуживание брендов под ключ</h3>
             <div className="flex flex-wrap w-full gap-2 py-2">
               {details?.map((item, i) => (
-                <span key={i} className="px-3 py-1 border border-black/20 rounded-2xl text-sm">
+                <span
+                  key={i}
+                  className="px-2 md:px-3 py-1 border border-black/20 rounded-custom text-[10px] md:text-sm"
+                >
                   {item}
                 </span>
               ))}
             </div>
           </div>
-          <div className="pt-10 align-bottom">
+          <div className="absolute bottom-0 right-0 pt-10 align-bottom">
             <Image
               src="/service.svg"
               alt="/group-people"
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               className="contain"
               draggable={false}
             />
           </div>
         </div>
       </Link>
+
+      <div className="flex justify-center pt-10">
+        <UniversalButton label="Получить консультацию" to="/" />
+      </div>
     </section>
   )
 }

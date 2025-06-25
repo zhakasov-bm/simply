@@ -15,10 +15,13 @@ export default function AboutUsBlock({ component }: { component: Component }) {
       {component.globals.map((block, id) => {
         if (block.blockType === 'about') {
           return (
-            <div key={id} className="flex flex-col gap-10 lg:flex-row lg:gap-20">
+            <div key={id} className="flex flex-col gap-8 lg:flex-row lg:gap-20">
               <div className="flex flex-col flex-1/2 gap-5">
                 <h1 className="lg:text-4xl lg:text-left">{block.heading}</h1>
-                <RichText data={block.content} className="text-xl font-inter font-normal" />
+                <RichText
+                  data={block.content}
+                  className="text-lg md:text-xl font-inter font-normal"
+                />
               </div>
 
               {/* //Stats Cards */}
@@ -28,14 +31,12 @@ export default function AboutUsBlock({ component }: { component: Component }) {
                     <div
                       key={i}
                       className={`
-                bg-black text-white rounded-custom p-5 lg:py-6 lg:px-8 shadow-md flex flex-col gap-2
+                bg-lightBG text-black lg:bg-black lg:text-white rounded-custom p-3 lg:p-5 lg:py-6 lg:px-8 lg:shadow-md flex flex-col gap-1 lg:gap-2
                 ${i === 2 ? 'col-span-2' : ''}
                 `}
                     >
-                      <h3 className="text-3xl lg:text-4xl font-medium mb-2">{stat.title}</h3>
-                      <p className="text-base lg:text-lg font-inter font-light">
-                        {stat.description}
-                      </p>
+                      <h3 className="text-2xl lg:text-4xl lg:font-medium lg:mb-2">{stat.title}</h3>
+                      <p className="text-xs lg:text-lg font-inter font-light">{stat.description}</p>
                     </div>
                   ))}
                 </div>

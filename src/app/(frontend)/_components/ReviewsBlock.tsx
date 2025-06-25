@@ -22,7 +22,7 @@ export default function ReviewBlock({ component }: { component: Component }) {
   })
 
   return (
-    <section className="relative my-24 mx-8">
+    <section className="relative my-24">
       <Image
         src="/cam1.png"
         alt="camera"
@@ -42,12 +42,7 @@ export default function ReviewBlock({ component }: { component: Component }) {
       {component.globals.map((block, id) => {
         if (block.blockType === 'reviews') {
           return (
-            <div key={id} className="flex flex-col container mx-auto lg:px-16">
-              {/* Gradient left blur */}
-              <div className="absolute top-0 left-0 h-full w-12 z-10 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none" />
-
-              {/* Gradient right blur */}
-              <div className="absolute top-0 right-0 h-full w-12 z-10 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none" />
+            <div key={id} className="flex flex-col md:container md:mx-auto lg:px-16 ml-8">
               <h1 className="text-4xl pb-12 text-center">{block.heading}</h1>
               <div ref={sliderRef} className="keen-slider flex justify-between overflow-hidden">
                 {block.reviews?.map((review, i) => (

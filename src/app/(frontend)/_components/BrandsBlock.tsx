@@ -9,22 +9,19 @@ type Props = {
 
 export default function BrandsBlockBlock({ component, isLabel = false }: Props) {
   return (
-    <section className="py-16">
+    <section className="py-8 md:py-16">
       {component.globals.map((block, id) => {
         if (block.blockType === 'brands') {
           return (
             <div key={id} className="flex flex-col gap-12">
               {isLabel && <h1 className="text-4xl text-center pb-10">{block.heading}</h1>}
-              <Marquee
-                pauseOnHover={true}
-                speed={50} // Adjust speed as needed
-                gradient={true} // Optional: adds fade effect at edges
-                gradientWidth={50} // Optional: width of the gradient
-              >
+              <Marquee pauseOnHover={true} speed={50} gradient={true} gradientWidth={50}>
                 {block.logos?.map((item, i) => (
-                  <div key={i} className="w-40 h-24 mx-8 relative flex-shrink-0">
+                  <div
+                    key={i}
+                    className="w-24 h-12 mx-2 md:w-40 md:h-24 md:mx-8 relative flex-shrink-0"
+                  >
                     {' '}
-                    {/* Added mx-8 for horizontal spacing and flex-shrink-0 */}
                     {typeof item.logo === 'object' && item.logo.url && (
                       <Image
                         src={item.logo.url}

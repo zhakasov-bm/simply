@@ -9,8 +9,8 @@ export const Logo = ({ nav }: { nav: Navigation }) => {
         <Image
           src={nav.logo.url}
           alt={nav.logo.alt || ''}
-          width={140}
-          height={60}
+          width={120}
+          height={50}
           draggable={false}
         />
       )}

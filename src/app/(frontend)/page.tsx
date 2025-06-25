@@ -59,14 +59,19 @@ export default async function HomePage() {
     <div>
       <BGraphic />
       <HeroBlock component={component} />
+      <div className="block md:hidden">
+        <BrandsBlock component={component} isLabel={false} />
+      </div>
       <AboutUsBlock component={component} />
       <ServicesBlock heading={heading} solutions={solutions} />
       <TrustedByBlock component={component} />
       <CasesBlock heading="Кейсы – истории, которые мы создали" cases={cases} type="slider" />
       <LeadCaptureBlock block={formBlocks[0]} />
       <CertificateBlock component={component} />
-      <BrandsBlock component={component} isLabel={true} />
-      <LeadCaptureBlock block={formBlocks[1]} />
+      <div className="hidden md:block">
+        <BrandsBlock component={component} isLabel={true} />
+        <LeadCaptureBlock block={formBlocks[1]} />
+      </div>
       <TeamBlock component={component} />
       <ReviewsBlock component={component} />
       {requestForm && <RequestFormBlock block={requestForm} />}

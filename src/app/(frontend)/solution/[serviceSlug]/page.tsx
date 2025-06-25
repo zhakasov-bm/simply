@@ -1,7 +1,7 @@
-import configPromise from '@payload-config'
+import configPromise from '@/payload.config'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
-import config from '@payload-config'
+import config from '@/payload.config'
 
 import ReviewBlock from '../../_components/ReviewsBlock'
 import CertificateBlock from '../../_components/CertificateBlock'
@@ -95,12 +95,12 @@ export default async function SolutionPage({ params }: PageProps) {
         <Hero component={component} solution={solution} />
         <BrandsBlock component={component} />
 
-        {formBlock && <LeadCaptureBlock block={formBlock} />}
+        <div className="hidden md:block">{formBlock && <LeadCaptureBlock block={formBlock} />}</div>
         {solution.hasSubservices && <WhyServiceNeeded solution={solution} />}
         {!solution.hasSubservices && <InfoBlock solution={solution} />}
         <ProblemBlock solution={solution} />
         <AvailableServices subservices={subservices} solution={solution} />
-        <CasesBlock heading="Наши кейсы" cases={casesResult.docs} type="simple" />
+        <CasesBlock heading="Наши кейсы" cases={casesResult.docs} type="slider" />
         {formBlock && <LeadCaptureBlock block={formBlock} />}
         <WhyUsBlock component={component} />
         <CertificateBlock component={component} />

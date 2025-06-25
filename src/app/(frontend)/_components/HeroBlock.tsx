@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Component } from '@/payload-types'
 import UniversalButton from './UniversalButton'
-import BGraphic from './BGRaphic'
 
 export default function HeroBlock({ component }: { component: Component }) {
   return (
@@ -12,9 +11,9 @@ export default function HeroBlock({ component }: { component: Component }) {
           return (
             <div key={id} className="flex gap-3 container mx-auto px-8 lg:px-16">
               {/* Mobile */}
-              <div className="flex flex-col items-center justify-between gap-6 h-auto rounded-custom relative md:hidden ">
+              <div className="flex flex-col items-center justify-between gap-6 h-auto rounded-custom relative md:hidden bg-container">
                 <h1 className="special pt-32">{block.heading}</h1>
-                <div className="flex w-full h-120 justify-center  z-10">
+                <div className="flex w-full h-100 justify-center  z-10">
                   {typeof block?.image === 'object' && block.image.url && (
                     <>
                       <Image

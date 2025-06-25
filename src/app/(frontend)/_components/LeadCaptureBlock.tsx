@@ -87,8 +87,8 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
     <section className="container-class">
       <div className=" bg-lightBG rounded-custom">
         {typeof block?.form === 'object' && block?.form?.title === 'leadCaptureForm' && (
-          <div className="flex flex-col gap-6 py-10 px-8">
-            <h1 className="text-2xl leadForm text-center">{block.heading}</h1>
+          <div className="flex flex-col gap-6 py-10 px-4 md:px-8">
+            <h3 className="text-xl md:text-2xl leadForm text-center">{block.heading}</h3>
             <form
               className="flex flex-col lg:flex-row gap-2 items-stretch font-inter"
               onSubmit={handleSubmit}
