@@ -20,7 +20,6 @@ export function CaseCard({ item }: { item: Case }) {
           </span>
         ))}
       </div>
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
     </Link>
   )
 }

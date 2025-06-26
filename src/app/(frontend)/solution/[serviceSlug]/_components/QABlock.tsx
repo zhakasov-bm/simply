@@ -20,8 +20,8 @@ export default function QABlock({ solution, subservice }: Props) {
   }
 
   return (
-    <section className="container mx-auto py-20 px-16">
-      <h1 className="text-4xl pb-12 text-center">{content.titleQA}</h1>
+    <section className="container-class">
+      <h1 className="text-4xl pb-8 md:pb-12 text-center">{content.titleQA}</h1>
       <div className="flex flex-col gap-3">
         {content.questions?.map((item, index) => {
           const isOpen = openIndex === index
@@ -38,10 +38,10 @@ export default function QABlock({ solution, subservice }: Props) {
 
               <div
                 className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${
-                  isOpen ? 'max-h-96 mt-4' : 'max-h-0'
+                  isOpen ? 'max-h-96' : 'max-h-0'
                 }`}
               >
-                <p className="text-gray-700">{item.answer}</p>
+                <p className="text-gray-700 font-inter pt-4">{item.answer}</p>
               </div>
             </div>
           )

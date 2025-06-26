@@ -13,7 +13,7 @@ export default function InfoBlock({ solution, subservice }: Props) {
 
   return (
     <section
-      className="container-class py-20"
+      className="container-class md:py-20"
       style={{
         backgroundImage: 'url("/graphic.svg")',
         backgroundRepeat: 'no-repeat',
@@ -22,14 +22,14 @@ export default function InfoBlock({ solution, subservice }: Props) {
       }}
     >
       <h1 className="text-3xl md:text-4xl pb-12 text-center">{content.heading || content.name}</h1>
-      <div className="bg-lightBG rounded-custom px-16 py-10 flex items-center gap-24">
-        <div className="flex flex-col gap-6">
+      <div className="bg-lightBG rounded-custom p-8 md:px-16 md:py-10 flex flex-col-reverse md:flex-row items-center gap-2 md:gap-24">
+        <div className="flex flex-col gap-4 md:gap-6">
           <h1 className="text-2xl md:text-3xl">{content.title || content.name}</h1>
-          <p className="font-inter font-normal text-xl text-black/60">
+          <p className="font-inter font-normal text-lg md:text-xl text-black/60">
             {content.description || content.subtitle}
           </p>
         </div>
-        <div className="h-full">
+        <div className="w-[70%] md:h-full">
           {typeof content.icon === 'object' && content.icon?.url && (
             <Image
               src={content.icon.url}

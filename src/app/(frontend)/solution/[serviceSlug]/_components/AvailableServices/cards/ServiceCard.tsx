@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { ServiceItem } from '../types'
 
 export const ServiceCard = ({ name, icon }: ServiceItem) => (
-  <div className="bg-lightBG py-4 px-6 flex gap-4 items-center rounded-custom">
+  <div className="bg-lightBG p-4 md:px-6 flex gap-4 items-center rounded-custom">
     {icon?.url ? (
       <Image
         src={icon.url}
@@ -22,6 +22,6 @@ export const ServiceCard = ({ name, icon }: ServiceItem) => (
         draggable={false}
       />
     )}
-    <p>{name}</p>
+    <p className="text-sm md:text-base">{name}</p>
   </div>
 )

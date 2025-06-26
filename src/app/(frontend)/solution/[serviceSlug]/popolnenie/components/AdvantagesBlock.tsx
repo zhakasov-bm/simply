@@ -10,13 +10,13 @@ type Props = {
 
 export default function AdvantagesBlock({ block }: Props) {
   return (
-    <section className="container mx-auto py-20">
+    <section className="container-class pb-8">
       <RichText data={block.advantagesTitle} />
-      <div className="grid grid-cols-3 gap-5 pt-8">
+      <div className="grid grid-cols-3 gap-3 pt-8">
         {block.advantages?.map((adv, idx) => (
           <div
             key={idx}
-            className="bg-blueBG py-5 px-8 rounded-2xl relative overflow-hidden flex flex-col"
+            className="bg-blueBG py-5 px-8 rounded-custom relative overflow-hidden flex flex-col min-h-[240px]"
           >
             <div className="text-black/5 font-bold text-[240px] font-montserrat absolute top-0 right-0 leading-none">
               {idx + 1}

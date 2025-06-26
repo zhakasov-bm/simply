@@ -11,7 +11,7 @@ export default function AvailableServices({
   const renderServices = () => {
     if (subservice) {
       return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-3 w-full">
           {subservice.services?.map((service, id) => (
             <ServiceCard
               key={id}
@@ -44,12 +44,12 @@ export default function AvailableServices({
   }
 
   return (
-    <section className="container-class flex flex-col items-center">
-      <h1 className="text-4xl pb-12">
+    <section className="container-class py-8 flex flex-col items-center">
+      <h1 className="text-4xl pb-6 md:pb-12 text-center">
         {subservice ? subservice.serviceTitle : solution.servicesTitle}
       </h1>
       {renderServices()}
-      <UniversalButton label="Получить консультацию" className="mt-12" />
+      <UniversalButton label="Получить консультацию" className="mt-8 md:mt-12" />
     </section>
   )
 }

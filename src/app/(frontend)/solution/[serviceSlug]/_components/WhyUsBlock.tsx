@@ -8,17 +8,20 @@ export default function WhyUsBlock({ component }: { component: Component }) {
         if (block.blockType === 'why-us') {
           return (
             <div key={id}>
-              <h1 className="text-4xl text-center pb-12">{block.heading}</h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <h1 className="text-4xl text-center pb-6 md:pb-12">{block.heading}</h1>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                 {block.items?.map((item, id) => (
-                  <div key={id} className="bg-lightBG rounded-custom p-10 relative">
-                    <div className="flex flex-col gap-4 pb-10 pr-50">
-                      <h1 className="text-xl">{item.title}</h1>
-                      <p className="text-base font-light text-black/60 font-inter">
+                  <div
+                    key={id}
+                    className="bg-lightBG rounded-custom p-5 md:p-10 overflow-hidden relative"
+                  >
+                    <div className="flex flex-col gap-8 md:gap-4 pr-20 md:pb-10 md:pr-50">
+                      <h3 className="text-lg leading-6 md:text-xl">{item.title}</h3>
+                      <p className="text-xs md:text-base text-black/60 font-inter">
                         {item.description}
                       </p>
                     </div>
-                    <div className="absolute right-5 bottom-5">
+                    <div className="absolute -right-24 -bottom-8 -rotate-12 md:rotate-none md:right-5 md:bottom-5">
                       {typeof item.icon === 'object' && item.icon.url && (
                         <Image
                           src={item.icon.url}

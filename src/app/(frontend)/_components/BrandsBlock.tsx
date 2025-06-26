@@ -19,7 +19,7 @@ export default function BrandsBlockBlock({ component, isLabel = false }: Props) 
                 {block.logos?.map((item, i) => (
                   <div
                     key={i}
-                    className="w-24 h-12 mx-2 md:w-40 md:h-24 md:mx-8 relative flex-shrink-0"
+                    className="w-32 h-16 mx-4 md:w-40 md:h-24 md:mx-8 relative flex-shrink-0"
                   >
                     {' '}
                     {typeof item.logo === 'object' && item.logo.url && (
