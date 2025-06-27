@@ -71,7 +71,7 @@ export default async function SubservicePage({ params }: PageProps) {
       {sub.slug === 'seo' && seoBlocks[0] && <SeoBlock block={seoBlocks[0]} />}
       <AvailableServices solution={service} subservices={[sub]} subservice={sub} />
       <WhyUsBlock component={component} />
-      <CasesBlock heading="Наши кейсы" cases={casesResult.docs} type="simple" />
+      <CasesBlock heading="Наши кейсы" cases={casesResult.docs} type="slider" />
       {formBlock && <LeadCaptureBlock block={formBlock} />}
       {sub.slug === 'seo' && seoBlocks[1] && <SeoBlock block={seoBlocks[0]} />}
       <TrustedByBlock component={component} />

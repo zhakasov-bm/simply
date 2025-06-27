@@ -84,7 +84,7 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
   }
 
   return (
-    <section className="container-class">
+    <section className="container mx-auto my-16 lg:my-20 px-6 lg:px-16">
       <div className=" bg-lightBG rounded-custom">
         {typeof block?.form === 'object' && block?.form?.title === 'leadCaptureForm' && (
           <div className="flex flex-col gap-6 py-10 px-4 md:px-8">

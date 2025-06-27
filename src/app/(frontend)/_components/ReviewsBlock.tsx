@@ -42,7 +42,7 @@ export default function ReviewBlock({ component }: { component: Component }) {
       {component.globals.map((block, id) => {
         if (block.blockType === 'reviews') {
           return (
-            <div key={id} className="flex flex-col md:container md:mx-auto lg:px-16 ml-8">
+            <div key={id} className="flex flex-col md:container md:mx-auto lg:p-16 ml-8">
               <h1 className="text-4xl pb-12 text-center">{block.heading}</h1>
               <div ref={sliderRef} className="keen-slider flex justify-between overflow-hidden">
                 {block.reviews?.map((review, i) => (

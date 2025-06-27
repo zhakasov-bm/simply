@@ -82,7 +82,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
           <Link
             href={`/solution/${solution.slug}`}
             key={solution.id}
-            className="relative bg-lightBG rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group min-w-[80%] overflow-hidden"
+            className="relative bg-lightBG rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group md:max-h-[280px] min-w-[80%] overflow-hidden"
           >
             <div className="flex flex-col gap-2 z-10 md:pb-16 md:max-w-90">
               <h3 className="text-xl">{solution.name}</h3>
@@ -114,7 +114,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
         ))}
       </div>
 
-      <Link href="/solution">
+      <Link href="/solution/brand-maintenance">
         <div
           className="relative bg-primary rounded-custom flex justify-between mt-5 cursor-pointer overflow-hidden h-[240px]"
           style={{

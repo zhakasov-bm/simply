@@ -41,7 +41,7 @@ body {
 
 
 .container-class {
-  @apply container mx-auto my-16 lg:my-20 px-6 lg:px-16
+  @apply container mx-auto my-16 lg:my-20 px-6 lg:px-16 lg:py-13
 }
 
 @media (max-width: 768px) {
