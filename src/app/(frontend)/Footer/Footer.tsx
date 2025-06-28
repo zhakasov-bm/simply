@@ -42,8 +42,10 @@ export default function Footer({ nav, solutions }: Props) {
   const groupedSolutions = solutions.reduce(
     (acc, item) => {
       const cat = item.category
-      if (!acc[cat]) acc[cat] = []
-      acc[cat].push(item)
+      if (cat) {
+        if (!acc[cat]) acc[cat] = []
+        acc[cat].push(item)
+      }
       return acc
     },
     {} as Record<string, Solution[]>,
