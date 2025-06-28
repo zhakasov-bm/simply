@@ -15,8 +15,9 @@ type Props = {
 export default function ServicesBlock({ heading, solutions }: Props) {
   const [selectedCategory, setSelectedCategory] = useState('all')
 
-  //Details for unique block
-  const details = ['Бренд', 'Сопровождение', 'Мерч']
+  // Filter out maintenance services from main list
+  const regularSolutions = solutions.filter((solution) => !solution.maintenance)
+  const maintenanceSolutions = solutions.filter((solution) => solution.maintenance)
 
   const categoryLabels: Record<string, string> = {
     content: 'Креатив и Контент',
@@ -25,12 +26,14 @@ export default function ServicesBlock({ heading, solutions }: Props) {
     website: 'Сайты и Технологии',
   }
 
-  const categories = Array.from(new Set(solutions.map((s) => s.category)))
+  const categories = Array.from(
+    new Set(regularSolutions.map((s) => s.category).filter((cat) => cat != null)),
+  ) as string[]
 
   const filteredSolutions =
     selectedCategory === 'all'
-      ? solutions
-      : solutions.filter((s) => s.category === selectedCategory)
+      ? regularSolutions
+      : regularSolutions.filter((s) => s.category === selectedCategory)
 
   return (
     <section className="container-class my-20">
@@ -82,10 +85,10 @@ export default function ServicesBlock({ heading, solutions }: Props) {
           <Link
             href={`/solution/${solution.slug}`}
             key={solution.id}
-            className="relative bg-lightBG rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group md:max-h-[280px] min-w-[80%] overflow-hidden"
+            className="relative bg-lightBG rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group md:max-h-[240px] min-w-[80%] overflow-hidden"
           >
             <div className="flex flex-col gap-2 z-10 md:pb-16 md:max-w-90">
-              <h3 className="text-xl">{solution.name}</h3>
+              <h3 className="text-base md:text-xl">{solution.name}</h3>
               <div className="flex flex-wrap w-full gap-1 md:gap-2 pt-2 pb-10">
                 {solution.details?.map((item, i) => (
                   <span
@@ -100,7 +103,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
 
             {/* Image */}
             {typeof solution.icon === 'object' && solution.icon?.url && (
-              <div className="absolute bottom-[-20px] -right-10 w-[200px] h-[200px] md:bottom-[-70px] md:right-[-40px] md:w-[300px] md:h-[300px] pointer-events-none">
+              <div className="absolute bottom-[-20px] -right-10 w-[200px] h-[200px] md:bottom-[-70px] md:right-[-40px] md:w-[280px] md:h-[280px] pointer-events-none">
                 <Image
                   src={solution.icon?.url}
                   alt={solution.icon?.alt || ''}
@@ -114,41 +117,50 @@ export default function ServicesBlock({ heading, solutions }: Props) {
         ))}
       </div>
 
-      <Link href="/solution/brand-maintenance">
-        <div
-          className="relative bg-primary rounded-custom flex justify-between mt-5 cursor-pointer overflow-hidden h-[240px]"
-          style={{
-            backgroundImage: 'url("/bg-line.svg")',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'bottom right',
-            backgroundSize: 'contain',
-          }}
-        >
-          <div className="flex flex-col gap-2 p-6 md:p-10">
-            <h3 className="text-xl">Обслуживание брендов под ключ</h3>
-            <div className="flex flex-wrap w-full gap-2 py-2">
-              {details?.map((item, i) => (
-                <span
-                  key={i}
-                  className="px-2 md:px-3 py-1 border border-black/20 rounded-custom text-[10px] md:text-sm"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="absolute bottom-0 right-0 pt-10 align-bottom">
-            <Image
-              src="/service.svg"
-              alt="/group-people"
-              width={400}
-              height={400}
-              className="contain"
-              draggable={false}
-            />
-          </div>
+      {/* Maintenance Services Section */}
+      {maintenanceSolutions.length > 0 && (
+        <div className="mt-5 space-y-3">
+          {maintenanceSolutions.map((solution) => (
+            <Link href={`/solution/${solution.slug}`} key={solution.id}>
+              <div
+                className="relative bg-primary rounded-custom flex justify-between cursor-pointer overflow-hidden h-[280px]"
+                style={{
+                  backgroundImage: 'url("/bg-line.svg")',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'bottom right',
+                  backgroundSize: 'contain',
+                }}
+              >
+                <div className="flex flex-col gap-2 p-6 md:p-10">
+                  <h3 className="text-xl">{solution.name}</h3>
+                  <div className="flex flex-wrap w-full gap-2 py-2 z-100">
+                    {solution.details?.map((item, i) => (
+                      <span
+                        key={i}
+                        className="px-2 md:px-3 py-1 border border-black/20 bg-lightBG/10 backdrop-blur-[2px] rounded-custom text-[10px] md:text-sm"
+                      >
+                        {item.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {typeof solution.icon === 'object' && solution.icon?.url && (
+                  <div className="absolute -bottom-32 md:-bottom-20 right-0 md:right-20 -rotate-40">
+                    <Image
+                      src={solution.icon.url}
+                      alt={solution.icon.alt || ''}
+                      width={400}
+                      height={400}
+                      className="contain"
+                      draggable={false}
+                    />
+                  </div>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
-      </Link>
+      )}
 
       <div className="flex justify-center pt-10">
         <UniversalButton label="Получить консультацию" to="/" />

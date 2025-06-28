@@ -24,7 +24,7 @@ export default function Hero(props: Props) {
       </div>
       <div className="flex flex-col justify-center items-center text-center">
         <div className="flex flex-col gap-4 md:max-w-5xl pt-16 px-6 md:p-0">
-          <h1 className="text-6xl leading-16">{title}</h1>
+          <h1 className="text-6xl md:leading-16">{title}</h1>
           <p className="text-lg md:text-2xl font-light">{subtitle}</p>
         </div>
 

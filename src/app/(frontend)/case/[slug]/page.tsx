@@ -53,7 +53,7 @@ export default async function CasePage({ params }: PageProps) {
       <CasesBlock
         heading="Посмотрите другие кейсы"
         cases={casesResult.docs}
-        type="simple"
+        type="slider"
         excludeId={caseData.id}
       />
     </div>

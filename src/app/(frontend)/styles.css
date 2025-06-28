@@ -50,7 +50,7 @@ body {
   }
 
   h1.special {
-    @apply text-[32px] text-left leading-10;
+    @apply text-[32px] text-left md:leading-10;
   }
 
   h1.leadForm {

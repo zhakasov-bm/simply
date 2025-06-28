@@ -1,9 +1,10 @@
+import UniversalButton from '@/app/(frontend)/_components/UniversalButton'
 import { Case } from '@/payload-types'
 
 export default function Hero({ caseData }: { caseData: Case }) {
   return (
     <section
-      className="container mx-auto py-20 flex flex-col items-center text-center"
+      className="container mx-auto pt-20 md:pb-20 flex flex-col items-center text-center"
       style={{
         backgroundImage: 'url("/wave.svg")',
         backgroundRepeat: 'no-repeat',
@@ -11,17 +12,16 @@ export default function Hero({ caseData }: { caseData: Case }) {
         backgroundSize: 'contain',
       }}
     >
-      <div className="flex flex-col gap-4 max-w-5xl">
+      <div className="flex flex-col items-center gap-5 max-w-5xl p-8 md:p-0">
         {/* <div className="flex gap-2 text-xs text-center font-light">
           <Link href="/">Main</Link>
           <Link href="/">Case</Link>
           <Link href="/">{caseData.slug}</Link>
         </div> */}
         <h1 className="text-6xl">{caseData.heading}</h1>
-        <p className="text-2xl font-light">{caseData.subtitle}</p>
+        <p className="text-base md:text-2xl font-light">{caseData.subtitle}</p>
+        <UniversalButton label="Обсудить проект" className="mt-8 max-w-fit" />
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-10 mt-20 max-w-5xl w-full"></div>
     </section>
   )
 }

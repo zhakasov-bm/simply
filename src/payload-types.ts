@@ -175,7 +175,8 @@ export interface Solution {
   subtitle: string;
   slug: string;
   icon: string | Media;
-  category: 'content' | 'pr' | 'brand' | 'website';
+  maintenance?: boolean | null;
+  category?: ('content' | 'pr' | 'brand' | 'website') | null;
   details?:
     | {
         name?: string | null;
@@ -736,6 +737,7 @@ export interface SolutionsSelect<T extends boolean = true> {
   subtitle?: T;
   slug?: T;
   icon?: T;
+  maintenance?: T;
   category?: T;
   details?:
     | T

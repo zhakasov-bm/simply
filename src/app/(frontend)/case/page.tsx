@@ -20,7 +20,7 @@ export default async function page() {
 
   return (
     <div>
-      <CasesBlock heading="Наши кейсы" cases={cases} type="loadMore" />
+      <CasesBlock heading="Наши кейсы" cases={cases} type="slider" />
     </div>
   )
 }

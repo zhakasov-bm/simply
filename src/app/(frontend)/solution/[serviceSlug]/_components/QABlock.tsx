@@ -20,7 +20,7 @@ export default function QABlock({ solution, subservice }: Props) {
   }
 
   return (
-    <section className="container-class">
+    <section className="container mx-auto px-8 md:px-40">
       <h1 className="text-4xl pb-8 md:pb-12 text-center">{content.titleQA}</h1>
       <div className="flex flex-col gap-3">
         {content.questions?.map((item, index) => {

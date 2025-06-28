@@ -46,7 +46,7 @@ export default function CertificateBlock({ component }: { component: Component }
               </div>
 
               <div className="md:hidden">
-                <Marquee pauseOnHover={true} speed={50} gradient={true} gradientWidth={50}>
+                <Marquee speed={50} gradient={true} gradientWidth={50}>
                   {block.certificates?.map((item, i) => (
                     <div key={i} className="w-24 h-24 mx-4 relative flex-shrink-0">
                       {' '}

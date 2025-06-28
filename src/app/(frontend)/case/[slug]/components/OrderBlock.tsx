@@ -4,13 +4,16 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 
 export default function OrderBLock({ caseData }: { caseData: Case }) {
   return (
-    <section className="container mx-auto py-20">
-      <div className="flex flex-row-reverse gap-20 py-16 px-12 bg-lightBG rounded-2xl">
-        <div className="flex flex-col gap-4 w-1/2">
+    <section className="container-class">
+      <div className="flex flex-col-reverse md:flex-row-reverse gap-8 md:gap-20 p-6 md:py-16 md:px-12 bg-lightBG rounded-custom">
+        <div className="flex flex-col gap-4 md:w-1/2">
           <h1 className="text-3xl">{caseData.title}</h1>
-          <RichText data={caseData.description} className="font-inter font-light text-xl" />
+          <RichText
+            data={caseData.description}
+            className="font-inter font-light text-lg md:text-xl"
+          />
         </div>
-        <div className="relative w-1/2">
+        <div className="relative h-60 md:w-1/2">
           {typeof caseData.image === 'object' && caseData.image.url && (
             <Image
               src={caseData.image.url}

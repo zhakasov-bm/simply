@@ -25,7 +25,7 @@ export default function TeamBlock({ component }: { component: Component }) {
                 </div>
 
                 <div className="">
-                  <Marquee speed={50} pauseOnHover={true}>
+                  <Marquee speed={50}>
                     {block.avatars?.map((item, i) => (
                       <div
                         key={i}

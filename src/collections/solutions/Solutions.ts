@@ -36,9 +36,16 @@ export const Solutions: CollectionConfig = {
       required: true,
     },
     {
+      name: 'maintenance',
+      type: 'checkbox',
+      label: 'Обслуживание брендов под ключ',
+    },
+    {
       name: 'category',
       type: 'select',
-      required: true,
+      admin: {
+        condition: (data) => !data?.maintenance,
+      },
       options: [
         { label: 'Креатив и Контент', value: 'content' },
         { label: 'Продвижение и PR', value: 'pr' },

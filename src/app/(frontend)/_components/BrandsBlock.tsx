@@ -15,7 +15,7 @@ export default function BrandsBlockBlock({ component, isLabel = false }: Props) 
           return (
             <div key={id} className="flex flex-col gap-12">
               {isLabel && <h1 className="text-4xl text-center pb-10">{block.heading}</h1>}
-              <Marquee pauseOnHover={true} speed={50} gradient={true} gradientWidth={50}>
+              <Marquee speed={50} gradient={true} gradientWidth={50}>
                 {block.logos?.map((item, i) => (
                   <div
                     key={i}
