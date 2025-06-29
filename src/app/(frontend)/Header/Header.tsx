@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Logo } from '../_components/Logo/Logo'
 import { Menu, X } from 'lucide-react'
 import { MobileMenu } from './MobileMenu'
+import { FaPhoneAlt } from 'react-icons/fa'
 
 type NavProps = {
   nav: Navigation
@@ -67,11 +68,11 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
 
   return (
     <header className="container mx-auto flex justify-between fixed z-[1000] bg-white md:bg-transparent md:static items-center py-4 md:py-5 px-8 md:px-0">
+      {/* Left: Logo and Nav */}
       <div className="flex gap-20 items-center">
         <Logo nav={nav} />
-
         {/* Desktop Menu */}
-        <div className="hidden md:flex">
+        <div className="hidden md:flex justify-around">
           <nav className="flex gap-6 relative">
             {nav.links?.map((link, idx) => {
               const isActive = pathname === link.url || activeIdx === idx
@@ -104,6 +105,11 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           </nav>
         </div>
       </div>
+      {/* Right: Phone number */}
+      <Link href="tel:+77752026010" className="hidden text-base md:flex items-center gap-2 group">
+        <FaPhoneAlt size={20} className="transition-transform duration-300 group-hover:rotate-12" />
+        +7 775 202 60 10
+      </Link>
 
       {/* Burger button (mobile only) */}
       <button className="md:hidden z-50" onClick={toggleMobileMenu}>

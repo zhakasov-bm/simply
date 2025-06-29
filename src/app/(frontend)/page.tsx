@@ -36,7 +36,7 @@ export default async function HomePage() {
   try {
     const solutionsRes = await payload.find({
       collection: 'solutions',
-      limit: 10,
+      limit: 20,
     })
     solutions = solutionsRes.docs
   } catch (e) {

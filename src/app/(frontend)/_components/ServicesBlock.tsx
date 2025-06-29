@@ -36,7 +36,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       : regularSolutions.filter((s) => s.category === selectedCategory)
 
   return (
-    <section className="container-class my-20">
+    <section className="container-class my-20" id="services">
       <h1 className="text-4xl text-center mb-8 md:mb-12">{heading}</h1>
 
       {/* Mobile Select */}

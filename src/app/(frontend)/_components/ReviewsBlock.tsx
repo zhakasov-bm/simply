@@ -29,7 +29,7 @@ export default function ReviewBlock({ component }: { component: Component }) {
         width={300}
         height={300}
         draggable={false}
-        className="hidden md:absolute bottom select-none"
+        className="hidden md:block absolute bottom select-none"
       />
       <Image
         src="/cam2.png"
@@ -37,7 +37,7 @@ export default function ReviewBlock({ component }: { component: Component }) {
         width={300}
         height={300}
         draggable={false}
-        className="hidden md:absolute right-0 -bottom-20 h-auto z-1 select-none"
+        className="hidden md:block absolute right-0 -bottom-20 h-auto z-1 select-none"
       />
       {component.globals.map((block, id) => {
         if (block.blockType === 'reviews') {

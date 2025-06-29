@@ -11,6 +11,7 @@ import RequestFormBlock from '@/app/(frontend)/_components/RequestFormBlock'
 import QABlock from '../_components/QABlock'
 import AdvantagesBlock from './components/AdvantagesBlock'
 import TarifBlock from './components/TarifBlock'
+import Calculator from './components/Calculator'
 
 interface PageProps {
   params: Promise<{ serviceSlug: string }>
@@ -67,6 +68,7 @@ export default async function PopolneniePage({ params }: PageProps) {
       {advBlock && <AdvantagesBlock block={advBlock} />}
       {tarifBlock && <TarifBlock block={tarifBlock} />}
       {formBlock && <LeadCaptureBlock block={formBlock} />}
+      {/* {tarifBlock && <Calculator block={tarifBlock} />} */}
 
       <TrustedByBlock component={component} />
 

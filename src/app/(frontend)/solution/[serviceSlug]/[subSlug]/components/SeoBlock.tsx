@@ -12,18 +12,22 @@ export default function SeoBlock({ block }: Props) {
   if (!designType) return null
 
   return (
-    <section className="container mx-auto py-20">
+    <section className="container-class">
       {header && <RichText data={header} />}
 
       <div
-        className={`grid gap-5 pt-12 ${
-          designType === 'layout1' ? 'grid-cols-3' : designType === 'layout2' ? 'grid-cols-4' : ''
+        className={`grid gap-3 pt-8 md:pt-12 ${
+          designType === 'layout1'
+            ? 'grid-col-1 md:grid-cols-3'
+            : designType === 'layout2'
+              ? 'grid-col-1 md:grid-cols-4'
+              : ''
         }`}
       >
         {steps.map((item, i) => (
           <div
             key={i}
-            className={`flex flex-col gap-2 rounded-2xl p-6 ${
+            className={`flex flex-col gap-2 rounded-custom p-6 ${
               designType === 'layout1' ? 'bg-lightBG' : designType === 'layout2' ? 'bg-primary' : ''
             }`}
           >
@@ -50,7 +54,7 @@ export default function SeoBlock({ block }: Props) {
                 </div>
               )}
 
-            <h1 className="text-base">{item.title}</h1>
+            <h3 className="text-base">{item.title}</h3>
             <p className="font-inter font-normal text-base text-black/60">{item.description}</p>
           </div>
         ))}

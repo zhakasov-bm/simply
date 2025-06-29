@@ -50,7 +50,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
         </div>
 
         {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex flex-col gap-4 overflow-y-auto">
           {/* Main nav links */}
           {nav.links?.map((link, idx) => {
             const isServices = link.label === 'Услуги'
@@ -96,7 +96,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                               {solution.name}
                             </Link>
                           ) : (
-                            <div className="flex flex-col">
+                            <div className="flex flex-col gap-4">
                               <div className="flex justify-between items-center">
                                 <Link
                                   href={`/solution/${solution.slug}`}
@@ -117,7 +117,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
 
                           {/* Subservices */}
                           {isOpen && relatedSubs.length > 0 && (
-                            <div className="pl-4 flex flex-col gap-1">
+                            <div className="pl-4 flex flex-col gap-4">
                               {relatedSubs.map((sub) => (
                                 <Link
                                   key={sub.id}

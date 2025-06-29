@@ -78,7 +78,7 @@ body {
 
 
   .payload-richtext h2 {
-    @apply text-2xl md:text-4xl md:mb-4 md:leading-12;
+    @apply text-2xl md:text-4xl mb-2 md:mb-4 md:leading-12;
   }
 
   .payload-richtext h3 {
