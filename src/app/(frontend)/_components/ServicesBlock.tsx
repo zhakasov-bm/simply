@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { ALLOWED_CITIES } from '@/app/utils/cities'
 
 import { Solution } from '@/payload-types'
 import UniversalButton from './UniversalButton'
@@ -14,6 +16,9 @@ type Props = {
 
 export default function ServicesBlock({ heading, solutions }: Props) {
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const pathname = usePathname()
+  const currentCity =
+    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
 
   // Filter out maintenance services from main list
   const regularSolutions = solutions.filter((solution) => !solution.maintenance)
@@ -83,7 +88,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       <div className="flex overflow-x-auto hide-scrollbar md:grid grid-cols-2 gap-3 h-[280px] md:h-auto">
         {filteredSolutions.map((solution) => (
           <Link
-            href={`/solution/${solution.slug}`}
+            href={`/${currentCity}/solution/${solution.slug}`}
             key={solution.id}
             className="relative bg-lightBG rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group md:max-h-[240px] min-w-[80%] overflow-hidden"
           >

@@ -2,12 +2,14 @@
 
 import type { Navigation, Solution, Subservice } from '@/payload-types'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Logo } from '../_components/Logo/Logo'
 import { Menu, X } from 'lucide-react'
 import { MobileMenu } from './MobileMenu'
 import { FaPhoneAlt } from 'react-icons/fa'
+import { PiMapPinFill } from 'react-icons/pi'
+import { ALLOWED_CITIES, CITY_RU } from '@/app/utils/cities'
 
 type NavProps = {
   nav: Navigation
@@ -17,8 +19,20 @@ type NavProps = {
 
 export default function Header({ nav, solutions, subservices }: NavProps) {
   const pathname = usePathname()
+  const router = useRouter()
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+
+  // Get current city from pathname
+  const currentCity =
+    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+
+  const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newCity = e.target.value
+    // Replace the city in the pathname
+    const newPath = pathname.replace(/^\/(almaty|astana|shymkent|aktobe)/, `/${newCity}`)
+    router.push(newPath)
+  }
 
   const toggleMobileMenu = () => setIsMobileOpen((prev) => !prev)
 
@@ -30,12 +44,12 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
     if (relatedSubs.length === 0) return null
 
     return (
-      <div className="absolute left-full top-0 hidden group-hover/item:flex flex-col bg-white shadow-md p-4 z-20 min-w-[200px]">
+      <div className="absolute left-full top-0 hidden group-hover/item:flex flex-col rounded-custom bg-white shadow-md p-4 z-20 min-w-[200px]">
         {relatedSubs.map((sub) => (
           <Link
             key={sub.id}
-            href={`/solution/${solution.slug}/${sub.slug}`}
-            className="py-1 px-2 hover:bg-gray-100 whitespace-nowrap"
+            href={`/${currentCity}/solution/${solution.slug}/${sub.slug}`}
+            className="py-1 px-2 rounded-custom hover:bg-gray-100 whitespace-nowrap"
           >
             {sub.name}
           </Link>
@@ -45,7 +59,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   }
 
   const renderServicesDropdown = () => (
-    <div className="absolute top-full left-0 hidden font-inter group-hover:flex flex-col bg-white shadow-md p-4 z-10 min-w-[200px]">
+    <div className="absolute top-full left-0 hidden font-inter group-hover:flex flex-col rounded-custom bg-white shadow-md p-4 z-10 min-w-[200px]">
       {solutions.map((solution) => {
         const hasSubs = subservices.some(
           (sub) => typeof sub.service === 'object' && sub.service.id === solution.id,
@@ -54,8 +68,8 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
         return (
           <div key={solution.id} className={`relative ${hasSubs ? 'group/item' : ''}`}>
             <Link
-              href={`/solution/${solution.slug}`}
-              className="py-1 px-2 hover:bg-gray-100 whitespace-nowrap block"
+              href={`/${currentCity}/solution/${solution.slug}`}
+              className="py-1 px-2 rounded-custom hover:bg-gray-100 whitespace-nowrap block"
             >
               {solution.name}
             </Link>
@@ -69,7 +83,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   return (
     <header className="container mx-auto flex justify-between fixed z-[1000] bg-white md:bg-transparent md:static items-center py-4 md:py-5 px-8 md:px-0">
       {/* Left: Logo and Nav */}
-      <div className="flex gap-20 items-center">
+      <div className="flex gap-6 md:gap-20 items-center">
         <Logo nav={nav} />
         {/* Desktop Menu */}
         <div className="hidden md:flex justify-around">
@@ -105,11 +119,31 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           </nav>
         </div>
       </div>
-      {/* Right: Phone number */}
-      <Link href="tel:+77752026010" className="hidden text-base md:flex items-center gap-2 group">
-        <FaPhoneAlt size={20} className="transition-transform duration-300 group-hover:rotate-12" />
-        +7 775 202 60 10
-      </Link>
+      {/* Right: City Selector, Phone number */}
+      <div className="flex gap-4">
+        <div className="flex items-center justify-between">
+          <PiMapPinFill />{' '}
+          <select
+            value={currentCity}
+            onChange={handleCityChange}
+            className="text-base font-inter text-black"
+          >
+            {ALLOWED_CITIES.map((city) => (
+              <option key={city} value={city}>
+                {CITY_RU[city]}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <Link href="tel:+77752026010" className="hidden text-base md:flex items-center gap-2 group">
+          <FaPhoneAlt
+            size={20}
+            className="transition-transform duration-300 group-hover:rotate-12"
+          />
+          +7 775 202 60 10
+        </Link>
+      </div>
 
       {/* Burger button (mobile only) */}
       <button className="md:hidden z-50" onClick={toggleMobileMenu}>

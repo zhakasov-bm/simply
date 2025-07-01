@@ -1,9 +1,18 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { Component } from '@/payload-types'
 import UniversalButton from './UniversalButton'
+import { usePathname } from 'next/navigation'
+import { ALLOWED_CITIES, CITY_PREPOSITIONAL } from '@/app/utils/cities'
 
 export default function HeroBlock({ component }: { component: Component }) {
+  const pathname = usePathname()
+  const currentCity =
+    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+  const cityText = CITY_PREPOSITIONAL[currentCity] || ''
+
   return (
     <section className="md:py-24">
       {component.globals.map((block, id) => {
@@ -12,7 +21,9 @@ export default function HeroBlock({ component }: { component: Component }) {
             <div key={id} className="flex gap-3 container mx-auto px-8 lg:px-16">
               {/* Mobile */}
               <div className="flex flex-col items-center justify-between gap-6 h-auto rounded-custom relative md:hidden bg-container">
-                <h1 className="special pt-32">{block.heading}</h1>
+                <h1 className="special pt-32">
+                  {block.heading} {cityText && <span>{cityText}</span>}
+                </h1>
                 <div className="flex w-full h-100 justify-center  z-10">
                   {typeof block?.image === 'object' && block.image.url && (
                     <>
@@ -29,14 +40,7 @@ export default function HeroBlock({ component }: { component: Component }) {
                     </>
                   )}{' '}
                 </div>
-                {/* <Image
-                  src="/graphic.png"
-                  alt="graphic"
-                  width={500}
-                  height={500}
-                  className="absolute top-[160px] w-[320px]"
-                  draggable={false}
-                /> */}
+
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center whitespace-nowrap z-20">
                   <Image src="/btn.svg" alt="btn_graphic" width={60} height={60} />
                   <UniversalButton label="Погрузиться в креатив" className="w-auto" />
@@ -46,7 +50,7 @@ export default function HeroBlock({ component }: { component: Component }) {
               {/* Left */}
               <div className="hidden md:flex flex-col gap-16 flex-8/12">
                 <h1 className="md:text-4xl lg:text-6xl font-medium leading-tight">
-                  {block.heading}
+                  {block.heading} {cityText && <span>{cityText}</span>}
                 </h1>
 
                 <div

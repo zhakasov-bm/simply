@@ -5,11 +5,12 @@ import Link from 'next/link'
 type SubserviceCardProps = {
   sub: Subservice
   solutionSlug: string
+  currentCity: string
 }
 
-export const SubserviceCard = ({ sub, solutionSlug }: SubserviceCardProps) => (
+export const SubserviceCard = ({ sub, solutionSlug, currentCity }: SubserviceCardProps) => (
   <Link
-    href={`/solution/${solutionSlug}/${sub.slug}`}
+    href={`/${currentCity}/solution/${solutionSlug}/${sub.slug}`}
     className="flex p-6 md:p-10 rounded-custom bg-lightBG relative overflow-hidden group w-full"
   >
     <div className="absolute top-8 right-8  md:hidden">

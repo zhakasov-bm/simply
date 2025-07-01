@@ -29,7 +29,7 @@ export default function InfoBlock({ solution, subservice }: Props) {
             {content.description || content.subtitle}
           </p>
         </div>
-        <div className="w-[70%] md:h-full">
+        <div className="w-[70%] md:w-full md:h-full">
           {typeof content.icon === 'object' && content.icon?.url && (
             <Image
               src={content.icon.url}

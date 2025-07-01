@@ -1,13 +1,21 @@
+'use client'
+
 import UniversalButton from '@/app/(frontend)/_components/UniversalButton'
 import { ServiceCard } from './cards/ServiceCard'
 import { SubserviceCard } from './cards/SubserviceCard'
 import { AvailableServicesProps } from './types'
+import { usePathname } from 'next/navigation'
+import { ALLOWED_CITIES } from '@/app/utils/cities'
 
 export default function AvailableServices({
   solution,
   subservices,
   subservice,
 }: AvailableServicesProps) {
+  const pathname = usePathname()
+  const currentCity =
+    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+
   const renderServices = () => {
     if (subservice) {
       return (
@@ -37,7 +45,12 @@ export default function AvailableServices({
             <ServiceCard key={id} name={service.title || ''} icon={null} />
           ))}
         {subservices.map((sub, idx) => (
-          <SubserviceCard key={idx} sub={sub} solutionSlug={solution.slug || ''} />
+          <SubserviceCard
+            key={idx}
+            sub={sub}
+            solutionSlug={solution.slug || ''}
+            currentCity={currentCity}
+          />
         ))}
       </div>
     )

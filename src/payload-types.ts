@@ -228,7 +228,7 @@ export interface Solution {
     answer?: string | null;
     id?: string | null;
   }[];
-  Lead: {
+  lead: {
     root: {
       type: string;
       children: {
@@ -780,7 +780,7 @@ export interface SolutionsSelect<T extends boolean = true> {
         answer?: T;
         id?: T;
       };
-  Lead?: T;
+  lead?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { X, ChevronDown, ChevronUp } from 'lucide-react'
 import type { Navigation, Solution, Subservice } from '@/payload-types'
+import { usePathname } from 'next/navigation'
+import { ALLOWED_CITIES } from '@/app/utils/cities'
 
 type Props = {
   nav: Navigation
@@ -16,6 +18,9 @@ type Props = {
 export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMobileOpen }: Props) {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [openSolutionId, setOpenSolutionId] = useState<string | null>(null)
+  const pathname = usePathname()
+  const currentCity =
+    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
 
   // Prevent page scroll when menu is open
   useEffect(() => {
@@ -89,7 +94,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                         <div key={solution.id} className="flex flex-col gap-4">
                           {relatedSubs.length === 0 ? (
                             <Link
-                              href={`/solution/${solution.slug}`}
+                              href={`/${currentCity}/solution/${solution.slug}`}
                               onClick={toggleMobileMenu}
                               className="w-full text-left pr-4 rounded-2xl active:bg-lightBG"
                             >
@@ -99,7 +104,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                             <div className="flex flex-col gap-4">
                               <div className="flex justify-between items-center">
                                 <Link
-                                  href={`/solution/${solution.slug}`}
+                                  href={`/${currentCity}/solution/${solution.slug}`}
                                   onClick={toggleMobileMenu}
                                   className="flex-1 text-left rounded-2xl active:bg-lightBG"
                                 >
@@ -121,7 +126,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                               {relatedSubs.map((sub) => (
                                 <Link
                                   key={sub.id}
-                                  href={`/solution/${solution.slug}/${sub.slug}`}
+                                  href={`/${currentCity}/solution/${solution.slug}/${sub.slug}`}
                                   onClick={toggleMobileMenu}
                                   className="rounded-2xl active:bg-lightBG"
                                 >

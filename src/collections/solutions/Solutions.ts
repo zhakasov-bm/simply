@@ -56,7 +56,7 @@ export const Solutions: CollectionConfig = {
     {
       name: 'details',
       type: 'array',
-      label: 'Deatils',
+      label: 'Details',
       fields: [
         {
           name: 'name',
@@ -116,7 +116,7 @@ export const Solutions: CollectionConfig = {
       required: true,
     },
     {
-      name: 'Lead',
+      name: 'lead',
       type: 'richText',
       required: true,
     },

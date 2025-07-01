@@ -1,11 +1,20 @@
+'use client'
+
 import { Component, Solution, Subservice } from '@/payload-types'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import { ALLOWED_CITIES, CITY_PREPOSITIONAL } from '@/app/utils/cities'
 
 type Props =
   | { component: Component; solution: Solution; subservice?: never }
   | { component: Component; subservice: Subservice; solution?: never }
 
 export default function Hero(props: Props) {
+  const pathname = usePathname()
+  const currentCity =
+    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+  const cityText = CITY_PREPOSITIONAL[currentCity] || ''
+
   const { component } = props
   const title = props.solution?.name || props.subservice?.name
   const subtitle = props.solution?.subtitle || props.subservice?.subtitle
@@ -24,7 +33,9 @@ export default function Hero(props: Props) {
       </div>
       <div className="flex flex-col justify-center items-center text-center">
         <div className="flex flex-col gap-4 md:max-w-5xl pt-16 px-6 md:p-0">
-          <h1 className="text-6xl md:leading-16">{title}</h1>
+          <h1 className="text-6xl md:leading-16">
+            {title} {cityText && <span>{cityText}</span>}
+          </h1>
           <p className="text-lg md:text-2xl font-light">{subtitle}</p>
         </div>
 
