@@ -1,4 +1,5 @@
 // payload/globals/navigation.ts
+import { FloatingNavBlock } from '@/blocks/FloatingNavBlock'
 import { GlobalConfig } from 'payload'
 
 export const Navigation: GlobalConfig = {
@@ -65,6 +66,13 @@ export const Navigation: GlobalConfig = {
       type: 'checkbox',
       label: 'Показать языковой переключатель',
       defaultValue: true,
+    },
+    {
+      name: 'floatNav',
+      label: 'Плавающие навигации',
+      type: 'blocks',
+      required: true,
+      blocks: [FloatingNavBlock],
     },
   ],
 }

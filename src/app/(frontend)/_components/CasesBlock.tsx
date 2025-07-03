@@ -56,6 +56,7 @@ export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
 
   return (
     <section
+      id="cases"
       className="container-class my-20"
       style={{
         backgroundImage: 'url("graphic.svg")',

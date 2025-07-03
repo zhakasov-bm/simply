@@ -72,6 +72,7 @@ export interface Config {
     solutions: Solution;
     subservices: Subservice;
     cases: Case;
+    pages: Page;
     forms: Form;
     'form-submissions': FormSubmission;
     'payload-locked-documents': PayloadLockedDocument;
@@ -85,6 +86,7 @@ export interface Config {
     solutions: SolutionsSelect<false> | SolutionsSelect<true>;
     subservices: SubservicesSelect<false> | SubservicesSelect<true>;
     cases: CasesSelect<false> | CasesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -429,6 +431,87 @@ export interface Case {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: string;
+  heading: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  image?: (string | null) | Media;
+  slug: string;
+  layout: (
+    | {
+        title?: string | null;
+        statistics: {
+          value: string;
+          description: string;
+          bgColor?: string | null;
+          id?: string | null;
+        }[];
+        about: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'company';
+      }
+    | {
+        title: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        values: {
+          adv: string;
+          icon?: (string | null) | Media;
+          title: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mission';
+      }
+  )[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "forms".
  */
 export interface Form {
@@ -644,6 +727,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'cases';
         value: string | Case;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: string | Page;
       } | null)
     | ({
         relationTo: 'forms';
@@ -919,6 +1006,52 @@ export interface CasesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  heading?: T;
+  image?: T;
+  slug?: T;
+  layout?:
+    | T
+    | {
+        company?:
+          | T
+          | {
+              title?: T;
+              statistics?:
+                | T
+                | {
+                    value?: T;
+                    description?: T;
+                    bgColor?: T;
+                    id?: T;
+                  };
+              about?: T;
+              id?: T;
+              blockName?: T;
+            };
+        mission?:
+          | T
+          | {
+              title?: T;
+              values?:
+                | T
+                | {
+                    adv?: T;
+                    icon?: T;
+                    title?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "forms_select".
  */
 export interface FormsSelect<T extends boolean = true> {
@@ -1121,6 +1254,19 @@ export interface Navigation {
     id?: string | null;
   }[];
   languageSwitcher?: boolean | null;
+  floatNav: {
+    navigation?:
+      | {
+          nav?: string | null;
+          scrollTo?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    button?: string | null;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'floating-nav';
+  }[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1277,6 +1423,33 @@ export interface Component {
         blockName?: string | null;
         blockType: 'request-form';
       }
+    | {
+        title?: string | null;
+        statistics: {
+          value: string;
+          description: string;
+          bgColor?: string | null;
+          id?: string | null;
+        }[];
+        about: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'company';
+      }
   )[];
   statistics: {
     text: string;
@@ -1314,6 +1487,24 @@ export interface NavigationSelect<T extends boolean = true> {
         id?: T;
       };
   languageSwitcher?: T;
+  floatNav?:
+    | T
+    | {
+        'floating-nav'?:
+          | T
+          | {
+              navigation?:
+                | T
+                | {
+                    nav?: T;
+                    scrollTo?: T;
+                    id?: T;
+                  };
+              button?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1476,6 +1667,22 @@ export interface ComponentSelect<T extends boolean = true> {
                     id?: T;
                   };
               form?: T;
+              id?: T;
+              blockName?: T;
+            };
+        company?:
+          | T
+          | {
+              title?: T;
+              statistics?:
+                | T
+                | {
+                    value?: T;
+                    description?: T;
+                    bgColor?: T;
+                    id?: T;
+                  };
+              about?: T;
               id?: T;
               blockName?: T;
             };

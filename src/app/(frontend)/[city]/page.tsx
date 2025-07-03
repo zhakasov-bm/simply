@@ -1,11 +1,7 @@
-import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
 import React from 'react'
-import { fileURLToPath } from 'url'
-import { Solution, Case } from '@/payload-types'
 import { ALLOWED_CITIES } from '@/app/utils/cities'
-
-import config from '@/payload.config'
+import { getHomePageData } from '@/app/utils/homeService'
 import '../styles.css'
 import HeroBlock from '../_components/HeroBlock'
 import AboutUsBlock from '../_components/AboutUsBlock'
@@ -21,13 +17,16 @@ import BGraphic from '../_components/BGRaphic'
 import RequestFormBlock from '../_components/RequestFormBlock'
 import FloatingNav from '../_components/FloatingNav'
 
-export default async function HomePage({ params }: { params: { city: string } }) {
-  const city = params.city
+interface PageProps {
+  params: Promise<{ city: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function HomePage({ params }: PageProps) {
+  const { city } = await params
   if (!ALLOWED_CITIES.includes(city)) return notFound()
 
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const component = await payload.findGlobal({ slug: 'component' })
+  const { component, solutions, cases, navigation } = await getHomePageData()
 
   const serviceBlock = component.globals.find((block) => block.blockType === 'services')
   const heading = serviceBlock?.heading || ''
@@ -35,36 +34,10 @@ export default async function HomePage({ params }: { params: { city: string } })
   const formBlocks = component.globals.filter((block) => block.blockType === 'form')
   const requestForm = component.globals.find((block) => block.blockType === 'request-form')
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
-
-  let solutions: Solution[] = []
-
-  try {
-    const solutionsRes = await payload.find({
-      collection: 'solutions',
-      limit: 20,
-    })
-    solutions = solutionsRes.docs
-  } catch (e) {
-    console.log(e)
-  }
-
-  let cases: Case[] = []
-
-  try {
-    const casesRes = await payload.find({
-      collection: 'cases',
-      limit: 10,
-    })
-    cases = casesRes.docs
-  } catch (e) {
-    console.log(e)
-  }
-
   return (
     <div>
       <BGraphic />
-      <FloatingNav />
+      <FloatingNav nav={navigation} />
       <HeroBlock component={component} />
       <div className="block md:hidden">
         <BrandsBlock component={component} isLabel={false} />

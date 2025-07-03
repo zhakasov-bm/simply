@@ -20,6 +20,39 @@ type NavProps = {
   subservices: Subservice[]
 }
 
+// Helper to get nav link props for both desktop and mobile
+type GetNavLinkPropsArgs = {
+  link: { label: string; url: string }
+  idx: number
+  pathname: string
+  activeIdx: number | null
+  currentCity: string
+  isCasePage: boolean
+  mainPageHref: string
+  setActiveIdx?: ((idx: number) => void) | undefined
+}
+
+export function getNavLinkProps(args: GetNavLinkPropsArgs) {
+  const { link, idx, pathname, activeIdx, currentCity, isCasePage, mainPageHref, setActiveIdx } =
+    args
+  const isActive = pathname === link.url || activeIdx === idx
+  const baseClass = `text-base hover:text-black ${isActive ? 'text-black' : 'text-black/40'}`
+  let href = `/${currentCity}${link.url}`
+  let onClick = () => setActiveIdx && setActiveIdx(idx)
+
+  if (link.label === 'Главная') {
+    href = isCasePage ? mainPageHref : `/${currentCity}${link.url}`
+  } else if (link.label === 'О нас') {
+    href = '/company'
+  } else if (link.url.startsWith('http')) {
+    href = link.url
+  } else if (link.url === '/case' || link.url.startsWith('/case/')) {
+    href = link.url
+  }
+
+  return { href, onClick, className: baseClass }
+}
+
 export default function Header({ nav, solutions, subservices }: NavProps) {
   const pathname = usePathname()
   const router = useRouter()
@@ -123,34 +156,19 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                 )
               }
 
-              // Special case for Главная
-              if (link.label === 'Главная') {
-                return (
-                  <Link
-                    key={idx}
-                    href={isCasePage ? mainPageHref : `/${currentCity}${link.url}`}
-                    onClick={() => setActiveIdx(idx)}
-                    className={`text-base hover:text-black ${isActive ? 'text-black' : 'text-black/40'}`}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              }
-
-              // Если ссылка внешняя
-              const isExternal = link.url.startsWith('http')
-              // Если это страница кейсов
-              const isCaseLink = link.url === '/case' || link.url.startsWith('/case/')
-
+              // Use helper for all other links
+              const props = getNavLinkProps({
+                link,
+                idx,
+                pathname,
+                activeIdx,
+                currentCity,
+                isCasePage,
+                mainPageHref,
+                setActiveIdx,
+              })
               return (
-                <Link
-                  key={idx}
-                  href={
-                    isExternal ? link.url : isCaseLink ? link.url : `/${currentCity}${link.url}`
-                  }
-                  onClick={() => setActiveIdx(idx)}
-                  className={`text-base hover:text-black ${isActive ? 'text-black' : 'text-black/40'}`}
-                >
+                <Link key={idx} {...props}>
                   {link.label}
                 </Link>
               )
@@ -159,9 +177,9 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
         </div>
       </div>
       {/* Right: City Selector, Phone number */}
-      <div className="hidden md:flex gap-5">
+      <div className="flex gap-2 md:gap-5">
         <button
-          className="text-base font-inter text-black underline decoration-dashed flex items-center gap-0 cursor-pointer"
+          className="hidden md:flex text-base font-inter text-black underline decoration-dashed items-center gap-0 cursor-pointer"
           onClick={() => setIsCityModalOpen(true)}
         >
           <PiMapPinFill />
@@ -175,15 +193,15 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           />
           +7 775 202 60 10
         </Link>
-        <div className="flex items-center justify-center rounded-lg bg-lightBG w-8 h-8 cursor-pointer">
-          <Image src="/light-mode.svg" alt="light-mode" width={16} height={16} />
+        <div className="flex items-center justify-center w-10 h-10 cursor-pointer">
+          <Image src="/light-mode.svg" alt="light-mode" width={20} height={20} />
         </div>
-      </div>
 
-      {/* Burger button (mobile only) */}
-      <button className="md:hidden z-50" onClick={toggleMobileMenu}>
-        {isMobileOpen ? '' : <Menu size={40} />}
-      </button>
+        {/* Burger button (mobile only) */}
+        <button className="md:hidden z-50" onClick={toggleMobileMenu}>
+          {isMobileOpen ? '' : <Menu size={40} />}
+        </button>
+      </div>
 
       {/* Mobile menu */}
       <div

@@ -1,5 +1,5 @@
 import { getPayload } from 'payload'
-import configPromise from '@/payload.config'
+import config from '@/payload.config'
 import { extractFormBlocks } from '@/app/utils/formBlockUtils'
 import { Component, Solution, Subservice, Case } from '@/payload-types'
 
@@ -16,7 +16,7 @@ export interface SolutionData {
 }
 
 export async function getSolutionData(slug: string): Promise<SolutionData> {
-  const payload = await getPayload({ config: configPromise })
+  const payload = await getPayload({ config })
 
   const [component, solutionRes, casesResult] = await Promise.all([
     payload.findGlobal({ slug: 'component' }),

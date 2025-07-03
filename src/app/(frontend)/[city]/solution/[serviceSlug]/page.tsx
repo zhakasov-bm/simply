@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getSolutionData } from '@/app/api/solutions/service'
+import { getSolutionData } from '@/app/utils/solutionsService'
 import { SolutionPageLayout } from './_components/SolutionPageLayout'
 
 interface PageProps {

@@ -22,7 +22,7 @@ export default function ReviewBlock({ component }: { component: Component }) {
   })
 
   return (
-    <section className="relative my-24">
+    <section id="reviews" className="relative my-24">
       <Image
         src="/cam1.png"
         alt="camera"

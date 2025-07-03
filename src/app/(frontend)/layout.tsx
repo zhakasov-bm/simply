@@ -5,6 +5,7 @@ import { getPayload } from 'payload'
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import { Solution, Subservice } from '@/payload-types'
+import { getSolutionData } from '@/app/utils/solutionsService'
 
 export const metadata = {
   description: 'Marketing agency',
@@ -15,42 +16,25 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
   const payload = await getPayload({ config })
 
-  // Навигация
   const navigation = await payload.findGlobal({ slug: 'navigation' })
 
-  // Услуги (solutions)
+  // Услуги (solutions) и подуслуги (subservices) через shared service
   let solutions: Solution[] = []
-  try {
-    const solutionsRes = await payload.find({
-      collection: 'solutions',
-      limit: 100,
-    })
-    solutions = solutionsRes.docs
-  } catch (e) {
-    console.error('Error fetching solutions:', e)
-  }
-
-  // Подуслуги (subservices)
   let subservices: Subservice[] = []
   try {
-    const subservicesRes = await payload.find({
-      collection: 'subservices',
-      limit: 100,
-    })
-
-    subservices = subservicesRes.docs.map((sub) => ({
-      ...sub,
-      icon:
-        typeof sub.icon === 'object' && sub.icon
-          ? {
-              ...sub.icon,
-              url: sub.icon.url || '',
-              alt: sub.icon.alt || '',
-            }
-          : sub.icon,
-    }))
+    // Fetch all solutions (limit 100) and their subservices
+    const allSolutionsRes = await payload.find({ collection: 'solutions', limit: 100 })
+    solutions = allSolutionsRes.docs
+    // For all solutions, fetch subservices and flatten
+    const subservicesArr = await Promise.all(
+      solutions.map(async (solution) => {
+        const { subservices } = await getSolutionData(solution.slug)
+        return subservices
+      }),
+    )
+    subservices = subservicesArr.flat()
   } catch (e) {
-    console.error('Error fetching subservices:', e)
+    console.error('Error fetching solutions or subservices:', e)
   }
 
   return (

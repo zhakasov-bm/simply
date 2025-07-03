@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
+import { getNavLinkProps } from '../Header/Header'
 
 import { FaFacebook, FaInstagram, FaTelegram, FaLinkedin, FaYoutube } from 'react-icons/fa'
 import { Logo } from '../_components/Logo/Logo'
@@ -91,18 +92,27 @@ export default function Footer({ nav, solutions }: Props) {
         {/* Navigation */}
         <nav className="hidden md:flex flex-col gap-2">
           <h3 className="text-2xl py-2">Компания</h3>
-          {nav.links?.map((link, idx) => (
-            <Link
-              key={idx}
-              href={link.url}
-              onClick={() => setActiveIdx(idx)}
-              className={`text-sm font-light hover:text-black ${
-                pathname === link.url || activeIdx === idx ? 'text-black' : 'text-black/40'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {nav.links?.map((link, idx) => {
+            const props = getNavLinkProps({
+              link,
+              idx,
+              pathname,
+              activeIdx,
+              currentCity,
+              isCasePage: pathname.startsWith('/case'),
+              mainPageHref: `/${currentCity}`,
+              setActiveIdx,
+            })
+            return (
+              <Link
+                key={idx}
+                {...props}
+                className={`text-sm font-light hover:text-black ${props.className?.replace('text-base', '')}`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
         </nav>
 
         {/* Services */}

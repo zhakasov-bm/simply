@@ -12,7 +12,7 @@ export default function HeroBlock({ component }: { component: Component }) {
   const cityText = CITY_PREPOSITIONAL[currentCity] || ''
 
   return (
-    <section className="md:py-24">
+    <section id="hero" className="md:py-24">
       {component.globals.map((block, id) => {
         if (block.blockType === 'hero') {
           return (

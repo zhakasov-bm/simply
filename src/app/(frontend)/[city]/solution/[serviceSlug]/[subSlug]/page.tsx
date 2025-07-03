@@ -1,5 +1,4 @@
-import { notFound } from 'next/navigation'
-import { getSubserviceData } from '@/app/api/subservices/service'
+import { getSubserviceData } from '@/app/utils/subservicesService'
 import { SubservicePageLayout } from './_components/SubservicePageLayout'
 
 interface PageProps {

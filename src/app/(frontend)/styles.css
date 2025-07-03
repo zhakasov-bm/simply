@@ -76,6 +76,9 @@ body {
 
   /* Headings */
 
+  .payload-richtext h1 {
+    @apply text-2xl md:text-5xl my-2 md:mb-4 md:px-40 md:leading-13;
+  }
 
   .payload-richtext h2 {
     @apply text-2xl md:text-4xl mb-2 md:mb-4 md:leading-12;
@@ -95,4 +98,12 @@ body {
 
   .adv-richtext p {
     @apply text-base font-normal text-black/80; /* Or use rem like 1rem */
+  }
+
+  .mission-richtext p {
+    @apply text-sm font-inter uppercase text-black/80 mb-4; 
+  }
+
+  .mission-richtext h5 {
+    @apply text-base md:text-2xl; 
   }

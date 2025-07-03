@@ -2,6 +2,7 @@
 import { AboutUsBlock } from '@/blocks/AboutUsBlock'
 import { BrandsBlock } from '@/blocks/BrandsBlock'
 import { CertificateBlock } from '@/blocks/CertificateBlock'
+import { CompanyBlock } from '@/blocks/CompanyBlock'
 import { FormBlock } from '@/blocks/FormBlock'
 import { HeroBlock } from '@/blocks/HeroBlock'
 import { RequestFormBlock } from '@/blocks/RequestFormBlock'
@@ -33,6 +34,7 @@ export const Component: GlobalConfig = {
         BrandsBlock,
         WhyUsBlock,
         RequestFormBlock,
+        CompanyBlock,
       ],
     },
     {

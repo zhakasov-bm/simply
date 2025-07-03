@@ -5,6 +5,11 @@ import Link from 'next/link'
 import { X, ChevronDown, ChevronUp } from 'lucide-react'
 import type { Navigation, Solution, Subservice } from '@/payload-types'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
+import { getNavLinkProps } from './Header'
+import { CityModal } from './CityModal'
+import { CITY_RU } from '@/app/utils/cities'
+import { PiMapPinFill } from 'react-icons/pi'
+import { useRouter, usePathname } from 'next/navigation'
 
 type Props = {
   nav: Navigation
@@ -17,7 +22,10 @@ type Props = {
 export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMobileOpen }: Props) {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [openSolutionId, setOpenSolutionId] = useState<string | null>(null)
-  const [currentCity] = useCurrentCity()
+  const [isCityModalOpen, setIsCityModalOpen] = useState(false)
+  const [currentCity, setCurrentCity] = useCurrentCity()
+  const router = useRouter()
+  const pathname = usePathname()
 
   // Prevent page scroll when menu is open
   useEffect(() => {
@@ -51,8 +59,33 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
           </button>
         </div>
 
+        {/* City Selector */}
+        <div className="flex flex-col gap-4">
+          <button
+            className="flex items-center gap-2 text-base font-inter text-black underline decoration-dashed cursor-pointer"
+            onClick={() => setIsCityModalOpen(true)}
+          >
+            <PiMapPinFill />
+            {CITY_RU[currentCity]}
+          </button>
+          {isCityModalOpen && (
+            <CityModal
+              currentCity={currentCity}
+              onSelect={(city) => {
+                setCurrentCity(city)
+                setIsCityModalOpen(false)
+                const cityRegex = /^\/[a-zA-Z-]+/
+                const newPath = pathname.replace(cityRegex, `/${city}`)
+                router.push(newPath)
+                toggleMobileMenu()
+              }}
+              onClose={() => setIsCityModalOpen(false)}
+            />
+          )}
+        </div>
+
         {/* Scrollable content */}
-        <div className="flex flex-col gap-4 overflow-y-auto">
+        <div className="flex flex-col gap-4 overflow-y-auto mt-4">
           {/* Main nav links */}
           {nav.links?.map((link, idx) => {
             const isServices = link.label === 'Услуги'
@@ -68,13 +101,27 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                     {servicesOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                   </button>
                 ) : (
-                  <Link
-                    href={link.url}
-                    onClick={toggleMobileMenu}
-                    className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl text-black rounded-2xl active:bg-lightBG"
-                  >
-                    {link.label}
-                  </Link>
+                  (() => {
+                    const props = getNavLinkProps({
+                      link,
+                      idx,
+                      pathname: '', // pathname not needed for mobile active state
+                      activeIdx: null,
+                      currentCity,
+                      isCasePage: false,
+                      mainPageHref: `/${currentCity}`,
+                      setActiveIdx: undefined,
+                    })
+                    return (
+                      <Link
+                        {...props}
+                        onClick={toggleMobileMenu}
+                        className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl text-black rounded-2xl active:bg-lightBG"
+                      >
+                        {link.label}
+                      </Link>
+                    )
+                  })()
                 )}
 
                 {/* Services Dropdown */}

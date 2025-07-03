@@ -4,7 +4,7 @@ import Marquee from 'react-fast-marquee'
 
 export default function TeamBlock({ component }: { component: Component }) {
   return (
-    <section className="container-class">
+    <section id="team" className="container-class">
       <div className=" bg-lightBG rounded-custom">
         {component.globals.map((block, id) => {
           if (block.blockType === 'team') {
