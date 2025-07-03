@@ -32,7 +32,7 @@ export default function QABlock({ solution, subservice }: Props) {
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggle(index)}
               >
-                <h2 className="text-lg">{item.question}</h2>
+                <h2 className="text-base">{item.question}</h2>
                 {isOpen ? <FaMinus /> : <FaPlus />}
               </div>
 

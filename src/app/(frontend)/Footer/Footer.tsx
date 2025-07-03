@@ -6,7 +6,7 @@ import type { Navigation, Solution } from '@/payload-types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { ALLOWED_CITIES } from '@/app/utils/cities'
+import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 import { FaFacebook, FaInstagram, FaTelegram, FaLinkedin, FaYoutube } from 'react-icons/fa'
 import { Logo } from '../_components/Logo/Logo'
@@ -19,8 +19,7 @@ type Props = {
 export default function Footer({ nav, solutions }: Props) {
   const pathname = usePathname()
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
-  const currentCity =
-    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+  const [currentCity] = useCurrentCity()
 
   const icons = {
     facebook: FaFacebook,

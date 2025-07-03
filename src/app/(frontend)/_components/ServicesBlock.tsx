@@ -3,8 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { ALLOWED_CITIES } from '@/app/utils/cities'
+import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 import { Solution } from '@/payload-types'
 import UniversalButton from './UniversalButton'
@@ -16,9 +15,7 @@ type Props = {
 
 export default function ServicesBlock({ heading, solutions }: Props) {
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const pathname = usePathname()
-  const currentCity =
-    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+  const [currentCity] = useCurrentCity()
 
   // Filter out maintenance services from main list
   const regularSolutions = solutions.filter((solution) => !solution.maintenance)

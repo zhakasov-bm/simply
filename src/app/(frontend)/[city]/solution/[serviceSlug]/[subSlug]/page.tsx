@@ -1,19 +1,6 @@
-import config from '@/payload.config'
-import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
-import BGraphic from '@/app/(frontend)/_components/BGRaphic'
-import Hero from '../_components/Hero'
-import LeadCaptureBlock from '@/app/(frontend)/_components/LeadCaptureBlock'
-import BrandsBlockBlock from '@/app/(frontend)/_components/BrandsBlock'
-import InfoBlock from '../_components/InfoBlock'
-import AvailableServices from '../_components/AvailableServices/AvailableServices'
-import WhyUsBlock from '../_components/WhyUsBlock'
-import CasesBlock from '@/app/(frontend)/_components/CasesBlock'
-import TrustedByBlock from '@/app/(frontend)/_components/TrustedByBlock'
-import ReviewBlock from '@/app/(frontend)/_components/ReviewsBlock'
-import RequestFormBlock from '@/app/(frontend)/_components/RequestFormBlock'
-import QABlock from '../_components/QABlock'
-import SeoBlock from './components/SeoBlock'
+import { getSubserviceData } from '@/app/api/subservices/service'
+import { SubservicePageLayout } from './_components/SubservicePageLayout'
 
 interface PageProps {
   params: Promise<{ serviceSlug: string; subSlug: string }>
@@ -21,64 +8,32 @@ interface PageProps {
 }
 
 export default async function SubservicePage({ params }: PageProps) {
-  const { serviceSlug, subSlug } = await params
+  try {
+    const { serviceSlug, subSlug } = await params
 
-  const payload = await getPayload({ config })
+    const { component, service, subservice, cases, formBlock, requestFormBlock, seoBlocks } =
+      await getSubserviceData(serviceSlug, subSlug)
 
-  const [component, serviceRes] = await Promise.all([
-    payload.findGlobal({ slug: 'component' }),
-    payload.find({
-      collection: 'solutions',
-      where: { slug: { equals: serviceSlug } },
-    }),
-  ])
-
-  const service = serviceRes.docs[0]
-  if (!service) return notFound()
-
-  const subRes = await payload.find({
-    collection: 'subservices',
-    where: { slug: { equals: subSlug }, service: { equals: service.id } },
-  })
-  const sub = subRes.docs[0]
-  if (!sub) return notFound()
-
-  let formBlock = null
-  let requestFormBlock = null
-
-  for (const block of component.globals || []) {
-    if (block.blockType === 'form' && !formBlock) formBlock = block
-    if (block.blockType === 'request-form' && !requestFormBlock) requestFormBlock = block
-    if (formBlock && requestFormBlock) break
+    return (
+      <SubservicePageLayout
+        component={component}
+        service={service}
+        subservice={subservice}
+        cases={cases}
+        formBlock={formBlock}
+        requestFormBlock={requestFormBlock}
+        seoBlocks={seoBlocks}
+      />
+    )
+  } catch (error) {
+    console.error('Error in SubservicePage:', error)
+    return (
+      <div className="container mx-auto py-8">
+        <h1 className="text-2xl font-bold mb-4">Error loading subservice</h1>
+        <p className="text-red-600">
+          {error instanceof Error ? error.message : 'Unknown error occurred'}
+        </p>
+      </div>
+    )
   }
-
-  const casesResult = await payload.find({
-    collection: 'cases',
-    limit: 3,
-    sort: '-createdAt', // minus = descending
-  })
-
-  const seoBlocks = sub.additionalBlocks?.filter((b) => b.blockType === 'seoblock') || []
-
-  return (
-    <div>
-      <BGraphic />
-      <Hero component={component} subservice={sub} />
-      <BrandsBlockBlock component={component} />
-
-      {formBlock && <LeadCaptureBlock block={formBlock} />}
-      <InfoBlock subservice={sub} />
-      {sub.slug === 'SEO' && seoBlocks[0] && <SeoBlock block={seoBlocks[0]} />}
-      <AvailableServices solution={service} subservices={[sub]} subservice={sub} />
-      <WhyUsBlock component={component} />
-      <CasesBlock heading="Наши кейсы" cases={casesResult.docs} type="slider" />
-      {formBlock && <LeadCaptureBlock block={formBlock} />}
-      {sub.slug === 'SEO' && seoBlocks[1] && <SeoBlock block={seoBlocks[1]} />}
-      <TrustedByBlock component={component} />
-
-      <ReviewBlock component={component} />
-      <QABlock subservice={sub} />
-      {requestFormBlock && <RequestFormBlock block={requestFormBlock} />}
-    </div>
-  )
 }

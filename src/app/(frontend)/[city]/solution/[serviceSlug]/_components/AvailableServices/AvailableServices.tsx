@@ -5,7 +5,7 @@ import { ServiceCard } from './cards/ServiceCard'
 import { SubserviceCard } from './cards/SubserviceCard'
 import { AvailableServicesProps } from './types'
 import { usePathname } from 'next/navigation'
-import { ALLOWED_CITIES } from '@/app/utils/cities'
+import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 export default function AvailableServices({
   solution,
@@ -13,8 +13,7 @@ export default function AvailableServices({
   subservice,
 }: AvailableServicesProps) {
   const pathname = usePathname()
-  const currentCity =
-    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+  const [currentCity] = useCurrentCity()
 
   const renderServices = () => {
     if (subservice) {

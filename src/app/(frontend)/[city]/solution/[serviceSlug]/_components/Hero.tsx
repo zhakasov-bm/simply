@@ -2,17 +2,15 @@
 
 import { Component, Solution, Subservice } from '@/payload-types'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { ALLOWED_CITIES, CITY_PREPOSITIONAL } from '@/app/utils/cities'
+import { CITY_PREPOSITIONAL } from '@/app/utils/cities'
+import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 type Props =
   | { component: Component; solution: Solution; subservice?: never }
   | { component: Component; subservice: Subservice; solution?: never }
 
 export default function Hero(props: Props) {
-  const pathname = usePathname()
-  const currentCity =
-    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+  const [currentCity] = useCurrentCity()
   const cityText = CITY_PREPOSITIONAL[currentCity] || ''
 
   const { component } = props

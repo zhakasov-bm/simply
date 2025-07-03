@@ -1,121 +1,38 @@
-import configPromise from '@/payload.config'
 import { notFound } from 'next/navigation'
-import { getPayload } from 'payload'
-
-import ReviewBlock from '../../../_components/ReviewsBlock'
-import CertificateBlock from '../../../_components/CertificateBlock'
-import BrandsBlock from '../../../_components/BrandsBlock'
-import InfoBlock from './_components/InfoBlock'
-import ProblemBlock from '../components/ProblemBlock'
-import LeadCaptureBlock from '../../../_components/LeadCaptureBlock'
-import Hero from './_components/Hero'
-import WhyUsBlock from './_components/WhyUsBlock'
-import BGraphic from '../../../_components/BGRaphic'
-import TrustedByBlock from '../../../_components/TrustedByBlock'
-import QABlock from './_components/QABlock'
-import AvailableServices from './_components/AvailableServices/AvailableServices'
-import CasesBlock from '../../../_components/CasesBlock'
-import WhyServiceNeeded from './_components/WhyServiceNeeded'
-import LeadBlock from '../components/LeadBlock'
+import { getSolutionData } from '@/app/api/solutions/service'
+import { SolutionPageLayout } from './_components/SolutionPageLayout'
 
 interface PageProps {
   params: Promise<{ serviceSlug: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-// Comment out generateStaticParams to see if that's causing the issue
-// export async function generateStaticParams() {
-//   const payload = await getPayload({ config })
-//   const res = await payload.find({ collection: 'solutions' })
-
-//   return res.docs.map((solution) => ({
-//     serviceSlug: solution.slug,
-//   }))
-// }
-
 export default async function SolutionPage({ params }: PageProps) {
   try {
     const { serviceSlug: slug } = await params
     if (!slug) return notFound()
 
-    const payload = await getPayload({ config: configPromise })
-
-    const [component, solutionRes] = await Promise.all([
-      payload.findGlobal({ slug: 'component' }),
-      payload.find({
-        collection: 'solutions',
-        where: { slug: { equals: slug } },
-      }),
-    ])
-
-    const solution = solutionRes.docs?.[0]
-    if (!solution) return notFound()
-
-    const casesResult = await payload.find({
-      collection: 'cases',
-      limit: 3,
-      sort: '-createdAt', // minus = descending
-    })
-
-    // Get subservices related to this service
-    const subservicesRes = await payload.find({
-      collection: 'subservices',
-      where: {
-        service: {
-          equals: solution.id,
-        },
-      },
-    })
-
-    const subservices = subservicesRes.docs.map((sub) => ({
-      ...sub,
-      icon:
-        typeof sub.icon === 'object' && sub.icon
-          ? {
-              ...sub.icon,
-              url: sub.icon.url || '',
-              alt: sub.icon.alt || '',
-            }
-          : sub.icon,
-    }))
-
-    let formBlock = null
-    let requestFormBlock = null
-
-    for (const block of component.globals || []) {
-      if (block.blockType === 'form' && !formBlock) formBlock = block
-      if (block.blockType === 'request-form' && !requestFormBlock) requestFormBlock = block
-      if (formBlock && requestFormBlock) break
-    }
+    const { component, solution, subservices, cases, formBlock, requestFormBlock } =
+      await getSolutionData(slug)
 
     return (
-      <div>
-        <BGraphic />
-        <Hero component={component} solution={solution} />
-        <BrandsBlock component={component} />
-
-        <div className="hidden md:block">{formBlock && <LeadCaptureBlock block={formBlock} />}</div>
-        {solution.hasSubservices && <WhyServiceNeeded solution={solution} />}
-        {!solution.hasSubservices && <InfoBlock solution={solution} />}
-        <ProblemBlock solution={solution} />
-        <AvailableServices subservices={subservices} solution={solution} />
-        <CasesBlock heading="Наши кейсы" cases={casesResult.docs} type="slider" />
-        {formBlock && <LeadCaptureBlock block={formBlock} />}
-        <WhyUsBlock component={component} />
-        <CertificateBlock component={component} />
-        <TrustedByBlock component={component} />
-        <ReviewBlock component={component} />
-
-        <QABlock solution={solution} />
-        <LeadBlock solution={solution} />
-      </div>
+      <SolutionPageLayout
+        component={component}
+        solution={solution}
+        subservices={subservices}
+        cases={cases}
+        formBlock={formBlock}
+        requestFormBlock={requestFormBlock}
+      />
     )
   } catch (error) {
     console.error('Error in SolutionPage:', error)
     return (
-      <div>
-        <h1>Error loading solution</h1>
-        <p>Error: {error instanceof Error ? error.message : 'Unknown error'}</p>
+      <div className="container mx-auto py-8">
+        <h1 className="text-2xl font-bold mb-4">Error loading solution</h1>
+        <p className="text-red-600">
+          {error instanceof Error ? error.message : 'Unknown error occurred'}
+        </p>
       </div>
     )
   }

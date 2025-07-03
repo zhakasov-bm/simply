@@ -19,6 +19,7 @@ import ServicesBlock from '../_components/ServicesBlock'
 import CasesBlock from '../_components/CasesBlock'
 import BGraphic from '../_components/BGRaphic'
 import RequestFormBlock from '../_components/RequestFormBlock'
+import FloatingNav from '../_components/FloatingNav'
 
 export default async function HomePage({ params }: { params: { city: string } }) {
   const city = params.city
@@ -63,6 +64,7 @@ export default async function HomePage({ params }: { params: { city: string } })
   return (
     <div>
       <BGraphic />
+      <FloatingNav />
       <HeroBlock component={component} />
       <div className="block md:hidden">
         <BrandsBlock component={component} isLabel={false} />

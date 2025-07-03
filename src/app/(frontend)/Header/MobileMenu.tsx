@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { X, ChevronDown, ChevronUp } from 'lucide-react'
 import type { Navigation, Solution, Subservice } from '@/payload-types'
-import { usePathname } from 'next/navigation'
-import { ALLOWED_CITIES } from '@/app/utils/cities'
+import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 type Props = {
   nav: Navigation
@@ -18,9 +17,7 @@ type Props = {
 export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMobileOpen }: Props) {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [openSolutionId, setOpenSolutionId] = useState<string | null>(null)
-  const pathname = usePathname()
-  const currentCity =
-    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+  const [currentCity] = useCurrentCity()
 
   // Prevent page scroll when menu is open
   useEffect(() => {

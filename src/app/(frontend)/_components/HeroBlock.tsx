@@ -4,13 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Component } from '@/payload-types'
 import UniversalButton from './UniversalButton'
-import { usePathname } from 'next/navigation'
-import { ALLOWED_CITIES, CITY_PREPOSITIONAL } from '@/app/utils/cities'
+import { CITY_PREPOSITIONAL } from '@/app/utils/cities'
+import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 export default function HeroBlock({ component }: { component: Component }) {
-  const pathname = usePathname()
-  const currentCity =
-    ALLOWED_CITIES.find((city) => pathname.startsWith(`/${city}`)) || ALLOWED_CITIES[0]
+  const [currentCity] = useCurrentCity()
   const cityText = CITY_PREPOSITIONAL[currentCity] || ''
 
   return (
@@ -48,7 +46,7 @@ export default function HeroBlock({ component }: { component: Component }) {
               </div>
 
               {/* Left */}
-              <div className="hidden md:flex flex-col gap-16 flex-8/12">
+              <div className="hidden md:flex flex-col gap-10 flex-8/12">
                 <h1 className="md:text-4xl lg:text-6xl font-medium leading-tight">
                   {block.heading} {cityText && <span>{cityText}</span>}
                 </h1>
