@@ -5,7 +5,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 export default function Mission({ page }: { page: Page }) {
   return (
     <section className="container-class">
-      {page.layout.map((block, id) => {
+      {(page.layout ?? []).map((block, id) => {
         if (block.blockType === 'mission') {
           return (
             <div key={id} className="flex flex-col gap-8">

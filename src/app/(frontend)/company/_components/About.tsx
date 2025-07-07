@@ -13,7 +13,7 @@ export default function About({ page }: { page: Page }) {
         backgroundSize: 'contain',
       }}
     >
-      {page.layout.map((block, id) => {
+      {(page.layout ?? []).map((block, id) => {
         if (block.blockType === 'company') {
           return (
             <div key={id} className="flex flex-col gap-6">
