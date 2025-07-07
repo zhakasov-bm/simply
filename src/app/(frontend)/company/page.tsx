@@ -8,12 +8,12 @@ import About from './_components/About'
 import Mission from './_components/Mission'
 import RequestFormBlock from '../_components/RequestFormBlock'
 import LeadCaptureBlock from '../_components/LeadCaptureBlock'
+import Breadcrumbs from '../_components/Breadcrumbs'
 
 export default async function CompanyPage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  // Получаем страницу по slug 'company'
   const res = await payload.find({
     collection: 'pages',
     where: { slug: { equals: 'company' } },

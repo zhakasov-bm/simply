@@ -1,12 +1,21 @@
-import Link from 'next/link'
+import { getHomePageData } from '@/app/utils/homeService'
+import BGraphic from '../../_components/BGRaphic'
+import ServicesBlock from '../../_components/ServicesBlock'
 
-export default function page() {
+interface PageProps {
+  params: Promise<{ city: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function page({ params }: PageProps) {
+  const { component, solutions } = await getHomePageData()
+  const serviceBlock = component.globals.find((block) => block.blockType === 'services')
+  const heading = serviceBlock?.heading || ''
+
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col items-center justify-center min-h-[60vh] text-center px-4 gap-2">
-      <h1 className="text-teal-500 font-semibold text-3xl">Oops, Page not found</h1>
-      <Link href={'/'} className="inline-flex items-center">
-        Back to Main Page
-      </Link>
+    <div>
+      <BGraphic />
+      <ServicesBlock heading={heading} solutions={solutions} />
     </div>
   )
 }

@@ -17,6 +17,18 @@ type Props = {
   solutions: Solution[]
 }
 
+// Helper: returns true if the link should be active for the current path
+function isNavLinkActive(linkUrl: string, pathname: string, currentCity: string): boolean {
+  const cityRegex = /^\/[a-zа-я-]+/
+  const cleanedPath = pathname.replace(cityRegex, '') || '/'
+
+  if (linkUrl === '/') {
+    return pathname === `/${currentCity}` || pathname === '/'
+  }
+  const regex = new RegExp(`^${linkUrl}(\/|$)`)
+  return regex.test(cleanedPath)
+}
+
 export default function Footer({ nav, solutions }: Props) {
   const pathname = usePathname()
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
@@ -93,6 +105,7 @@ export default function Footer({ nav, solutions }: Props) {
         <nav className="hidden md:flex flex-col gap-2">
           <h3 className="text-2xl py-2">Компания</h3>
           {nav.links?.map((link, idx) => {
+            const isActive = isNavLinkActive(link.url, pathname, currentCity)
             const props = getNavLinkProps({
               link,
               idx,
@@ -107,7 +120,7 @@ export default function Footer({ nav, solutions }: Props) {
               <Link
                 key={idx}
                 {...props}
-                className={`text-sm font-light hover:text-black ${props.className?.replace('text-base', '')}`}
+                className={`text-sm font-light hover:text-black ${isActive ? 'text-black' : 'text-black/40'}`}
               >
                 {link.label}
               </Link>

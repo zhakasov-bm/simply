@@ -435,6 +435,7 @@ export interface Case {
  */
 export interface Page {
   id: string;
+  name: string;
   heading: {
     root: {
       type: string;
@@ -452,61 +453,63 @@ export interface Page {
   };
   image?: (string | null) | Media;
   slug: string;
-  layout: (
-    | {
-        title?: string | null;
-        statistics: {
-          value: string;
-          description: string;
-          bgColor?: string | null;
-          id?: string | null;
-        }[];
-        about: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
+  layout?:
+    | (
+        | {
+            title?: string | null;
+            statistics: {
+              value: string;
+              description: string;
+              bgColor?: string | null;
+              id?: string | null;
             }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'company';
-      }
-    | {
-        title: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
+            about: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
               [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'company';
+          }
+        | {
+            title: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            values: {
+              adv: string;
+              icon?: (string | null) | Media;
+              title: string;
+              id?: string | null;
             }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        values: {
-          adv: string;
-          icon?: (string | null) | Media;
-          title: string;
-          id?: string | null;
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'mission';
-      }
-  )[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mission';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1009,6 +1012,7 @@ export interface CasesSelect<T extends boolean = true> {
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
+  name?: T;
   heading?: T;
   image?: T;
   slug?: T;

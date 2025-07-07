@@ -21,13 +21,15 @@ const ProblemCard = ({
     className={`flex flex-col gap-2 bg-blueBG rounded-2xl p-6 pt-16 overflow-hidden relative justify-end flex-1/3 ${className}`}
   >
     <div
-      className="text-black/5 font-bold font-montserrat absolute top-10 right-0 leading-none"
+      className="text-black/5 font-bold font-montserrat absolute top-10 right-0 leading-none select-none"
       style={{ fontSize: `${numberSize}px` }}
     >
       {number}
     </div>
-    <h1 className="text-lg">{title}</h1>
-    <p className="font-inter font-normal text-base text-black/60">{subtitle}</p>
+    <div className="flex flex-col gap-2 z-10">
+      <h1 className="text-lg">{title}</h1>
+      <p className="font-inter font-normal text-base text-black/60">{subtitle}</p>
+    </div>
   </div>
 )
 

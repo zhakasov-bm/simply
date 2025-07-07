@@ -33,28 +33,26 @@ type GetNavLinkPropsArgs = {
 }
 
 export function getNavLinkProps(args: GetNavLinkPropsArgs) {
-  const { link, idx, pathname, activeIdx, currentCity, isCasePage, mainPageHref, setActiveIdx } =
-    args
-  const isActive = pathname === link.url || activeIdx === idx
-  const baseClass = `text-base hover:text-black ${isActive ? 'text-black' : 'text-black/40'}`
+  const { link, idx, currentCity, isCasePage, mainPageHref, setActiveIdx } = args
   let href = `/${currentCity}${link.url}`
   let onClick = () => setActiveIdx && setActiveIdx(idx)
 
   if (link.label === 'Главная') {
     href = isCasePage ? mainPageHref : `/${currentCity}${link.url}`
-  } else if (link.label === 'О нас') {
-    href = '/company'
+  } else if (link.url === '/company') {
+    href = link.url
   } else if (link.url.startsWith('http')) {
     href = link.url
   } else if (link.url === '/case' || link.url.startsWith('/case/')) {
     href = link.url
   }
 
-  return { href, onClick, className: baseClass }
+  return { href, onClick }
 }
 
 export default function Header({ nav, solutions, subservices }: NavProps) {
   const pathname = usePathname()
+  console.log(pathname)
   const router = useRouter()
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
@@ -107,7 +105,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   }
 
   const renderServicesDropdown = () => (
-    <div className="absolute top-full left-0 hidden font-inter group-hover:flex flex-col rounded-custom bg-white shadow-md p-4 z-10 min-w-[200px]">
+    <div className="absolute top-full left-0 hidden font-inter group-hover:flex flex-col rounded-custom bg-white shadow-md p-4 z-100 min-w-[200px]">
       {solutions.map((solution) => {
         const hasSubs = subservices.some(
           (sub) => typeof sub.service === 'object' && sub.service.id === solution.id,
@@ -140,7 +138,15 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
         <div className="hidden md:flex justify-around">
           <nav className="flex gap-6 relative">
             {nav.links?.map((link, idx) => {
-              const isActive = pathname === link.url || activeIdx === idx
+              const cityRegex = /^\/[a-zа-я-]+/
+              const cleanedPath = pathname.replace(cityRegex, '') || '/'
+
+              const isActive =
+                link.url === '/'
+                  ? pathname === `/${currentCity}` || pathname === '/'
+                  : link.url === '/case' || link.url === '/company'
+                    ? pathname === link.url || pathname.startsWith(link.url + '/')
+                    : cleanedPath === link.url || cleanedPath.startsWith(link.url + '/')
 
               if (link.label === 'Услуги') {
                 return (
@@ -156,7 +162,6 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                 )
               }
 
-              // Use helper for all other links
               const props = getNavLinkProps({
                 link,
                 idx,
@@ -167,8 +172,13 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                 mainPageHref,
                 setActiveIdx,
               })
+
               return (
-                <Link key={idx} {...props}>
+                <Link
+                  key={idx}
+                  {...props}
+                  className={`text-base ${isActive ? 'text-black' : 'text-black/40'} hover:text-black`}
+                >
                   {link.label}
                 </Link>
               )

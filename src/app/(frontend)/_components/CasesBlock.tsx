@@ -10,15 +10,14 @@ import { CaseCard } from '../case/_components/CaseCard'
 type Props = {
   heading: string
   cases: Case[]
-  type?: 'slider' | 'simple' | 'loadMore' | 'mobile'
+  type?: 'slider' | 'simple' | 'mobile'
   excludeId?: string
 }
 
 export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [visibleCount, setVisibleCount] = useState(6)
   const [dynamicType, setDynamicType] = useState<'slider' | 'mobile'>(
-    type === 'slider' || type === 'mobile' ? type : 'slider',
+    type === 'slider' ? type : 'mobile',
   )
 
   // Auto switch based on screen width
@@ -49,10 +48,6 @@ export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
   const groupedCases = Array.from({ length: Math.ceil(filteredCases.length / 6) }, (_, i) =>
     filteredCases.slice(i * 6, i * 6 + 6),
   )
-
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 6)
-  }
 
   return (
     <section
@@ -140,27 +135,6 @@ export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
           <div className="flex justify-center pt-10">
             <UniversalButton label="Смотреть все кейсы" to="/case" />
           </div>
-        </>
-      )}
-
-      {/* Load more type */}
-      {type === 'loadMore' && (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4">
-            {filteredCases.slice(0, visibleCount).map((item) => (
-              <CaseCard key={item.id} item={item} />
-            ))}
-          </div>
-
-          <div className="text-center text-sm text-gray-500 mt-4">
-            Показано {Math.min(visibleCount, filteredCases.length)} из {filteredCases.length}
-          </div>
-
-          {visibleCount < filteredCases.length && (
-            <div className="flex justify-center pt-10">
-              <UniversalButton label="Показать ещё" onClick={handleLoadMore} />
-            </div>
-          )}
         </>
       )}
     </section>

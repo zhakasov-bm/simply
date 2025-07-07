@@ -29,7 +29,6 @@ export function SolutionPageLayout({
   subservices,
   cases,
   formBlock,
-  requestFormBlock,
 }: SolutionPageLayoutProps) {
   return (
     <div>

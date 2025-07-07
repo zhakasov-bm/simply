@@ -6,6 +6,12 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   fields: [
     {
+      name: 'name',
+      type: 'text',
+      required: true,
+      label: 'Название страницы',
+    },
+    {
       name: 'heading',
       type: 'richText',
       required: true,
@@ -26,7 +32,8 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      required: true,
+      required: false,
+      minRows: 0,
       blocks: [CompanyBlock, OurMissionBlock],
     },
   ],

@@ -39,6 +39,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body>
         <Header nav={navigation} solutions={solutions} subservices={subservices} />
         <main>{children}</main>

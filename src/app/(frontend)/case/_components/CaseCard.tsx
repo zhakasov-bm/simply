@@ -7,7 +7,7 @@ export function CaseCard({ item }: { item: Case }) {
   return (
     <Link
       href={`/case/${item.slug}`}
-      className="block w-full min-w-[280px] rounded-2xl overflow-hidden aspect-[4/3] bg-cover bg-center group flex-shrink-0"
+      className="block w-full md:min-w-[280px] rounded-2xl overflow-hidden aspect-[4/3] bg-cover bg-center group flex-shrink-0"
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
       <div className="flex gap-2 ml-6 pt-18 z-10 relative">
