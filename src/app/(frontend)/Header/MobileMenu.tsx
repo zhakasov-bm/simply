@@ -95,7 +95,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                 {isServices ? (
                   <button
                     onClick={() => setServicesOpen(!servicesOpen)}
-                    className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl text-black rounded-2xl active:bg-lightBG"
+                    className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl text-black rounded-2xl active:bg-background"
                   >
                     {link.label}
                     {servicesOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -116,7 +116,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                       <Link
                         {...props}
                         onClick={toggleMobileMenu}
-                        className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl text-black rounded-2xl active:bg-lightBG"
+                        className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl text-black rounded-2xl active:bg-background"
                       >
                         {link.label}
                       </Link>
@@ -140,7 +140,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                             <Link
                               href={`/${currentCity}/solution/${solution.slug}`}
                               onClick={toggleMobileMenu}
-                              className="w-full text-left pr-4 rounded-2xl active:bg-lightBG"
+                              className="w-full text-left pr-4 rounded-2xl active:bg-background"
                             >
                               {solution.name}
                             </Link>
@@ -150,13 +150,13 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                                 <Link
                                   href={`/${currentCity}/solution/${solution.slug}`}
                                   onClick={toggleMobileMenu}
-                                  className="flex-1 text-left rounded-2xl active:bg-lightBG"
+                                  className="flex-1 text-left rounded-2xl active:bg-background"
                                 >
                                   {solution.name}
                                 </Link>
                                 <button
                                   onClick={() => toggleSolution(solution.id)}
-                                  className="p-2 rounded-2xl active:bg-lightBG"
+                                  className="p-2 rounded-2xl active:bg-background"
                                 >
                                   {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                                 </button>
@@ -172,7 +172,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                                   key={sub.id}
                                   href={`/${currentCity}/solution/${solution.slug}/${sub.slug}`}
                                   onClick={toggleMobileMenu}
-                                  className="rounded-2xl active:bg-lightBG"
+                                  className="rounded-2xl active:bg-background"
                                 >
                                   {sub.name}
                                 </Link>

@@ -4,7 +4,7 @@ import { Component, Solution, Subservice } from '@/payload-types'
 import Image from 'next/image'
 import { CITY_PREPOSITIONAL } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
-import Breadcrumbs from '../../../../_components/Breadcrumbs'
+import Breadcrumbs from '../../../../_components/Breadcrumbs/Breadcrumbs'
 
 type Props =
   | { component: Component; solution: Solution; subservice?: never }

@@ -34,7 +34,7 @@ export default function TarifBlock({ block }: Props) {
               <p className="text-xl font-medium pt-6">{item.type}</p>
               <p className="text-base font-light">{item.price}</p>
 
-              <div className="bg-lightBG py-2 px-6 rounded-3xl text-base font-inter mt-4 flex items-center gap-2">
+              <div className="bg-background py-2 px-6 rounded-3xl text-base font-inter mt-4 flex items-center gap-2">
                 <span>{isNoCommission ? '🔥' : '💰'}</span>
                 <span>{item.commission}</span>
               </div>

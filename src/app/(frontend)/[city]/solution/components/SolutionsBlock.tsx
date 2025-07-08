@@ -8,7 +8,7 @@ export default function SolutionsBlock({ solution }: { solution: Solution }) {
       href={`/solution/${solution.id}`}
       className="w-full bg-teal-500 hover:bg-teal-600font-bold rounded overflow-hidden transition ease-in-out duration-300"
     >
-      <div className="bg-lightBG rounded-2xl p-6 flex">
+      <div className="bg-background rounded-2xl p-6 flex">
         <div className="flex flex-col gap-2">
           <h3>{solution.slug}</h3>
           <h1 className="text-2xl">{solution.name}</h1>

@@ -140,7 +140,7 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
             id={field.name}
             name={field.name}
             required={field.required}
-            className="peer w-full rounded-lg px-3 pt-5 pb-2 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-gray-500 appearance-none cursor-pointer"
+            className="peer w-full rounded-lg px-3 pt-5 pb-2 bg-inputBG text-lg focus:outline-none focus:ring-2 focus:ring-gray-500 appearance-none cursor-pointer"
           >
             <option value="">Выберите услугу</option>
             {availableServices.map((service) => (
@@ -183,7 +183,7 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
           name={field.name}
           required={field.required}
           placeholder=" "
-          className="peer w-full rounded-lg px-3 pt-5 pb-2 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+          className="peer w-full rounded-lg px-3 pt-5 pb-2 bg-inputBG text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
         />
         <label
           htmlFor={field.name}
@@ -197,10 +197,10 @@ export default function LeadCaptureBlock({ block }: { block: LeadCaptureProps })
 
   return (
     <section className="container mx-auto my-16 lg:my-20 px-6 lg:px-40">
-      <div className="bg-lightBG rounded-custom">
+      <div className="bg-background rounded-custom">
         {typeof block?.form === 'object' && block?.form?.title === 'leadCaptureForm' && (
           <div className="flex flex-col gap-6 py-10 px-4 md:px-12">
-            <h3 className="text-xl md:text-2xl leadForm text-center">{block.heading}</h3>
+            <h3 className="text-xl md:text-2xl md:px-16 leadForm text-center">{block.heading}</h3>
 
             {/* Success Message */}
             {formState.success && (

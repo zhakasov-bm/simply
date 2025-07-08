@@ -87,7 +87,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
           <Link
             href={`/${currentCity}/solution/${solution.slug}`}
             key={solution.id}
-            className="relative bg-lightBG rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group md:max-h-[240px] min-w-[80%] overflow-hidden"
+            className="relative bg-background rounded-custom p-6 flex flex-col md:flex-row justify-between items-start group md:max-h-[240px] min-w-[80%] overflow-hidden"
           >
             <div className="flex flex-col gap-2 z-10 md:pb-16 md:max-w-90">
               <h3 className="text-base md:text-xl">{solution.name}</h3>
@@ -95,7 +95,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
                 {solution.details?.map((item, i) => (
                   <span
                     key={i}
-                    className="px-2 md:px-3 py-1 border border-black/20 bg-lightBG/20 backdrop-blur-[2px] rounded-custom text-[10px] md:text-sm"
+                    className="px-2 md:px-3 py-1 border border-link/20 bg-background/20 backdrop-blur-[2px] rounded-custom text-[10px] md:text-sm"
                   >
                     {item.name}
                   </span>
@@ -133,13 +133,13 @@ export default function ServicesBlock({ heading, solutions }: Props) {
                   backgroundSize: 'contain',
                 }}
               >
-                <div className="flex flex-col gap-2 p-6 md:p-10">
+                <div className="flex flex-col gap-2 p-6 md:p-10 text-black">
                   <h3 className="text-xl">{solution.name}</h3>
                   <div className="flex flex-wrap w-full gap-2 py-2 z-100">
                     {solution.details?.map((item, i) => (
                       <span
                         key={i}
-                        className="px-2 md:px-3 py-1 border border-black/20 bg-lightBG/10 backdrop-blur-[2px] rounded-custom text-[10px] md:text-sm"
+                        className="px-2 md:px-3 py-1 border border-black/20 bg-white/10 backdrop-blur-[2px] rounded-custom text-[10px] md:text-sm"
                       >
                         {item.name}
                       </span>

@@ -1242,6 +1242,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Navigation {
   id: string;
   logo: string | Media;
+  logoDark?: (string | null) | Media;
   links: {
     label: string;
     url: string;
@@ -1366,6 +1367,7 @@ export interface Component {
         logos?:
           | {
               logo: string | Media;
+              logoDark?: (string | null) | Media;
               id?: string | null;
             }[]
           | null;
@@ -1395,6 +1397,7 @@ export interface Component {
         logos?:
           | {
               logo: string | Media;
+              logoDark?: (string | null) | Media;
               id?: string | null;
             }[]
           | null;
@@ -1469,6 +1472,7 @@ export interface Component {
  */
 export interface NavigationSelect<T extends boolean = true> {
   logo?: T;
+  logoDark?: T;
   links?:
     | T
     | {
@@ -1605,6 +1609,7 @@ export interface ComponentSelect<T extends boolean = true> {
                 | T
                 | {
                     logo?: T;
+                    logoDark?: T;
                     id?: T;
                   };
               id?: T;
@@ -1638,6 +1643,7 @@ export interface ComponentSelect<T extends boolean = true> {
                 | T
                 | {
                     logo?: T;
+                    logoDark?: T;
                     id?: T;
                   };
               id?: T;

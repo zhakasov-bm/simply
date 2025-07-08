@@ -17,7 +17,7 @@ export const CompanyBlock: Block = {
       fields: [
         { name: 'value', type: 'text', required: true },
         { name: 'description', type: 'text', required: true },
-        { name: 'bgColor', type: 'text', defaultValue: 'lightBG' },
+        { name: 'bgColor', type: 'text', defaultValue: 'background' },
       ],
     },
     {

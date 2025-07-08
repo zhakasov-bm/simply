@@ -1,7 +1,7 @@
 import { Page } from '@/payload-types'
 import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import Breadcrumbs from '../../_components/Breadcrumbs'
+import Breadcrumbs from '../../_components/Breadcrumbs/Breadcrumbs'
 
 export default function Hero({ page }: { page: Page }) {
   return (

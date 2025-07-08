@@ -11,13 +11,13 @@ export default function CertificateBlock({ component }: { component: Component }
             <div key={id}>
               <h1 className="text-4xl px-6 pb-8 md:pb-12 text-center">{block.heading}</h1>
 
-              <div className="hidden md:flex flex-col-reverse lg:flex-row bg-lightBG rounded-3xl p-8 md:p-15">
+              <div className="hidden md:flex flex-col-reverse lg:flex-row bg-background rounded-3xl p-8 md:p-15">
                 {/* Certificates Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full h-full lg:w-1/2 pr-28">
                   {block.certificates?.map((item, id) => (
                     <div
                       key={id}
-                      className="relative w-full aspect-square bg-white rounded-full overflow-hidden flex items-center justify-center"
+                      className="relative w-full aspect-square bg-inputBG rounded-full overflow-hidden flex items-center justify-center"
                     >
                       {typeof item.certificate === 'object' && item.certificate.url && (
                         <Image
@@ -36,10 +36,10 @@ export default function CertificateBlock({ component }: { component: Component }
                   {block.descriptions?.map((item, i) => (
                     <div
                       key={i}
-                      className="flex flex-col gap-4 md:p-6 md:bg-white font-inter rounded-2xl md:shadow-sm"
+                      className="flex flex-col gap-4 md:p-6 md:bg-inputBG font-inter rounded-2xl md:shadow-sm"
                     >
                       <h3 className="text-xl font-semibold">{item.title}</h3>
-                      <p className="text-base font-light text-gray-700">{item.message}</p>
+                      <p className="text-base font-light">{item.message}</p>
                     </div>
                   ))}
                 </div>

@@ -8,7 +8,7 @@ type Props = {
 
 export default function Calculator({ block }: Props) {
   return (
-    <section className="bg-lightBG py-1">
+    <section className="bg-background py-1">
       <h1 className="text-4xl pb-12 text-center">Калькулятора зачислений</h1>
       <div className="container-class">
         <div className="flex gap-2">

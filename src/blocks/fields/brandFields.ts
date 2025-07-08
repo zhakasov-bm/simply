@@ -18,6 +18,12 @@ export const brandFields: Field[] = [
         relationTo: 'media',
         required: true,
       },
+      {
+        name: 'logoDark',
+        label: 'Логотип (тёмная тема)',
+        type: 'upload',
+        relationTo: 'media',
+      },
     ],
   },
 ]

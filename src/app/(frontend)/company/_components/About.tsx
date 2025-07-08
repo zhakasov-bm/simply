@@ -25,7 +25,10 @@ export default function About({ page }: { page: Page }) {
                       key={id}
                       className={clsx(
                         'rounded-custom flex flex-col gap-4 justify-between p-5 md:p-6 flex-1',
-                        `bg-${item.bgColor}`,
+                        {
+                          'bg-primary text-black': item.bgColor === 'primary',
+                          'bg-background': item.bgColor === 'background',
+                        },
                       )}
                     >
                       <h3 className="text-xl md:text-3xl">{item.value}</h3>
@@ -34,7 +37,7 @@ export default function About({ page }: { page: Page }) {
                   ))}
                 </div>
               </div>
-              <div className="bg-lightBG p-8 rounded-custom">
+              <div className="bg-background p-8 rounded-custom">
                 <RichText data={block.about} />
               </div>
             </div>

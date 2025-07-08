@@ -14,7 +14,7 @@ export default function Mission({ page }: { page: Page }) {
                 {block.values?.map((item, id) => (
                   <div
                     key={id}
-                    className="rounded-custom flex flex-col gap-6 items-center p-7 bg-lightBG"
+                    className="rounded-custom flex flex-col gap-6 items-center p-7 bg-background"
                   >
                     <span className="font-inter text-sm uppercase">{item.adv}</span>
                     <div className="relative w-10 h-10">

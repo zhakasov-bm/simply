@@ -11,7 +11,7 @@ type SubserviceCardProps = {
 export const SubserviceCard = ({ sub, solutionSlug, currentCity }: SubserviceCardProps) => (
   <Link
     href={`/${currentCity}/solution/${solutionSlug}/${sub.slug}`}
-    className="flex p-6 md:p-10 rounded-custom bg-lightBG relative overflow-hidden group w-full"
+    className="flex p-6 md:p-10 rounded-custom bg-background relative overflow-hidden group w-full"
   >
     <div className="absolute top-8 right-8  md:hidden">
       <Image src={'/nav.svg'} alt="arrow" width={24} height={24} />

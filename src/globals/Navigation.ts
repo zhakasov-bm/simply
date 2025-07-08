@@ -13,6 +13,12 @@ export const Navigation: GlobalConfig = {
       required: true,
     },
     {
+      name: 'logoDark',
+      label: 'Логотип (тёмная тема)',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       name: 'links',
       type: 'array',
       label: 'Nav',

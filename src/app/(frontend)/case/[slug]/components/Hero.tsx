@@ -1,4 +1,4 @@
-import Breadcrumbs from '@/app/(frontend)/_components/Breadcrumbs'
+import Breadcrumbs from '@/app/(frontend)/_components/Breadcrumbs/Breadcrumbs'
 import UniversalButton from '@/app/(frontend)/_components/UniversalButton'
 import { Case } from '@/payload-types'
 

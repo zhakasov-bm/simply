@@ -55,7 +55,7 @@ export default function ActionsBlock({ caseData }: { caseData: Case }) {
                   blockRefs.current[i] = el
                 }}
                 data-index={i}
-                className={`flex flex-col gap-2 bg-lightBG justify-between rounded-custom p-4 md:p-6 transition-all duration-700 ease-out mb-4 ${
+                className={`flex flex-col gap-2 bg-background justify-between rounded-custom p-4 md:p-6 transition-all duration-700 ease-out mb-2 ${
                   visibleBlockIndex >= i ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}
                 style={{

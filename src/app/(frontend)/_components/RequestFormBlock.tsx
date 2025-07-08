@@ -99,7 +99,7 @@ export default function RequestFormBlock({ block }: { block: RequestFormProps })
       >
         {/* Left Side */}
         <div className="flex flex-col gap-5 w-1/2 p-40">
-          <h1 className="text-3xl pb-4">{block.title}</h1>
+          <h1 className="text-3xl pb-4 text-black">{block.title}</h1>
           {block.contacts?.map((contact, i) => (
             <div key={i}>
               {typeof contact.icon === 'object' && contact.icon.url && (

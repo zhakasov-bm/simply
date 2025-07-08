@@ -13,11 +13,11 @@ export default function WhyUsBlock({ component }: { component: Component }) {
                 {block.items?.map((item, id) => (
                   <div
                     key={id}
-                    className="bg-lightBG rounded-custom p-5 md:p-10 overflow-hidden relative"
+                    className="bg-background rounded-custom p-5 md:p-10 overflow-hidden relative"
                   >
                     <div className="flex flex-col gap-8 md:gap-4 pr-20 md:pb-10 md:pr-50">
                       <h3 className="text-lg leading-6 md:text-xl">{item.title}</h3>
-                      <p className="text-xs md:text-base text-black/60 font-inter">
+                      <p className="text-xs md:text-base text-link/60 font-inter">
                         {item.description}
                       </p>
                     </div>

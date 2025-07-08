@@ -27,7 +27,7 @@ const ProblemCard = ({
       {number}
     </div>
     <div className="flex flex-col gap-2 z-10">
-      <h1 className="text-lg">{title}</h1>
+      <h1 className="text-lg text-black">{title}</h1>
       <p className="font-inter font-normal text-base text-black/60">{subtitle}</p>
     </div>
   </div>
@@ -44,7 +44,7 @@ const SimpleProblemCard = ({
   subtitle: string
   className?: string
 }) => (
-  <div className={`flex flex-col gap-2 bg-lightBG rounded-2xl p-6 ${className}`}>
+  <div className={`flex flex-col gap-2 bg-background rounded-2xl p-6 ${className}`}>
     <div className="w-12 h-12 bg-primary mb-4 rounded-lg flex items-center justify-center">
       {number}
     </div>
@@ -70,7 +70,7 @@ const MobileSubserviceProblems = ({
     <div className="flex flex-col gap-2">
       {problems.map((item, i) => (
         <div key={i} className="flex flex-col gap-2 bg-blueBG rounded-custom p-6">
-          <h3 className="text-lg">{item.title}</h3>
+          <h3 className="text-lg text-black">{item.title}</h3>
           <p className="font-inter font-normal text-base text-black/60">{item.subtitle}</p>
         </div>
       ))}

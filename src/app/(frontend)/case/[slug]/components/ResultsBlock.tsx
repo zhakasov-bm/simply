@@ -39,7 +39,7 @@ export default function ResultsBlock({ caseData }: { caseData: Case }) {
   }, [caseData.results])
 
   return (
-    <section className="bg-lightBG py-1">
+    <section className="bg-background py-1">
       <div className="container-class">
         <h1 className="text-4xl pb-10">{caseData.resultTitle}</h1>
         <div className="flex flex-col md:flex-row gap-10">

@@ -8,7 +8,7 @@ import About from './_components/About'
 import Mission from './_components/Mission'
 import RequestFormBlock from '../_components/RequestFormBlock'
 import LeadCaptureBlock from '../_components/LeadCaptureBlock'
-import Breadcrumbs from '../_components/Breadcrumbs'
+import Breadcrumbs from '../_components/Breadcrumbs/Breadcrumbs'
 
 export default async function CompanyPage() {
   const payloadConfig = await config

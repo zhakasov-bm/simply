@@ -28,7 +28,7 @@ export default function SeoBlock({ block }: Props) {
           <div
             key={i}
             className={`flex flex-col gap-2 rounded-custom p-6 ${
-              designType === 'layout1' ? 'bg-lightBG' : designType === 'layout2' ? 'bg-primary' : ''
+              designType === 'layout1' ? 'background' : designType === 'layout2' ? 'bg-primary' : ''
             }`}
           >
             {/* Layout 1 — Number badge */}

@@ -2,7 +2,6 @@
 
 import type { Navigation, Solution, Subservice } from '@/payload-types'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Logo } from '../_components/Logo/Logo'
@@ -13,6 +12,7 @@ import { PiMapPinFill } from 'react-icons/pi'
 import { CITY_RU, getCityRegex } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
 import { CityModal } from './CityModal'
+import ThemeSwitch from '../_components/ThemeSwitch/ThemeSwitch'
 
 type NavProps = {
   nav: Navigation
@@ -127,7 +127,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   )
 
   return (
-    <header className="container mx-auto flex justify-between fixed z-[1000] bg-white md:bg-transparent md:static items-center py-4 md:py-5 px-8 md:px-0">
+    <header className="container mx-auto flex justify-between fixed z-[1000] bg-background md:bg-transparent md:static items-center py-4 md:py-5 px-8 md:px-0">
       {/* Left: Logo and Nav */}
       <div className="flex gap-6 md:gap-20 items-center">
         {/* Logo: go to /[city] if on /case or /case/[slug] */}
@@ -153,7 +153,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                   <div key={idx} className="relative group">
                     <button
                       onClick={() => setActiveIdx(idx)}
-                      className={`text-base ${isActive ? 'text-black' : 'text-black/40'} hover:text-black`}
+                      className={`text-base ${isActive ? 'text-hoverText' : 'text-label'} hover:text-hoverText`}
                     >
                       {link.label}
                     </button>
@@ -177,7 +177,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                 <Link
                   key={idx}
                   {...props}
-                  className={`text-base ${isActive ? 'text-black' : 'text-black/40'} hover:text-black`}
+                  className={`text-base ${isActive ? 'text-hoverText' : 'text-label'} hover:text-hoverText`}
                 >
                   {link.label}
                 </Link>
@@ -189,7 +189,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
       {/* Right: City Selector, Phone number */}
       <div className="flex gap-2 md:gap-5">
         <button
-          className="hidden md:flex text-base font-inter text-black underline decoration-dashed items-center gap-0 cursor-pointer"
+          className="hidden md:flex text-base font-inter text-hoverText underline decoration-dashed items-center gap-0 cursor-pointer"
           onClick={() => setIsCityModalOpen(true)}
         >
           <PiMapPinFill />
@@ -204,7 +204,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           +7 775 202 60 10
         </Link>
         <div className="flex items-center justify-center w-10 h-10 cursor-pointer">
-          <Image src="/light-mode.svg" alt="light-mode" width={20} height={20} />
+          <ThemeSwitch />
         </div>
 
         {/* Burger button (mobile only) */}

@@ -6,6 +6,7 @@ import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import { Solution, Subservice } from '@/payload-types'
 import { getSolutionData } from '@/app/utils/solutionsService'
+import { Providers } from './_components/providers/providers'
 
 export const metadata = {
   description: 'Marketing agency',
@@ -38,14 +39,16 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   }
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <Header nav={navigation} solutions={solutions} subservices={subservices} />
-        <main>{children}</main>
-        <Footer nav={navigation} solutions={solutions} />
+        <Providers>
+          <Header nav={navigation} solutions={solutions} subservices={subservices} />
+          <main>{children}</main>
+          <Footer nav={navigation} solutions={solutions} />
+        </Providers>
       </body>
     </html>
   )

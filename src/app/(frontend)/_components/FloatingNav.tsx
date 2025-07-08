@@ -2,6 +2,7 @@
 import { IoClose } from 'react-icons/io5'
 import Image from 'next/image'
 import { Navigation } from '@/payload-types'
+import ThemeSwitch from './ThemeSwitch/ThemeSwitch'
 
 export default function FloatingNav({ nav }: { nav: Navigation }) {
   const handleScroll = (id: string) => {
@@ -37,13 +38,14 @@ export default function FloatingNav({ nav }: { nav: Navigation }) {
                     {item.nav}
                   </div>
                 ))}
+                <ThemeSwitch />
                 <button
                   className="text-sm font-unbounded text-primary bg-black hover:text-white rounded-custom px-3 py-2 cursor-pointer"
                   onClick={() => handleScroll('contact')}
                 >
                   {block.button}
                 </button>
-                <IoClose width={100} height={100} className="cursor-pointer" />
+                {/* <IoClose width={100} height={100} className="cursor-pointer" /> */}
               </div>
             )
           }

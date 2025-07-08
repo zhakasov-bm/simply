@@ -74,14 +74,14 @@ export default function Breadcrumbs({
               {item.href && !item.isActive ? (
                 <Link
                   href={item.href}
-                  className="text-xs md:text-sm hover:text-black transition-colors duration-200 focus:outline-none"
+                  className="text-xs md:text-sm hover:text-link transition-colors duration-200 focus:outline-none"
                   aria-current={index === breadcrumbItems.length - 1 ? 'page' : undefined}
                 >
                   {item.label}
                 </Link>
               ) : (
                 <span
-                  className={item.isActive ? 'text-gray-900 font-medium' : 'text-gray-600'}
+                  className={item.isActive ? 'text-crumbsActive font-medium' : 'text-gray-600'}
                   aria-current={item.isActive ? 'page' : undefined}
                 >
                   {item.label}

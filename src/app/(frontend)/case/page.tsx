@@ -4,7 +4,7 @@ import config from '@/payload.config'
 import { CaseCard } from './_components/CaseCard'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import BGraphic from '../_components/BGRaphic'
-import Breadcrumbs from '../_components/Breadcrumbs'
+import Breadcrumbs from '../_components/Breadcrumbs/Breadcrumbs'
 
 export default async function page() {
   const payloadConfig = await config

@@ -67,7 +67,7 @@ export default function Footer({ nav, solutions }: Props) {
   )
 
   return (
-    <footer className="py-8 border-t border-gray-100">
+    <footer className="py-8 border-t border-link/10">
       <div className="container mx-auto flex flex-wrap justify-between px-8 py-8">
         <div className="flex flex-col gap-4">
           {/* Logo */}
@@ -80,7 +80,7 @@ export default function Footer({ nav, solutions }: Props) {
             <h3 className="text-2xl py-2">{nav.contactTitle}</h3>
             {nav.contacts?.map((contact, id) => (
               <div key={id}>
-                <p className="font-light text-base text-gray-500">{contact.item}</p>
+                <p className="font-light text-base text-link/40">{contact.item}</p>
               </div>
             ))}
           </div>
@@ -93,7 +93,7 @@ export default function Footer({ nav, solutions }: Props) {
                 <Link key={platform} href={url} target="_blank" rel="noreferrer">
                   <Icon
                     size={48}
-                    className="bg-lightBG rounded-xl p-3 hover:bg-gray-300 transition duration-300"
+                    className="bg-background rounded-xl p-3 hover:bg-primary transition duration-300"
                   />
                 </Link>
               )
@@ -120,7 +120,7 @@ export default function Footer({ nav, solutions }: Props) {
               <Link
                 key={idx}
                 {...props}
-                className={`text-sm font-light hover:text-black ${isActive ? 'text-black' : 'text-black/40'}`}
+                className={`text-sm font-light hover:text-link ${isActive ? 'text-link' : 'text-link/40'}`}
               >
                 {link.label}
               </Link>
@@ -134,16 +134,16 @@ export default function Footer({ nav, solutions }: Props) {
 
           {Object.entries(groupedSolutions).map(([category, items]) => (
             <div key={category}>
-              <h2 className="text-sm font-normal text-black">{getCategoryLabel(category)}</h2>
+              <h2 className="text-sm font-normal text-link">{getCategoryLabel(category)}</h2>
               <ul className="space-y-1">
                 {items.map((solution) => (
                   <li key={solution.id}>
                     <Link
                       href={`/${currentCity}/solution/${solution.slug}`} // better use slug
-                      className={`text-sm font-light hover:text-black ${
+                      className={`text-sm font-light hover:text-link ${
                         pathname === `/${currentCity}/solution/${solution.slug}`
-                          ? 'text-black'
-                          : 'text-black/40'
+                          ? 'text-link'
+                          : 'text-link/40'
                       }`}
                     >
                       {solution.name}

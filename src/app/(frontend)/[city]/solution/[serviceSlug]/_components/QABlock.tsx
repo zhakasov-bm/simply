@@ -27,7 +27,10 @@ export default function QABlock({ solution, subservice }: Props) {
           const isOpen = openIndex === index
 
           return (
-            <div key={index} className="bg-lightBG rounded-custom p-6 transition-all duration-500">
+            <div
+              key={index}
+              className="bg-background rounded-custom p-6 transition-all duration-500"
+            >
               <div
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggle(index)}
@@ -41,7 +44,7 @@ export default function QABlock({ solution, subservice }: Props) {
                   isOpen ? 'max-h-96' : 'max-h-0'
                 }`}
               >
-                <p className="text-gray-700 font-inter pt-4">{item.answer}</p>
+                <p className="text-link/70 font-inter pt-4">{item.answer}</p>
               </div>
             </div>
           )

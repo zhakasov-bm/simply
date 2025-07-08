@@ -7,9 +7,9 @@ export default function WhyServiceNeeded({ solution }: { solution: Solution }) {
   const items = solution.whyList || []
 
   const cardStyles = [
-    { bg: 'bg-lightBG' },
-    { bg: 'bg-primary', reverse: true },
-    { bg: 'bg-lightBG' },
+    { bg: 'bg-background' },
+    { bg: 'bg-primary', reverse: true, text: 'text-black' },
+    { bg: 'bg-background' },
   ]
 
   return (
@@ -18,7 +18,7 @@ export default function WhyServiceNeeded({ solution }: { solution: Solution }) {
 
       <div className="flex flex-col md:flex-row gap-3 pt-8">
         {items.slice(0, 3).map((item, i) => {
-          const { bg, reverse } = cardStyles[i] || {}
+          const { bg, reverse, text } = cardStyles[i] || {}
           return (
             <div
               key={i}
@@ -26,6 +26,7 @@ export default function WhyServiceNeeded({ solution }: { solution: Solution }) {
                 'flex flex-col p-8 rounded-custom justify-between items-center flex-1 gap-5 transition-all',
                 bg,
                 reverse && 'flex-col-reverse',
+                text,
               )}
             >
               <span className="text-xl text-center">{item?.title || ''}</span>
