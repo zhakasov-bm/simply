@@ -13,6 +13,8 @@ body {
     --font-inter: "Inter", sans-serif;
     --font-montserrat: "Montserrat", sans-serif;
 
+    --color-back: var(--back);
+
     --color-primary: #CCFE00;
     --color-greenBG: #F4FECD;
     --color-blueBG: #CCD7F7;
@@ -35,6 +37,7 @@ body {
 
 :root {
   --background: #F3F4F4;
+  --back: #fff;
   --label: #12121266;
   --hoverText: #121212;
   --crumbs: var(--color-gray-600);
@@ -45,11 +48,12 @@ body {
 
 .dark {
   --background: #2C2C2C;
+  --back: #121212;
   --label: #fff;
   --hoverText: #CCFE00;
   --crumbs: var(--color-gray-600);
   --crumbsActive: var(--color-gray-400);
-  --inputBG: rgba(17, 17, 17, 0.2);
+  --inputBG: #242424;
   --link: #fff;
 }
 

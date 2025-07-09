@@ -15,6 +15,8 @@ export default function UniversalButton({ label, to, className, onClick }: Unive
   const handleClick = () => {
     if (onClick) {
       onClick()
+    } else if (to?.startsWith('#')) {
+      document.querySelector(to)?.scrollIntoView({ behavior: 'smooth' })
     } else if (to) {
       router.push(to)
     }

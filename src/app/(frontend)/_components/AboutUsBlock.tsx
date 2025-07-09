@@ -31,7 +31,7 @@ export default function AboutUsBlock({ component }: { component: Component }) {
                     <div
                       key={i}
                       className={`
-                bg-background text-black lg:bg-black lg:text-white rounded-custom p-4 lg:p-5 lg:py-6 lg:px-8 lg:shadow-md flex flex-col gap-1 lg:gap-2
+                bg-background lg:bg-black lg:text-white rounded-custom p-4 lg:p-5 lg:py-6 lg:px-8 lg:shadow-md flex flex-col gap-1 lg:gap-2
                 ${i === 2 ? 'col-span-2' : ''}
                 `}
                     >

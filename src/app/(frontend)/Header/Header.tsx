@@ -90,12 +90,12 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
     if (relatedSubs.length === 0) return null
 
     return (
-      <div className="absolute left-full top-0 hidden group-hover/item:flex flex-col rounded-custom bg-white shadow-md p-4 z-20 min-w-[200px]">
+      <div className="absolute left-full top-0 hidden group-hover/item:flex flex-col rounded-custom bg-inputBG shadow-md p-4 z-20 min-w-[200px]">
         {relatedSubs.map((sub) => (
           <Link
             key={sub.id}
             href={`/${currentCity}/solution/${solution.slug}/${sub.slug}`}
-            className="py-1 px-2 rounded-custom hover:bg-gray-100 whitespace-nowrap"
+            className="py-1 px-2 rounded-custom hover:bg-link/10 whitespace-nowrap"
           >
             {sub.name}
           </Link>
@@ -105,7 +105,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   }
 
   const renderServicesDropdown = () => (
-    <div className="absolute top-full left-0 hidden font-inter group-hover:flex flex-col rounded-custom bg-white shadow-md p-4 z-100 min-w-[200px]">
+    <div className="absolute top-full left-0 hidden font-inter group-hover:flex flex-col rounded-custom bg-inputBG shadow-md p-4 z-100 min-w-[200px]">
       {solutions.map((solution) => {
         const hasSubs = subservices.some(
           (sub) => typeof sub.service === 'object' && sub.service.id === solution.id,
@@ -115,7 +115,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           <div key={solution.id} className={`relative ${hasSubs ? 'group/item' : ''}`}>
             <Link
               href={`/${currentCity}/solution/${solution.slug}`}
-              className="py-1 px-2 rounded-custom hover:bg-gray-100 whitespace-nowrap block"
+              className="py-1 px-2 rounded-custom hover:bg-link/10 whitespace-nowrap block"
             >
               {solution.name}
             </Link>
@@ -127,7 +127,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   )
 
   return (
-    <header className="container mx-auto flex justify-between fixed z-[1000] bg-background md:bg-transparent md:static items-center py-4 md:py-5 px-8 md:px-0">
+    <header className="container mx-auto flex justify-between fixed z-[1000] bg-back md:bg-transparent md:static items-center py-4 md:py-5 px-8 md:px-0">
       {/* Left: Logo and Nav */}
       <div className="flex gap-6 md:gap-20 items-center">
         {/* Logo: go to /[city] if on /case or /case/[slug] */}

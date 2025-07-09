@@ -6,6 +6,7 @@ import { Component } from '@/payload-types'
 import UniversalButton from './UniversalButton'
 import { CITY_PREPOSITIONAL } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
+import { handleScroll } from '@/app/utils/scroll'
 
 export default function HeroBlock({ component }: { component: Component }) {
   const [currentCity] = useCurrentCity()
@@ -34,14 +35,14 @@ export default function HeroBlock({ component }: { component: Component }) {
                         draggable={false}
                         className="object-contain w-auto h-full"
                       />
-                      <div className="absolute bottom-0 h-16 w-full z-10 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+                      <div className="absolute bottom-0 h-16 w-full z-10 bg-gradient-to-t from-back via-back/80 to-transparent pointer-events-none" />
                     </>
                   )}{' '}
                 </div>
 
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center whitespace-nowrap z-20">
                   <Image src="/btn.svg" alt="btn_graphic" width={60} height={60} />
-                  <UniversalButton label="Погрузиться в креатив" className="w-auto" />
+                  <UniversalButton label="Погрузиться в креатив" className="w-auto" to="services" />
                 </div>
               </div>
 
@@ -63,7 +64,7 @@ export default function HeroBlock({ component }: { component: Component }) {
                 >
                   <div className="absolute flex top-2 left-0">
                     <Image src="/btn.svg" alt="btn_graphic" width={60} height={60} />
-                    <UniversalButton label="Погрузиться в креатив" />
+                    <UniversalButton label="Погрузиться в креатив" to="#services" />
                   </div>
                   <Image
                     src="/graphic.png"

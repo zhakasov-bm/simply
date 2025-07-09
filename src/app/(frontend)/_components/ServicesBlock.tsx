@@ -7,6 +7,7 @@ import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 import { Solution } from '@/payload-types'
 import UniversalButton from './UniversalButton'
+import { handleScroll } from '@/app/utils/scroll'
 
 type Props = {
   heading: string
@@ -165,7 +166,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       )}
 
       <div className="flex justify-center pt-10">
-        <UniversalButton label="Получить консультацию" to="/" />
+        <UniversalButton label="Получить консультацию" to="#contact" />
       </div>
     </section>
   )
