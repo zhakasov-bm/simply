@@ -56,7 +56,7 @@ export default function AvailableServices({
   }
 
   return (
-    <section className="container-class py-8 flex flex-col items-center">
+    <section id="services" className="container-class py-8 flex flex-col items-center">
       <h1 className="text-4xl pb-6 md:pb-12 text-center">
         {subservice ? subservice.serviceTitle : solution.servicesTitle}
       </h1>

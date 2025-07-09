@@ -1,7 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { extractFormBlocks } from '@/app/utils/formBlockUtils'
-import { Component, Solution, Subservice, Case } from '@/payload-types'
+import { Component, Solution, Subservice, Case, Navigation } from '@/payload-types'
+import { getHomePageData } from './homeService'
 
 type FormBlockType = Extract<Component['globals'][0], { blockType: 'form' }>
 type RequestFormBlockType = Extract<Component['globals'][0], { blockType: 'request-form' }>
@@ -13,10 +14,13 @@ export interface SolutionData {
   cases: Case[]
   formBlock: FormBlockType | null
   requestFormBlock: RequestFormBlockType | null
+  navigation: Navigation
 }
 
 export async function getSolutionData(slug: string): Promise<SolutionData> {
   const payload = await getPayload({ config })
+
+  const { navigation } = await getHomePageData()
 
   const [component, solutionRes, casesResult] = await Promise.all([
     payload.findGlobal({ slug: 'component' }),
@@ -68,5 +72,6 @@ export async function getSolutionData(slug: string): Promise<SolutionData> {
     cases: casesResult.docs,
     formBlock,
     requestFormBlock,
+    navigation,
   }
 }

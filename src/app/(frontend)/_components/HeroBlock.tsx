@@ -42,7 +42,11 @@ export default function HeroBlock({ component }: { component: Component }) {
 
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center whitespace-nowrap z-20">
                   <Image src="/btn.svg" alt="btn_graphic" width={60} height={60} />
-                  <UniversalButton label="Погрузиться в креатив" className="w-auto" to="services" />
+                  <UniversalButton
+                    label="Погрузиться в креатив"
+                    className="w-auto"
+                    to="#services"
+                  />
                 </div>
               </div>
 

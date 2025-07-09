@@ -11,6 +11,7 @@ import ReviewBlock from '@/app/(frontend)/_components/ReviewsBlock'
 import RequestFormBlock from '@/app/(frontend)/_components/RequestFormBlock'
 import QABlock from '../../_components/QABlock'
 import SeoBlock from './SeoBlock'
+import FloatingNav from '@/app/(frontend)/_components/FloatingNav'
 
 interface SubservicePageLayoutProps {
   component: any
@@ -20,6 +21,7 @@ interface SubservicePageLayoutProps {
   formBlock: any
   requestFormBlock: any
   seoBlocks: any[]
+  navigation: any
 }
 
 export function SubservicePageLayout({
@@ -30,10 +32,13 @@ export function SubservicePageLayout({
   formBlock,
   requestFormBlock,
   seoBlocks,
+  navigation,
 }: SubservicePageLayoutProps) {
   return (
     <div>
       <BGraphic />
+      <FloatingNav nav={navigation} />
+
       <Hero component={component} subservice={subservice} />
       <BrandsBlockBlock component={component} />
 

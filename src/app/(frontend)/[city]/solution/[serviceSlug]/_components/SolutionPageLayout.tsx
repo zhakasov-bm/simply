@@ -13,6 +13,7 @@ import AvailableServices from './AvailableServices/AvailableServices'
 import CasesBlock from '../../../../_components/CasesBlock'
 import WhyServiceNeeded from './WhyServiceNeeded'
 import LeadBlock from '../../components/LeadBlock'
+import FloatingNav from '@/app/(frontend)/_components/FloatingNav'
 
 interface SolutionPageLayoutProps {
   component: any
@@ -20,7 +21,7 @@ interface SolutionPageLayoutProps {
   subservices: any[]
   cases: any[]
   formBlock: any
-  requestFormBlock: any
+  navigation: any
 }
 
 export function SolutionPageLayout({
@@ -29,10 +30,13 @@ export function SolutionPageLayout({
   subservices,
   cases,
   formBlock,
+  navigation,
 }: SolutionPageLayoutProps) {
   return (
     <div>
       <BGraphic />
+      <FloatingNav nav={navigation} />
+
       <Hero component={component} solution={solution} />
       <BrandsBlock component={component} />
 

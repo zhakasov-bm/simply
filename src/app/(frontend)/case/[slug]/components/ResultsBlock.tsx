@@ -50,7 +50,7 @@ export default function ResultsBlock({ caseData }: { caseData: Case }) {
                   blockRefs.current[i] = el
                 }}
                 data-index={i}
-                className={`flex flex-col gap-3 bg-white justify-between rounded-custom p-4 md:p-6 transition-all duration-700 ease-out ${
+                className={`flex flex-col gap-3 bg-inputBG justify-between rounded-custom p-4 md:p-6 transition-all duration-700 ease-out ${
                   visibleBlocks.includes(i)
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'

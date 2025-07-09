@@ -12,7 +12,7 @@ export default async function SolutionPage({ params }: PageProps) {
     const { serviceSlug: slug } = await params
     if (!slug) return notFound()
 
-    const { component, solution, subservices, cases, formBlock, requestFormBlock } =
+    const { component, solution, subservices, cases, formBlock, navigation } =
       await getSolutionData(slug)
 
     return (
@@ -22,7 +22,7 @@ export default async function SolutionPage({ params }: PageProps) {
         subservices={subservices}
         cases={cases}
         formBlock={formBlock}
-        requestFormBlock={requestFormBlock}
+        navigation={navigation}
       />
     )
   } catch (error) {

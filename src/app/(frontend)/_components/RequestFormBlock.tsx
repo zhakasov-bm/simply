@@ -85,7 +85,7 @@ export default function RequestFormBlock({ block }: { block: RequestFormProps })
   }
 
   return (
-    <section id="contact" className="hidden md:block md:container md:mx-auto md:py-24 md:px-16">
+    <section id="contact" className="hidden lg:block md:container md:mx-auto md:py-24 md:px-16">
       <h1 className="text-4xl text-center pb-12">{block.heading}</h1>
       <div
         className="flex"
@@ -98,8 +98,8 @@ export default function RequestFormBlock({ block }: { block: RequestFormProps })
         }}
       >
         {/* Left Side */}
-        <div className="flex flex-col gap-5 w-1/2 p-40">
-          <h1 className="text-3xl pb-4 text-black">{block.title}</h1>
+        <div className="flex flex-col gap-5 w-1/2 pt-40 lg:p-40 text-black">
+          <h1 className="text-3xl pb-4">{block.title}</h1>
           {block.contacts?.map((contact, i) => (
             <div key={i}>
               {typeof contact.icon === 'object' && contact.icon.url && (
@@ -135,7 +135,7 @@ export default function RequestFormBlock({ block }: { block: RequestFormProps })
                       name={field.name}
                       required={field.required}
                       placeholder=" "
-                      className="peer w-full rounded-2xl px-3 pt-5 pb-2 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+                      className="peer w-full rounded-2xl px-3 pt-5 pb-2 text-black bg-white text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
                     />
                     <label
                       htmlFor={field.name}

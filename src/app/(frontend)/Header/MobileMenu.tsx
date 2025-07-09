@@ -48,7 +48,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
   return (
     isMobileOpen && (
       <div
-        className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg font-inter z-500 px-8 py-10 flex flex-col gap-4 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-80 bg-inputBG shadow-lg font-inter z-500 px-8 py-10 flex flex-col gap-4 transform transition-transform duration-300 ease-in-out ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -62,7 +62,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
         {/* City Selector */}
         <div className="flex flex-col gap-4">
           <button
-            className="flex items-center gap-2 text-base font-inter text-black underline decoration-dashed cursor-pointer"
+            className="flex items-center gap-2 text-base font-inter underline decoration-dashed cursor-pointer"
             onClick={() => setIsCityModalOpen(true)}
           >
             <PiMapPinFill />
@@ -95,7 +95,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                 {isServices ? (
                   <button
                     onClick={() => setServicesOpen(!servicesOpen)}
-                    className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl text-black rounded-2xl active:bg-background"
+                    className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl rounded-2xl active:bg-background"
                   >
                     {link.label}
                     {servicesOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -116,7 +116,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
                       <Link
                         {...props}
                         onClick={toggleMobileMenu}
-                        className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl text-black rounded-2xl active:bg-background"
+                        className="w-full flex justify-between items-center text-left text-transform: uppercase font-medium text-xl rounded-2xl active:bg-background"
                       >
                         {link.label}
                       </Link>

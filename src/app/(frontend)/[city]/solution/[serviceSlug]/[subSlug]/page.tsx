@@ -10,8 +10,16 @@ export default async function SubservicePage({ params }: PageProps) {
   try {
     const { serviceSlug, subSlug } = await params
 
-    const { component, service, subservice, cases, formBlock, requestFormBlock, seoBlocks } =
-      await getSubserviceData(serviceSlug, subSlug)
+    const {
+      component,
+      service,
+      subservice,
+      cases,
+      formBlock,
+      requestFormBlock,
+      seoBlocks,
+      navigation,
+    } = await getSubserviceData(serviceSlug, subSlug)
 
     return (
       <SubservicePageLayout
@@ -22,6 +30,7 @@ export default async function SubservicePage({ params }: PageProps) {
         formBlock={formBlock}
         requestFormBlock={requestFormBlock}
         seoBlocks={seoBlocks}
+        navigation={navigation}
       />
     )
   } catch (error) {
