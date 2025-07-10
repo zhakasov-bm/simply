@@ -6,6 +6,8 @@ import { SubserviceCard } from './cards/SubserviceCard'
 import { AvailableServicesProps } from './types'
 import { usePathname } from 'next/navigation'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
+import { ConsultationModal } from '@/app/(frontend)/_components/Modal/ConsultationModal'
+import { useState } from 'react'
 
 export default function AvailableServices({
   solution,
@@ -14,6 +16,12 @@ export default function AvailableServices({
 }: AvailableServicesProps) {
   const pathname = usePathname()
   const [currentCity] = useCurrentCity()
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const handleModalSubmit = (data: { name: string; email: string; phone: string }) => {
+    setModalOpen(false)
+    // Optionally show a success message
+  }
 
   const renderServices = () => {
     if (subservice) {
@@ -61,7 +69,16 @@ export default function AvailableServices({
         {subservice ? subservice.serviceTitle : solution.servicesTitle}
       </h1>
       {renderServices()}
-      <UniversalButton label="Получить консультацию" className="mt-8 md:mt-12" />
+      <UniversalButton
+        label="Получить консультацию"
+        className="mt-8 md:mt-12"
+        onClick={() => setModalOpen(true)}
+      />
+      <ConsultationModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handleModalSubmit}
+      />
     </section>
   )
 }

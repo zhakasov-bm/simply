@@ -20,7 +20,7 @@ export default function Hero({ caseData }: { caseData: Case }) {
         </div>
         <h1 className="text-6xl">{caseData.heading}</h1>
         <p className="text-base md:text-2xl font-light">{caseData.subtitle}</p>
-        <UniversalButton label="Обсудить проект" className="mt-8 max-w-fit" />
+        <UniversalButton label="Обсудить проект" className="mt-8 max-w-fit" to="#contact" />
       </div>
     </section>
   )

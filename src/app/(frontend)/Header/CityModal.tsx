@@ -19,7 +19,7 @@ export const CityModal = ({ currentCity, onSelect, onClose }: CityModalProps) =>
   }, [])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 focus:outline">
+    <div className="fixed inset-0 z-500 flex items-center justify-center bg-black/50 focus:outline">
       <div className="bg-white rounded-custom p-6 min-w-[300px] max-h-[80vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-medium">Выберите город</h2>

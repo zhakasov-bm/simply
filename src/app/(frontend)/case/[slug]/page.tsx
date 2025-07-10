@@ -10,6 +10,7 @@ import ResultsBlock from './components/ResultsBlock'
 import LeadCaptureBlock from '../../_components/LeadCaptureBlock'
 import CasesBlock from '../../_components/CasesBlock'
 import BGraphic from '../../_components/BGRaphic'
+import RequestFormBlock from '../../_components/RequestFormBlock'
 
 export async function generateStaticParams() {
   // optionally: to support static generation
@@ -40,6 +41,7 @@ export default async function CasePage({ params }: PageProps) {
   const formBlock = component?.globals?.find((block) => block.blockType === 'form')
 
   const casesResult = await payload.find({ collection: 'cases', limit: 10 })
+  const requestForm = component.globals.find((block) => block.blockType === 'request-form')
 
   return (
     <div>
@@ -56,6 +58,7 @@ export default async function CasePage({ params }: PageProps) {
         type="slider"
         excludeId={caseData.id}
       />
+      {requestForm && <RequestFormBlock block={requestForm} />}
     </div>
   )
 }

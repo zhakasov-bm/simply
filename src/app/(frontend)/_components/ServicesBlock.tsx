@@ -7,7 +7,7 @@ import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 import { Solution } from '@/payload-types'
 import UniversalButton from './UniversalButton'
-import { handleScroll } from '@/app/utils/scroll'
+import { ConsultationModal } from './Modal/ConsultationModal'
 
 type Props = {
   heading: string
@@ -17,6 +17,7 @@ type Props = {
 export default function ServicesBlock({ heading, solutions }: Props) {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [currentCity] = useCurrentCity()
+  const [modalOpen, setModalOpen] = useState(false)
 
   // Filter out maintenance services from main list
   const regularSolutions = solutions.filter((solution) => !solution.maintenance)
@@ -37,6 +38,12 @@ export default function ServicesBlock({ heading, solutions }: Props) {
     selectedCategory === 'all'
       ? regularSolutions
       : regularSolutions.filter((s) => s.category === selectedCategory)
+
+  const handleModalSubmit = (data: { name: string; email: string; phone: string }) => {
+    // TODO: handle form submission (e.g., send to API)
+    setModalOpen(false)
+    // Optionally show a success message
+  }
 
   return (
     <section className="container-class my-20" id="services">
@@ -124,7 +131,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       {maintenanceSolutions.length > 0 && (
         <div className="mt-5 space-y-3">
           {maintenanceSolutions.map((solution) => (
-            <Link href={`/solution/${solution.slug}`} key={solution.id}>
+            <Link href={`/${currentCity}/solution/${solution.slug}`} key={solution.id}>
               <div
                 className="relative bg-primary rounded-custom flex justify-between cursor-pointer overflow-hidden h-[280px]"
                 style={{
@@ -166,8 +173,13 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       )}
 
       <div className="flex justify-center pt-10">
-        <UniversalButton label="Получить консультацию" to="#contact" />
+        <UniversalButton label="Получить консультацию" onClick={() => setModalOpen(true)} />
       </div>
+      <ConsultationModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handleModalSubmit}
+      />
     </section>
   )
 }
