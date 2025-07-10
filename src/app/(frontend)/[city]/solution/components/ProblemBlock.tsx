@@ -45,11 +45,11 @@ const SimpleProblemCard = ({
   className?: string
 }) => (
   <div className={`flex flex-col gap-2 bg-background rounded-2xl p-6 ${className}`}>
-    <div className="w-12 h-12 bg-primary mb-4 rounded-lg flex items-center justify-center">
+    <div className="w-12 h-12 bg-primary text-black mb-4 rounded-lg flex items-center justify-center">
       {number}
     </div>
     <h3 className="text-lg">{title}</h3>
-    <p className="font-inter font-normal text-base text-black/60">{subtitle}</p>
+    <p className="font-inter font-normal text-base text-link/70">{subtitle}</p>
   </div>
 )
 
