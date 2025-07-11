@@ -49,7 +49,7 @@ export function SubservicePageLayout({
 
       <AvailableServices solution={service} subservices={[subservice]} subservice={subservice} />
       <WhyUsBlock component={component} />
-      <CasesBlock heading="Наши кейсы" cases={cases} type="slider" />
+      <CasesBlock heading="Наши кейсы" cases={cases} type="simple" />
 
       {formBlock && <LeadCaptureBlock block={formBlock} />}
       {subservice.slug === 'SEO' && seoBlocks[1] && <SeoBlock block={seoBlocks[1]} />}

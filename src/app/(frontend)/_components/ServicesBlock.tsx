@@ -70,7 +70,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
         <button
           onClick={() => setSelectedCategory('all')}
           className={`flex-1 py-2 font-light border-b text-center transition-colors duration-300 ease-in-out cursor-pointer ${
-            selectedCategory === 'all' ? 'font-normal border-black' : 'font-light border-gray-300'
+            selectedCategory === 'all' ? 'font-normal border-link' : 'font-light border-cityHover'
           }`}
         >
           Все услуги
@@ -81,7 +81,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
             key={cat}
             onClick={() => setSelectedCategory(cat)}
             className={`flex-1 py-2 font-light border-b text-center transition-colors duration-300 ease-in-out cursor-pointer ${
-              selectedCategory === cat ? 'font-normal border-black' : 'font-light border-gray-300'
+              selectedCategory === cat ? 'font-normal border-link' : 'font-light border-cityHover'
             }`}
           >
             {categoryLabels[cat] || cat}

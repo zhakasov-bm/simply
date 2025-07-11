@@ -10,28 +10,20 @@ import { CaseCard } from '../case/_components/CaseCard'
 type Props = {
   heading: string
   cases: Case[]
-  type?: 'slider' | 'simple' | 'mobile'
+  type?: 'slider' | 'simple'
   excludeId?: string
 }
 
-export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
+export default function CasesBlock({ heading, cases, type = 'simple', excludeId }: Props) {
+  const [isMobile, setIsMobile] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [dynamicType, setDynamicType] = useState<'slider' | 'mobile'>(
-    type === 'slider' ? type : 'mobile',
-  )
 
-  // Auto switch based on screen width
   useEffect(() => {
-    if (type === 'slider' || type === 'mobile') {
-      const checkType = () => {
-        setDynamicType(window.innerWidth < 768 ? 'mobile' : 'slider')
-      }
-
-      checkType()
-      window.addEventListener('resize', checkType)
-      return () => window.removeEventListener('resize', checkType)
-    }
-  }, [type])
+    const update = () => setIsMobile(window.innerWidth < 768)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
   const filteredCases = cases
     .filter((c) => c.id !== excludeId)
@@ -62,8 +54,7 @@ export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
     >
       <h1 className="text-4xl text-center mb-8 md:mb-12">{heading}</h1>
 
-      {/* Desktop Slider */}
-      {dynamicType === 'slider' && (
+      {type === 'slider' && !isMobile && (
         <>
           <div ref={sliderRef} className="keen-slider">
             {groupedCases.map((group, i) => (
@@ -88,54 +79,30 @@ export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
               />
             ))}
           </div>
-
-          <div className="flex justify-center pt-10">
-            <UniversalButton label="Смотреть все кейсы" to="/case" />
-          </div>
         </>
       )}
 
-      {/* Mobile horizontal scroll */}
-      {dynamicType === 'mobile' && (
-        <>
-          <div className="flex gap-4 overflow-x-auto whitespace-nowrap hide-scrollbar">
-            {filteredCases.map((item) => (
-              <div key={item.id} className="flex-shrink-0 min-w-[280px]">
+      {(type === 'simple' || isMobile) && (
+        <div
+          className={`${
+            isMobile
+              ? 'flex gap-4 overflow-x-auto whitespace-nowrap hide-scrollbar px-2'
+              : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4'
+          }`}
+        >
+          {(type === 'simple' && !isMobile ? filteredCases.slice(0, 3) : filteredCases).map(
+            (item) => (
+              <div key={item.id} className={isMobile ? 'flex-shrink-0 min-w-[280px]' : ''}>
                 <CaseCard item={item} />
               </div>
-            ))}
-          </div>
-          {/* Temporary */}
-          {/* <div className="flex justify-center gap-2 mt-6">
-            {filteredCases.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => instanceRef.current?.moveToIdx(idx)}
-                className={`w-2 h-2 rounded-full cursor-pointer transition ${
-                  currentSlide === idx ? 'bg-primary' : 'bg-gray-300'
-                }`}
-              />
-            ))}
-          </div> */}
-          <div className="flex justify-center pt-10">
-            <UniversalButton label="Смотреть все кейсы" to="/case" />
-          </div>
-        </>
+            ),
+          )}
+        </div>
       )}
 
-      {/* Simple type (3 карточки) */}
-      {type === 'simple' && (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4">
-            {filteredCases.slice(0, 3).map((item) => (
-              <CaseCard key={item.id} item={item} />
-            ))}
-          </div>
-          <div className="flex justify-center pt-10">
-            <UniversalButton label="Смотреть все кейсы" to="/case" />
-          </div>
-        </>
-      )}
+      <div className="flex justify-center pt-10">
+        <UniversalButton label="Смотреть все кейсы" to="/case" />
+      </div>
     </section>
   )
 }

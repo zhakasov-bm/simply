@@ -98,7 +98,7 @@ export default function RequestFormBlock({ block }: { block: RequestFormProps })
         }}
       >
         {/* Left Side */}
-        <div className="flex flex-col gap-5 w-1/2 pt-40 lg:p-40 text-black">
+        <div className="flex flex-col gap-5 w-1/2 pt-40 pl-40 text-black">
           <h1 className="text-3xl pb-4">{block.title}</h1>
           {block.contacts?.map((contact, i) => (
             <div key={i}>

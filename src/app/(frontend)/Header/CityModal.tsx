@@ -20,7 +20,7 @@ export const CityModal = ({ currentCity, onSelect, onClose }: CityModalProps) =>
 
   return (
     <div className="fixed inset-0 z-500 flex items-center justify-center bg-black/50 focus:outline">
-      <div className="bg-white rounded-custom p-6 min-w-[300px] max-h-[80vh] overflow-y-auto">
+      <div className="bg-background rounded-custom p-6 min-w-[300px] max-h-[80vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-medium">Выберите город</h2>
           <IoClose onClick={onClose} width={40} height={40} className="cursor-pointer" />
@@ -30,8 +30,8 @@ export const CityModal = ({ currentCity, onSelect, onClose }: CityModalProps) =>
           {ALLOWED_CITIES.map((city) => (
             <li key={city}>
               <button
-                className={`w-full font-inter text-left py-2 px-4 rounded-custom hover:bg-gray-100 ${
-                  city === currentCity ? 'text-black' : 'text-black/40'
+                className={`w-full font-inter text-left py-2 px-4 rounded-custom cursor-pointer hover:bg-cityHover ${
+                  city === currentCity ? 'text-link' : 'text-link/40'
                 }`}
                 onClick={() => onSelect(city)}
               >

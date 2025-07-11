@@ -5,6 +5,9 @@ import { CaseCard } from './_components/CaseCard'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import BGraphic from '../_components/BGRaphic'
 import Breadcrumbs from '../_components/Breadcrumbs/Breadcrumbs'
+import RequestFormBlock from '../_components/RequestFormBlock'
+import { getHomePageData } from '@/app/utils/homeService'
+import LeadCaptureBlock from '../_components/LeadCaptureBlock'
 
 export default async function page() {
   const payloadConfig = await config
@@ -31,6 +34,10 @@ export default async function page() {
   const filteredCases = cases.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   )
+  const { component } = await getHomePageData()
+
+  const formBlocks = component.globals.filter((block) => block.blockType === 'form')
+  const requestForm = component.globals.find((block) => block.blockType === 'request-form')
 
   return (
     <div>
@@ -41,11 +48,16 @@ export default async function page() {
       <div className="px-8 md:px-64">
         <RichText data={page?.heading} className="case-richtext" />
       </div>
-      <div className="container mx-auto grid grid-cols-2 md:grid-cols-3 gap-3 px-4 py-8 md:py-16">
+      <div className="container mx-auto grid grid-cols-2 lg:grid-cols-3 gap-3 px-4 py-8 md:py-16">
         {filteredCases.map((item) => (
           <CaseCard key={item.id} item={item} />
         ))}
       </div>
+      <div className="block lg:hidden">
+        <LeadCaptureBlock block={formBlocks[1]} />
+      </div>
+
+      {requestForm && <RequestFormBlock block={requestForm} />}
     </div>
   )
 }

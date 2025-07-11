@@ -42,7 +42,7 @@ export const CITY_PREPOSITIONAL: Record<string, string> = {
   aktau: 'в Актау',
   atyrau: 'в Атырау',
   taraz: 'в Таразе',
-  talgar: 'Талгаре',
+  talgar: 'в Талгаре',
   kyzylorda: 'в Кызылорде',
   kostanay: 'в Костанае',
   dubai: 'в Дубае',

@@ -29,6 +29,8 @@ body {
 
     --color-link: var(--link);
 
+    /* active */
+    --color-cityHover: var(--cityHover);
     /* Input BG */
     --color-inputBG: var(--inputBG);
     --color-heroBG: var(--heroBG);
@@ -44,6 +46,7 @@ body {
   --hoverText: #121212;
   --crumbs: var(--color-gray-600);
   --crumbsActive: var(--color-gray-900);
+  --cityHover: var(--color-gray-200);
   --inputBG: #fff;
   --link: #121212;
 }
@@ -56,6 +59,7 @@ body {
   --hoverText: #CCFE00;
   --crumbs: var(--color-gray-600);
   --crumbsActive: var(--color-gray-400);
+  --cityHover: #444;
   --inputBG: #242424;
   --link: #fff;
 }
