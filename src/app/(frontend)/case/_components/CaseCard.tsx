@@ -7,14 +7,18 @@ export function CaseCard({ item }: { item: Case }) {
   return (
     <Link
       href={`/case/${item.slug}`}
-      className="block w-full md:min-w-[280px] rounded-2xl overflow-hidden aspect-[4/3] bg-cover bg-center group flex-shrink-0"
-      style={{ backgroundImage: `url(${imageUrl})` }}
+      className="group block w-full md:min-w-[280px] rounded-2xl overflow-hidden aspect-[4/3] relative flex-shrink-0"
     >
-      <div className="hidden lg:flex gap-2 ml-6 pt-18 z-10 relative">
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-out scale-100 group-hover:scale-105"
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      />
+
+      <div className="hidden lg:flex gap-2 z-10 absolute bottom-6 left-6">
         {item.tags?.map((t, i) => (
           <span
             key={i}
-            className="bg-white/20 px-3 py-1 rounded-full text-sm font-light border border-white/40 text-white"
+            className="bg-white/10 backdrop-blur-[3px] px-3 py-1 rounded-full text-sm font-light border border-white/40 text-white"
           >
             {t.tag}
           </span>

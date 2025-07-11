@@ -60,7 +60,7 @@ export default function ResultsBlock({ caseData }: { caseData: Case }) {
                 }}
                 key={i}
               >
-                <h1 className="text-4xl">{item.value}</h1>
+                <h1 className="text-2xl">{item.value}</h1>
                 <p className="font-light font-inter text-xs md:text-base">{item.description}</p>
               </div>
             ))}
