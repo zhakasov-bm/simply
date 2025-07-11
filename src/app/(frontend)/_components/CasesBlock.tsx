@@ -105,8 +105,8 @@ export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
               </div>
             ))}
           </div>
-
-          <div className="flex justify-center gap-2 mt-6">
+          {/* Temporary */}
+          {/* <div className="flex justify-center gap-2 mt-6">
             {filteredCases.map((_, idx) => (
               <button
                 key={idx}
@@ -116,8 +116,7 @@ export default function CasesBlock({ heading, cases, type, excludeId }: Props) {
                 }`}
               />
             ))}
-          </div>
-
+          </div> */}
           <div className="flex justify-center pt-10">
             <UniversalButton label="Смотреть все кейсы" to="/case" />
           </div>

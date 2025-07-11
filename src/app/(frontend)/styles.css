@@ -31,12 +31,14 @@ body {
 
     /* Input BG */
     --color-inputBG: var(--inputBG);
+    --color-heroBG: var(--heroBG);
 
 
 }
 
 :root {
   --background: #F3F4F4;
+  --heroBG: var(--color-gray-950);
   --back: #fff;
   --label: #12121266;
   --hoverText: #121212;
@@ -48,6 +50,7 @@ body {
 
 .dark {
   --background: #2C2C2C;
+  --heroBG: #2c2c2c;
   --back: #121212;
   --label: #fff;
   --hoverText: #CCFE00;

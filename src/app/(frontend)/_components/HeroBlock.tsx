@@ -6,11 +6,15 @@ import { Component } from '@/payload-types'
 import UniversalButton from './UniversalButton'
 import { CITY_PREPOSITIONAL } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
-import { handleScroll } from '@/app/utils/scroll'
+import { useTheme } from 'next-themes'
 
 export default function HeroBlock({ component }: { component: Component }) {
   const [currentCity] = useCurrentCity()
   const cityText = CITY_PREPOSITIONAL[currentCity] || ''
+
+  const { resolvedTheme } = useTheme()
+
+  const bgImage = resolvedTheme === 'dark' ? '/bg-hero-dark.svg' : '/bg-hero.svg'
 
   return (
     <section id="hero" className="md:py-24">
@@ -59,7 +63,7 @@ export default function HeroBlock({ component }: { component: Component }) {
                 <div
                   className="hidden h-full px-9 pb-15 md:flex flex-col gap-5 justify-end overflow-hidden lg:relative rounded-custom"
                   style={{
-                    backgroundImage: 'url("/bg-hero.svg")',
+                    backgroundImage: `url("${bgImage}")`,
                     width: '100%',
                     height: '100%',
                     backgroundRepeat: 'no-repeat',
@@ -108,7 +112,7 @@ export default function HeroBlock({ component }: { component: Component }) {
                     />
                   )}
                 </div>
-                <div className="flex flex-col gap-3 bg-gray-950 rounded-custom p-7">
+                <div className="flex flex-col gap-3 bg-heroBG rounded-custom p-7">
                   <Link
                     href={block.cta_button.url}
                     className="px-4 py-2 border border-primary/80

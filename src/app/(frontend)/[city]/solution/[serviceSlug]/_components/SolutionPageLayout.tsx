@@ -47,7 +47,7 @@ export function SolutionPageLayout({
 
       <ProblemBlock solution={solution} />
       <AvailableServices subservices={subservices} solution={solution} />
-      <CasesBlock heading="Наши кейсы" cases={cases} type="slider" />
+      <CasesBlock heading="Наши кейсы" cases={cases} type="simple" />
 
       {formBlock && <LeadCaptureBlock block={formBlock} />}
       <WhyUsBlock component={component} />

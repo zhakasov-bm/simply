@@ -55,7 +55,7 @@ export default async function CasePage({ params }: PageProps) {
       <CasesBlock
         heading="Посмотрите другие кейсы"
         cases={casesResult.docs}
-        type="slider"
+        type="simple"
         excludeId={caseData.id}
       />
       {requestForm && <RequestFormBlock block={requestForm} />}
