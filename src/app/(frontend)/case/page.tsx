@@ -46,7 +46,7 @@ export default async function page() {
         <Breadcrumbs />
       </div>
       <div className="px-8 md:px-64">
-        <RichText data={page?.heading} className="case-richtext" />
+        <RichText data={page?.heading} />
       </div>
       <div className="container mx-auto grid grid-cols-2 lg:grid-cols-3 gap-3 px-4 py-8 md:py-16">
         {filteredCases.map((item) => (

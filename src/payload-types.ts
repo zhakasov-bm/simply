@@ -73,6 +73,7 @@ export interface Config {
     subservices: Subservice;
     cases: Case;
     pages: Page;
+    vacancy: Vacancy;
     forms: Form;
     'form-submissions': FormSubmission;
     'payload-locked-documents': PayloadLockedDocument;
@@ -87,6 +88,7 @@ export interface Config {
     subservices: SubservicesSelect<false> | SubservicesSelect<true>;
     cases: CasesSelect<false> | CasesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    vacancy: VacancySelect<false> | VacancySelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -515,6 +517,37 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vacancy".
+ */
+export interface Vacancy {
+  id: string;
+  title: string;
+  subtitle: string;
+  city?: string | null;
+  category?: ('IT' | 'marketing') | null;
+  schedule?: string | null;
+  salary?: string | null;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  button?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "forms".
  */
 export interface Form {
@@ -734,6 +767,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
+      } | null)
+    | ({
+        relationTo: 'vacancy';
+        value: string | Vacancy;
       } | null)
     | ({
         relationTo: 'forms';
@@ -1051,6 +1088,22 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vacancy_select".
+ */
+export interface VacancySelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  city?: T;
+  category?: T;
+  schedule?: T;
+  salary?: T;
+  description?: T;
+  button?: T;
   updatedAt?: T;
   createdAt?: T;
 }
