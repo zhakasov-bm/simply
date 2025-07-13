@@ -1,6 +1,6 @@
 'use client'
 
-import { Component, Solution } from '@/payload-types'
+import { Component, Solution, Form } from '@/payload-types'
 import { useState, useEffect, useMemo } from 'react'
 
 type LeadCaptureProps = Extract<Component['globals'][0], { blockType: 'form' }>
@@ -90,7 +90,12 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
     }
   }
 
-  const renderField = (field: any, index: number) => {
+  const renderField = (field: NonNullable<Form['fields']>[0], index: number) => {
+    // Skip message fields as they don't have name, required, or label properties
+    if (field.blockType === 'message') {
+      return null
+    }
+
     const name = field.name || `field-${index}`
     const inputId = `${formId}-${name}-${index}` // 👈 Уникальный ID
     const lowerName = name.toLowerCase()
@@ -103,7 +108,7 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
             <select
               id={inputId}
               name={name}
-              required={field.required}
+              required={field.required ?? undefined}
               className="peer w-full rounded-lg px-3 pt-5 pb-2 bg-inputBG text-lg focus:outline-none focus:ring-2 focus:ring-gray-500 appearance-none cursor-pointer"
             >
               <option value="">Выберите услугу</option>
@@ -134,7 +139,7 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
             id={inputId}
             type={field.blockType === 'email' ? 'email' : 'text'}
             name={name}
-            required={field.required}
+            required={field.required ?? undefined}
             placeholder=" "
             className="peer w-full rounded-lg px-3 pt-5 pb-2 bg-inputBG text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
           />
@@ -174,7 +179,8 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
               onSubmit={handleSubmit}
               className="flex flex-col lg:flex-row gap-2 items-stretch font-inter"
             >
-              {block.form.fields?.map((field, i) => renderField(field, i))}
+              {typeof block.form === 'object' &&
+                block.form.fields?.map((field, i) => renderField(field, i))}
 
               <button
                 type="submit"
@@ -202,7 +208,8 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
                     Отправка...
                   </span>
                 ) : (
-                  block.form.submitButtonLabel || 'Отправить'
+                  (typeof block.form === 'object' ? block.form.submitButtonLabel : null) ||
+                  'Отправить'
                 )}
               </button>
             </form>

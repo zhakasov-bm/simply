@@ -35,7 +35,7 @@ export default async function CompanyPage() {
       <Hero page={page} />
       <About page={page} />
       <Mission page={page} />
-      <LeadCaptureBlock block={formBlocks[0]} />
+      <LeadCaptureBlock block={formBlocks[0]} formId="company-form" />
       <TeamBlock component={component} />
       <CertificateBlock component={component} />
       {requestForm && <RequestFormBlock block={requestForm} />}

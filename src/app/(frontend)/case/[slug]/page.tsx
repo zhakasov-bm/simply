@@ -51,7 +51,7 @@ export default async function CasePage({ params }: PageProps) {
       <OrderBLock caseData={caseData} />
       <ActionsBlock caseData={caseData} />
       <ResultsBlock caseData={caseData} />
-      {formBlock && <LeadCaptureBlock block={formBlock} />}
+      {formBlock && <LeadCaptureBlock block={formBlock} formId="case-detail-form" />}
       <CasesBlock
         heading="Посмотрите другие кейсы"
         cases={casesResult.docs}

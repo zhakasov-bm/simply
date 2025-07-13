@@ -54,7 +54,7 @@ export default async function page() {
         ))}
       </div>
       <div className="block lg:hidden">
-        <LeadCaptureBlock block={formBlocks[1]} />
+        <LeadCaptureBlock block={formBlocks[1]} formId="case-list-form" />
       </div>
 
       {requestForm && <RequestFormBlock block={requestForm} />}
