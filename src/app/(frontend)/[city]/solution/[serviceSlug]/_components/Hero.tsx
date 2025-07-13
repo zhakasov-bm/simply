@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { CITY_PREPOSITIONAL } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
 import Breadcrumbs from '../../../../_components/Breadcrumbs/Breadcrumbs'
+import { useTheme } from 'next-themes'
 
 type Props =
   | { component: Component; solution: Solution; subservice?: never }
@@ -13,6 +14,10 @@ type Props =
 export default function Hero(props: Props) {
   const [currentCity] = useCurrentCity()
   const cityText = CITY_PREPOSITIONAL[currentCity] || ''
+
+  const { resolvedTheme } = useTheme()
+
+  const bgImage = resolvedTheme === 'light' ? '/lineSticker.svg' : ''
 
   const { component } = props
   const title = props.solution?.name || props.subservice?.name
@@ -42,7 +47,7 @@ export default function Hero(props: Props) {
     <section className="container mx-auto py-24 md:py-16 relative">
       <div className="absolute md:hidden -top-20 -left-16 -z-10">
         <Image
-          src="/lineSticker.svg"
+          src={bgImage}
           alt="sticker line"
           width={500}
           height={500}

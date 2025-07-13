@@ -42,7 +42,7 @@ export function SubservicePageLayout({
       <Hero component={component} subservice={subservice} />
       <BrandsBlockBlock component={component} />
 
-      {formBlock && <LeadCaptureBlock block={formBlock} />}
+      {formBlock && <LeadCaptureBlock block={formBlock} formId="form-0" />}
       <InfoBlock subservice={subservice} />
 
       {subservice.slug === 'SEO' && seoBlocks[0] && <SeoBlock block={seoBlocks[0]} />}
@@ -51,7 +51,7 @@ export function SubservicePageLayout({
       <WhyUsBlock component={component} />
       <CasesBlock heading="Наши кейсы" cases={cases} type="simple" />
 
-      {formBlock && <LeadCaptureBlock block={formBlock} />}
+      {formBlock && <LeadCaptureBlock block={formBlock} formId="form-1" />}
       {subservice.slug === 'SEO' && seoBlocks[1] && <SeoBlock block={seoBlocks[1]} />}
 
       <TrustedByBlock component={component} />

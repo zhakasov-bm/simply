@@ -7,12 +7,12 @@ type Props = {
     { blockType: 'advantagesblock' }
   >
 }
-
-export default function AdvantagesBlock({ block }: Props) {
+//Need Updates!!!
+export default function StepsBlock({ block }: Props) {
   return (
     <section className="container-class pb-8">
       <RichText data={block.advantagesTitle} />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-8">
+      <div className="grid grid-cols-3 gap-3 pt-8">
         {block.advantages?.map((adv, idx) => (
           <div
             key={idx}
@@ -21,7 +21,7 @@ export default function AdvantagesBlock({ block }: Props) {
             <div className="text-black/5 font-bold text-[240px] font-montserrat absolute top-0 right-0 leading-none">
               {idx + 1}
             </div>
-            <div className="relative z-10 mt-auto pt-16 adv-richtext text-black">
+            <div className="relative z-10 mt-auto pt-16 adv-richtext">
               {adv.advantage && <RichText data={adv.advantage} />}
             </div>
           </div>

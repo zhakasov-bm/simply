@@ -50,7 +50,7 @@ export default function Breadcrumbs({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <nav
-        className={`flex items-center space-x-2 text-sm text-gray-600 ${className}`}
+        className={`flex items-center space-x-2 text-sm text-link/60 ${className}`}
         aria-label="Breadcrumb"
         role="navigation"
       >
@@ -81,7 +81,7 @@ export default function Breadcrumbs({
                 </Link>
               ) : (
                 <span
-                  className={item.isActive ? 'text-crumbsActive font-medium' : 'text-gray-600'}
+                  className={item.isActive ? 'text-link font-medium' : 'text-link/60'}
                   aria-current={item.isActive ? 'page' : undefined}
                 >
                   {item.label}

@@ -10,14 +10,14 @@ export default function TarifBlock({ block }: Props) {
     <section className="container-class py-8">
       <h1 className="text-4xl pb-12 text-center">{block.tarifTitle}</h1>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {block.tarifs?.map((item, idx) => {
           const isNoCommission = item.commission === 'Без комиссии'
 
           return (
             <div
               key={idx}
-              className="p-8 rounded-custom flex flex-col gap-2 border border-gray-200 items-center text-center"
+              className="p-8 rounded-custom flex flex-col gap-2 border border-cityHover items-center text-center"
             >
               {typeof item.icon === 'object' && item.icon?.url && (
                 <Image

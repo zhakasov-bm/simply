@@ -46,11 +46,11 @@ export default async function HomePage({ params }: PageProps) {
       <ServicesBlock heading={heading} solutions={solutions} />
       <TrustedByBlock component={component} />
       <CasesBlock heading="Кейсы – истории, которые мы создали" cases={cases} type="slider" />
-      <LeadCaptureBlock block={formBlocks[0]} />
+      <LeadCaptureBlock block={formBlocks[0]} formId="form-0" />
       <CertificateBlock component={component} />
       <div className="hidden md:block">
         <BrandsBlock component={component} isLabel={true} />
-        <LeadCaptureBlock block={formBlocks[1]} />
+        <LeadCaptureBlock block={formBlocks[1]} formId="form-1" />
       </div>
       <TeamBlock component={component} />
       <ReviewsBlock component={component} />

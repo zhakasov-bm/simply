@@ -40,7 +40,9 @@ export function SolutionPageLayout({
       <Hero component={component} solution={solution} />
       <BrandsBlock component={component} />
 
-      <div className="hidden md:block">{formBlock && <LeadCaptureBlock block={formBlock} />}</div>
+      <div className="hidden md:block">
+        {formBlock && <LeadCaptureBlock block={formBlock} formId="form-0" />}
+      </div>
 
       {solution.hasSubservices && <WhyServiceNeeded solution={solution} />}
       {!solution.hasSubservices && <InfoBlock solution={solution} />}
@@ -49,7 +51,7 @@ export function SolutionPageLayout({
       <AvailableServices subservices={subservices} solution={solution} />
       <CasesBlock heading="Наши кейсы" cases={cases} type="simple" />
 
-      {formBlock && <LeadCaptureBlock block={formBlock} />}
+      {formBlock && <LeadCaptureBlock block={formBlock} formId="form-1" />}
       <WhyUsBlock component={component} />
       <CertificateBlock component={component} />
       <TrustedByBlock component={component} />

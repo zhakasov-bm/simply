@@ -61,13 +61,13 @@ export default async function PopolneniePage({ params }: PageProps) {
   }
 
   return (
-    <div className="p-6">
+    <div>
       <BGraphic />
       <Hero component={component} subservice={sub} />
       <BrandsBlockBlock component={component} />
       {advBlock && <AdvantagesBlock block={advBlock} />}
       {tarifBlock && <TarifBlock block={tarifBlock} />}
-      {formBlock && <LeadCaptureBlock block={formBlock} />}
+      {formBlock && <LeadCaptureBlock block={formBlock} formId="form-0" />}
       {/* {tarifBlock && <Calculator block={tarifBlock} />} */}
 
       <TrustedByBlock component={component} />
