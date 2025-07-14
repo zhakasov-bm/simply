@@ -18,11 +18,28 @@ export const ConsultationModal = ({
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const modalRef = useRef<HTMLDivElement>(null)
 
+  // Persist form data in localStorage
+  useEffect(() => {
+    if (!open) return
+    // Load saved data when modal opens
+    const saved = localStorage.getItem('consultation-modal-form')
+    if (saved) {
+      const { name: savedName, email: savedEmail, phone: savedPhone } = JSON.parse(saved)
+      setName(savedName || '')
+      setEmail(savedEmail || '')
+      setPhone(savedPhone || '')
+    }
+  }, [open])
+
+  useEffect(() => {
+    // Save form data on change
+    localStorage.setItem('consultation-modal-form', JSON.stringify({ name, email, phone }))
+  }, [name, email, phone])
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         onClose()
-        resetForm()
       }
     }
 
@@ -44,23 +61,23 @@ export const ConsultationModal = ({
     setName('')
     setEmail('')
     setPhone('')
-    setStatus('idle')
+    localStorage.removeItem('consultation-modal-form')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('idle')
-
     try {
       await onSubmit({ name, email, phone })
       setStatus('success')
-      resetForm()
+      setTimeout(() => {
+        resetForm()
+        setStatus('idle')
+      }, 5000)
     } catch (error) {
       setStatus('error')
+      setTimeout(() => setStatus('idle'), 5000)
     }
-
-    // Хабарлама 5 секундтан соң жоғалады
-    setTimeout(() => setStatus('idle'), 5000)
   }
 
   if (!open) return null
@@ -83,10 +100,10 @@ export const ConsultationModal = ({
       >
         {/* Close button */}
         <button
-          className="absolute top-3 right-3 text-xl text-gray-500 hover:text-black"
+          className="absolute top-3 right-3 text-xl text-gray-500 hover:text-black cursor-pointer"
           onClick={() => {
             onClose()
-            resetForm()
+            // Do not reset form here, so data persists
           }}
           aria-label="Close"
         >
@@ -94,9 +111,7 @@ export const ConsultationModal = ({
         </button>
 
         {/* Heading */}
-        <h2 className="text-2xl font-unbounded font-semibold mb-6 text-center">
-          Получить консультацию
-        </h2>
+        <h2 className="text-xl font-unbounded mb-6 text-center">Получить консультацию</h2>
 
         {/* Success or error message */}
         {status === 'success' && (
@@ -110,37 +125,39 @@ export const ConsultationModal = ({
           </div>
         )}
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 font-inter">
-          {fields.map(({ id, label, value, onChange, type }) => (
-            <div key={id} className="relative">
-              <input
-                id={id}
-                type={type}
-                placeholder=" "
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                required
-                className="peer w-full rounded-xl px-3 pt-5 pb-2 bg-[#F3F4F4] text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-              />
-              <label
-                htmlFor={id}
-                className="absolute left-3 top-2 text-xs text-gray-500 transition-all 
-                peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-lg 
-                peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs"
-              >
-                {label}
-              </label>
-            </div>
-          ))}
+        {/* Form only if not success */}
+        {status !== 'success' && (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3 font-inter">
+            {fields.map(({ id, label, value, onChange, type }) => (
+              <div key={id} className="relative">
+                <input
+                  id={id}
+                  type={type}
+                  placeholder=" "
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}
+                  required
+                  className="peer w-full rounded-xl px-3 pt-5 pb-2 bg-[#F3F4F4] text-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+                />
+                <label
+                  htmlFor={id}
+                  className="absolute left-3 top-2 text-xs text-gray-500 transition-all 
+                  peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-lg 
+                  peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs"
+                >
+                  {label}
+                </label>
+              </div>
+            ))}
 
-          <button
-            type="submit"
-            className="bg-primary hover:bg-hover transition text-black font-unbounded text-lg rounded-2xl px-6 py-3"
-          >
-            Отправить
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="bg-primary hover:bg-hover transition text-black font-unbounded text-lg rounded-2xl px-6 py-3"
+            >
+              Отправить
+            </button>
+          </form>
+        )}
       </div>
     </div>
   )
