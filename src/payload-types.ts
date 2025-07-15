@@ -525,8 +525,13 @@ export interface Vacancy {
   subtitle: string;
   city?: string | null;
   category?: ('IT' | 'marketing') | null;
-  schedule?: string | null;
-  salary?: string | null;
+  tags?:
+    | {
+        name?: string | null;
+        icon: string | Media;
+        id?: string | null;
+      }[]
+    | null;
   description: {
     root: {
       type: string;
@@ -1100,8 +1105,13 @@ export interface VacancySelect<T extends boolean = true> {
   subtitle?: T;
   city?: T;
   category?: T;
-  schedule?: T;
-  salary?: T;
+  tags?:
+    | T
+    | {
+        name?: T;
+        icon?: T;
+        id?: T;
+      };
   description?: T;
   button?: T;
   updatedAt?: T;

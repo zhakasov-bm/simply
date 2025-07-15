@@ -25,19 +25,40 @@ export default async function page() {
 
   const vacancies: Vacancy[] = vacancyRes.docs
 
+  const groupedByCategory = vacancies.reduce<Record<string, Vacancy[]>>((acc, vacancy) => {
+    const category = vacancy.category || 'Другие'
+    if (!acc[category]) acc[category] = []
+    acc[category].push(vacancy)
+    return acc
+  }, {})
+
+  const categoryTitles: Record<string, string> = {
+    IT: 'IT-вакансии',
+    marketing: 'Маркетинг',
+    Другие: 'Другие',
+  }
+
   return (
     <div>
       <BGraphic />
+
       <div className="mb-8 px-6 md:px-0 pt-28 md:pt-20 flex justify-center">
-        <Breadcrumbs />
+        <Breadcrumbs customLabels={{ vacancy: page?.name || 'Вакансии' }} />
       </div>
-      <div className="px-8 md:px-56">
-        <RichText data={page?.heading} className="case-richtext" />
-        <div className="flex flex-col gap-2 py-8 md:py-16">
-          {vacancies.map((vacancy, i) => (
-            <VacancyCard key={i} item={vacancy} />
-          ))}
-        </div>
+
+      <div className="px-8 md:px-40">
+        <RichText data={page?.heading} className="vacancy-richtext" />
+
+        {Object.entries(groupedByCategory).map(([category, vacancies]) => (
+          <div key={category} className="py-8 md:py-12">
+            <h2 className="text-xl mb-6">{categoryTitles[category] || category}</h2>
+            <div className="flex flex-col gap-3">
+              {vacancies.map((vacancy, i) => (
+                <VacancyCard key={vacancy.id || i} item={vacancy} />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

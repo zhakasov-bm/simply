@@ -167,3 +167,11 @@ body {
   .case-richtext p {
     @apply text-base md:text-2xl font-light
   }
+
+    /* Vacancy heading */
+    .vacancy-richtext h1 {
+      @apply text-2xl md:text-5xl mb-2 md:mb-8
+    }
+    .vacancy-richtext p {
+      @apply text-base md:text-xl font-light font-inter
+    }

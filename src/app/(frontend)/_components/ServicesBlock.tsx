@@ -7,7 +7,7 @@ import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 import { Solution } from '@/payload-types'
 import UniversalButton from './UniversalButton'
-import { ConsultationModal } from './Modal/ConsultationModal'
+import { ConsultationForm } from './Modal/ConsultationModal'
 
 type Props = {
   heading: string
@@ -175,7 +175,7 @@ export default function ServicesBlock({ heading, solutions }: Props) {
       <div className="flex justify-center pt-10">
         <UniversalButton label="Получить консультацию" onClick={() => setModalOpen(true)} />
       </div>
-      <ConsultationModal
+      <ConsultationForm
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onSubmit={handleModalSubmit}

@@ -33,12 +33,20 @@ export const Vacancy: CollectionConfig = {
       ],
     },
     {
-      name: 'schedule',
-      type: 'text',
-    },
-    {
-      name: 'salary',
-      type: 'text',
+      name: 'tags',
+      type: 'array',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+        },
+        {
+          name: 'icon',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
     },
     {
       name: 'description',
