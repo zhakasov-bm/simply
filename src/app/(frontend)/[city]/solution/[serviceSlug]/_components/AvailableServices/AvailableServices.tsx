@@ -6,7 +6,7 @@ import { SubserviceCard } from './cards/SubserviceCard'
 import { AvailableServicesProps } from './types'
 import { usePathname } from 'next/navigation'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
-import { ConsultationModal } from '@/app/(frontend)/_components/Modal/ConsultationModal'
+import { ConsultationForm } from '@/app/(frontend)/_components/Modal/ConsultationModal'
 import { useState } from 'react'
 
 export default function AvailableServices({
@@ -74,7 +74,7 @@ export default function AvailableServices({
         className="mt-8 md:mt-12"
         onClick={() => setModalOpen(true)}
       />
-      <ConsultationModal
+      <ConsultationForm
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onSubmit={handleModalSubmit}

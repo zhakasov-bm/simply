@@ -3,7 +3,7 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import UniversalButton from '../../../_components/UniversalButton'
 import { Solution } from '@/payload-types'
-import { ConsultationModal } from '@/app/(frontend)/_components/Modal/ConsultationModal'
+import { ConsultationForm } from '@/app/(frontend)/_components/Modal/ConsultationModal'
 import { useState } from 'react'
 
 export default function LeadBlock({ solution }: { solution: Solution }) {
@@ -23,7 +23,7 @@ export default function LeadBlock({ solution }: { solution: Solution }) {
         className="my-6 w-full"
         onClick={() => setModalOpen(true)}
       />
-      <ConsultationModal
+      <ConsultationForm
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onSubmit={handleModalSubmit}
