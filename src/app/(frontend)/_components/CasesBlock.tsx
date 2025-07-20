@@ -46,7 +46,7 @@ export default function CasesBlock({ heading, cases, type = 'simple', excludeId 
       id="cases"
       className="container-class my-20"
       style={{
-        backgroundImage: 'url("graphic.svg")',
+        backgroundImage: 'url("/graphic.svg")',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'bottom center',
         backgroundSize: 'contain',
