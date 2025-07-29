@@ -1,10 +1,23 @@
 import { notFound } from 'next/navigation'
 import { getSolutionData } from '@/app/utils/solutionsService'
 import { SolutionPageLayout } from './_components/SolutionPageLayout'
+import { Metadata } from 'next'
 
 interface PageProps {
   params: Promise<{ serviceSlug: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+// Метаданные страницы
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
+  const { serviceSlug: slug } = await params
+  if (!slug) return notFound()
+  const { solution } = await getSolutionData(slug)
+
+  return {
+    title: `${solution.name}`,
+    description: solution.subtitle.substring(0, 160),
+  }
 }
 
 export default async function SolutionPage({ params }: PageProps) {
