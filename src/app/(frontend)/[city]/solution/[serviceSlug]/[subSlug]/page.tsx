@@ -1,9 +1,22 @@
 import { getSubserviceData } from '@/app/utils/subservicesService'
 import { SubservicePageLayout } from './_components/SubservicePageLayout'
+import { Metadata } from 'next'
 
 interface PageProps {
   params: Promise<{ serviceSlug: string; subSlug: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+// Метаданные страницы
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
+  const { serviceSlug, subSlug } = await params
+
+  const { subservice } = await getSubserviceData(serviceSlug, subSlug)
+
+  return {
+    title: `${subservice.name}`,
+    description: subservice.subtitle.substring(0, 160),
+  }
 }
 
 export default async function SubservicePage({ params }: PageProps) {
