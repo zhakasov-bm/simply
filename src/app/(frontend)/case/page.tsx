@@ -9,6 +9,12 @@ import RequestFormBlock from '../_components/RequestFormBlock'
 import { getHomePageData } from '@/app/utils/homeService'
 import LeadCaptureBlock from '../_components/LeadCaptureBlock'
 
+export const metadata = {
+  title: { absolute: 'Кейсы Simply Digital — наши успешные проекты' },
+  description:
+    'Успешные кейсы компании Simply Digital. Реальные результаты и примеры роста бизнеса с помощью digital-решений.',
+}
+
 export default async function page() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })

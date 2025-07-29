@@ -7,6 +7,12 @@ interface PageProps {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
+export const metadata = {
+  title: { absolute: 'Услуги компании Simply Digital' },
+  description:
+    'Услуги компании Simply Digital: комплексный digital-маркетинг, стратегия, реклама, SEO, SMM и аналитика.',
+}
+
 export default async function page({ params }: PageProps) {
   const { component, solutions } = await getHomePageData()
   const serviceBlock = component.globals.find((block) => block.blockType === 'services')

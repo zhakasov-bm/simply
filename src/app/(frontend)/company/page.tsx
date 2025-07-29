@@ -9,6 +9,12 @@ import Mission from './_components/Mission'
 import RequestFormBlock from '../_components/RequestFormBlock'
 import LeadCaptureBlock from '../_components/LeadCaptureBlock'
 
+export const metadata = {
+  title: { absolute: 'О компании Simply Digital' },
+  description:
+    'О компании Simply Digital: наши ценности, команда и подход к решению маркетинговых задач.',
+}
+
 export default async function CompanyPage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })

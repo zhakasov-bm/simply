@@ -6,6 +6,10 @@ import Breadcrumbs from '../../_components/Breadcrumbs/Breadcrumbs'
 import VacancyCard from './components/VacancyCard'
 import { Vacancy } from '@/payload-types'
 
+export const metadata = {
+  title: 'Вакансии',
+}
+
 export default async function page() {
   const payload = await getPayload({ config })
 

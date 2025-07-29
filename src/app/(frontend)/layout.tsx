@@ -7,10 +7,15 @@ import Footer from './Footer/Footer'
 import { Solution, Subservice } from '@/payload-types'
 import { getSolutionData } from '@/app/utils/solutionsService'
 import { Providers } from './_components/providers/providers'
+import { Metadata } from 'next'
 
-export const metadata = {
-  description: 'Marketing agency',
-  title: 'Simply Digital',
+export const metadata: Metadata = {
+  title: {
+    default: 'Simply Digital — Маркетинговое агентство полного цикла',
+    template: '%s | Simply Digital — Маркетинговое агентство полного цикла',
+  },
+  description:
+    'Simply Digital — это маркетинговое агентство, которое помогает бизнесу расти через комплексные digital-решения: стратегия, реклама, контент и аналитика.',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
