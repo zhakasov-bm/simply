@@ -24,7 +24,7 @@ export default function InfoBlock({ solution, subservice }: Props) {
       <h1 className="text-3xl md:text-4xl pb-12 text-center">{content.heading || content.name}</h1>
       <div className="bg-background rounded-custom p-8 md:px-16 md:py-10 flex flex-col-reverse md:flex-row items-center gap-2 md:gap-24">
         <div className="flex flex-col gap-4 md:gap-6">
-          <h2 className="text-xl md:text-3xl">{content.title || content.name}</h2>
+          <span className="text-xl md:text-3xl">{content.title || content.name}</span>
           <p className="font-inter font-normal text-lg md:text-xl text-link/60">
             {content.description || content.subtitle}
           </p>

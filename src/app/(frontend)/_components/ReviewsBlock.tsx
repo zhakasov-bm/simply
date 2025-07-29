@@ -48,7 +48,7 @@ export default function ReviewBlock({ component }: { component: Component }) {
                 {block.reviews?.map((review, i) => (
                   <div
                     key={i}
-                    className="keen-slider__slide min-w-[80%] font-inter flex flex-col gap-20 bg-background p-8 rounded-custom"
+                    className="keen-slider__slide min-w-[80%] font-inter flex flex-col justify-between gap-20 bg-background p-8 rounded-custom"
                   >
                     <p>{review.message}</p>
                     <div className="flex gap-3">

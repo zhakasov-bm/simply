@@ -72,7 +72,7 @@ export default function Hero(props: Props) {
         <div className="flex flex-col gap-6 md:flex-row md:gap-8 px-6 md:px-12 mt-0 md:mt-20 md:max-w-5xl w-full items-center justify-between">
           {component.statistics?.map((item, i) => (
             <div className="flex flex-col gap-1 md:items-start pt-12" key={i}>
-              <h2 className="text-5xl md:text-6xl">{item.text}</h2>
+              <span className="text-5xl md:text-6xl">{item.text}</span>
               <p className="text-base font-light">{item.value}</p>
             </div>
           ))}

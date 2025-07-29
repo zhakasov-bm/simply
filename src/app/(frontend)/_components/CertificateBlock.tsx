@@ -38,7 +38,7 @@ export default function CertificateBlock({ component }: { component: Component }
                       key={i}
                       className="flex flex-col gap-4 md:p-6 md:bg-inputBG font-inter rounded-2xl md:shadow-sm"
                     >
-                      <h3 className="text-xl font-semibold">{item.title}</h3>
+                      <span className="text-xl font-semibold">{item.title}</span>
                       <p className="text-base font-light">{item.message}</p>
                     </div>
                   ))}
