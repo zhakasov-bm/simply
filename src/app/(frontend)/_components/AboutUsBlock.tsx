@@ -35,7 +35,9 @@ export default function AboutUsBlock({ component }: { component: Component }) {
                 ${i === 2 ? 'col-span-2' : ''}
                 `}
                     >
-                      <h3 className="text-2xl lg:text-4xl lg:font-medium lg:mb-2">{stat.title}</h3>
+                      <span className="text-2xl lg:text-4xl lg:font-medium lg:mb-2">
+                        {stat.title}
+                      </span>
                       <p className="text-xs lg:text-lg font-inter font-light">{stat.description}</p>
                     </div>
                   ))}

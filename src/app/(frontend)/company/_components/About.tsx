@@ -31,7 +31,7 @@ export default function About({ page }: { page: Page }) {
                         },
                       )}
                     >
-                      <h3 className="text-xl md:text-3xl">{item.value}</h3>
+                      <span className="text-xl md:text-3xl">{item.value}</span>
                       <p className="font-inter text-base">{item.description}</p>
                     </div>
                   ))}
