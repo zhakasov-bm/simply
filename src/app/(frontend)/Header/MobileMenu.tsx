@@ -16,13 +16,20 @@ type Props = {
   solutions: Solution[]
   subservices: Subservice[]
   toggleMobileMenu: () => void
+  onOpenCityModal: () => void
   isMobileOpen: boolean
 }
 
-export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMobileOpen }: Props) {
+export function MobileMenu({
+  nav,
+  solutions,
+  subservices,
+  toggleMobileMenu,
+  onOpenCityModal,
+  isMobileOpen,
+}: Props) {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [openSolutionId, setOpenSolutionId] = useState<string | null>(null)
-  const [isCityModalOpen, setIsCityModalOpen] = useState(false)
   const [currentCity, setCurrentCity] = useCurrentCity()
   const router = useRouter()
   const pathname = usePathname()
@@ -63,12 +70,15 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
         <div className="flex flex-col gap-4">
           <button
             className="flex items-center gap-2 text-base font-inter underline decoration-dashed cursor-pointer"
-            onClick={() => setIsCityModalOpen(true)}
+            onClick={onOpenCityModal}
           >
             <PiMapPinFill />
-            {CITY_RU[currentCity]}
+            {typeof currentCity === 'string' && CITY_RU[currentCity]
+              ? CITY_RU[currentCity]
+              : 'Выберите город'}
+            {/* {CITY_RU[currentCity]} */}
           </button>
-          {isCityModalOpen && (
+          {/* {isCityModalOpen && (
             <CityModal
               currentCity={currentCity}
               onSelect={(city) => {
@@ -81,7 +91,7 @@ export function MobileMenu({ nav, solutions, subservices, toggleMobileMenu, isMo
               }}
               onClose={() => setIsCityModalOpen(false)}
             />
-          )}
+          )} */}
         </div>
 
         {/* Scrollable content */}

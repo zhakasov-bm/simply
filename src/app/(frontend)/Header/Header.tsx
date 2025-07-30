@@ -249,6 +249,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           solutions={solutions}
           subservices={subservices}
           toggleMobileMenu={toggleMobileMenu}
+          onOpenCityModal={() => setIsCityModalOpen(true)}
           isMobileOpen={isMobileOpen}
         />
       </div>
