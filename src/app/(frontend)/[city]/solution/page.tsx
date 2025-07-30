@@ -2,18 +2,13 @@ import { getHomePageData } from '@/app/utils/homeService'
 import BGraphic from '../../_components/BGRaphic'
 import ServicesBlock from '../../_components/ServicesBlock'
 
-interface PageProps {
-  params: Promise<{ city: string }>
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
-}
-
 export const metadata = {
   title: { absolute: 'Услуги компании Simply Digital' },
   description:
     'Услуги компании Simply Digital: комплексный digital-маркетинг, стратегия, реклама, SEO, SMM и аналитика.',
 }
 
-export default async function page({ params }: PageProps) {
+export default async function page() {
   const { component, solutions } = await getHomePageData()
   const serviceBlock = component.globals.find((block) => block.blockType === 'services')
   const heading = serviceBlock?.heading || ''
