@@ -62,7 +62,7 @@ export default function VacancyCard({ item }: { item: Vacancy }) {
       </div>
 
       <div className="flex items-center justify-between py-2">
-        <time className="text-link/40 font-iner text-sm font-light">
+        <time className="text-link/40 font-inter text-sm font-light">
           {formatDate(item.createdAt)}
         </time>
         <button

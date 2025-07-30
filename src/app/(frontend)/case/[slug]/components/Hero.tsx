@@ -4,15 +4,7 @@ import { Case } from '@/payload-types'
 
 export default function Hero({ caseData }: { caseData: Case }) {
   return (
-    <section
-      className="container mx-auto pt-20 md:pb-20 flex flex-col items-center text-center"
-      style={{
-        backgroundImage: 'url("/wave.svg")',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center right',
-        backgroundSize: 'contain',
-      }}
-    >
+    <section className="container mx-auto pt-20 md:pb-20 flex flex-col items-center text-center">
       <div className="flex flex-col items-center gap-5 max-w-5xl p-8 md:p-0">
         {/* Breadcrumbs */}
         <div className="mb-8 px-6 md:px-0 flex justify-center">

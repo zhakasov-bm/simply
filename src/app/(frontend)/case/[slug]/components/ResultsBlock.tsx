@@ -60,7 +60,7 @@ export default function ResultsBlock({ caseData }: { caseData: Case }) {
                 }}
                 key={i}
               >
-                <h1 className="text-2xl">{item.value}</h1>
+                <span className="text-lg leading-[1.15em] md:text-2xl">{item.value}</span>
                 <p className="font-light font-inter text-xs md:text-base">{item.description}</p>
               </div>
             ))}
