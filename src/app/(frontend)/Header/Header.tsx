@@ -3,7 +3,7 @@
 import type { Navigation, Solution, Subservice } from '@/payload-types'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Logo } from '../_components/Logo/Logo'
 import { Menu } from 'lucide-react'
 import { MobileMenu } from './MobileMenu'
@@ -61,6 +61,9 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
 
   const [currentCity, setCurrentCity] = useCurrentCity()
 
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLUListElement | null>(null)
+
   // Determine if we are on a case page (either /case or /case/[slug])
   const isCasePage = pathname.startsWith('/case')
   // Helper for main page link
@@ -90,12 +93,13 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
     if (relatedSubs.length === 0) return null
 
     return (
-      <div className="absolute left-full top-0 hidden group-hover/item:flex flex-col rounded-custom bg-inputBG shadow-md p-4 z-20 min-w-[200px]">
+      <div className="absolute left-full top-0 hidden group-hover/item:flex flex-col rounded-custom bg-inputBG shadow-md p-4 z-30 min-w-[200px]">
         {relatedSubs.map((sub) => (
           <Link
             key={sub.id}
             href={`/${currentCity}/solution/${solution.slug}/${sub.slug}`}
             className="py-1 px-2 rounded-custom hover:bg-link/10 whitespace-nowrap"
+            onClick={() => setDropdownOpen(false)}
           >
             {sub.name}
           </Link>
@@ -104,27 +108,34 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
     )
   }
 
-  const renderServicesDropdown = () => (
-    <div className="absolute top-full left-0 hidden font-inter group-hover:flex flex-col rounded-custom bg-inputBG shadow-md p-4 z-100 min-w-[200px]">
-      {solutions.map((solution) => {
-        const hasSubs = subservices.some(
-          (sub) => typeof sub.service === 'object' && sub.service.id === solution.id,
-        )
+  const renderServicesDropdown = () => {
+    return (
+      <div
+        className={`absolute top-full left-0 ${
+          dropdownOpen ? 'flex' : 'hidden'
+        } font-inter flex-col rounded-custom bg-inputBG shadow-md p-4 z-[999] min-w-[200px]`}
+      >
+        {solutions.map((solution) => {
+          const hasSubs = subservices.some(
+            (sub) => typeof sub.service === 'object' && sub.service.id === solution.id,
+          )
 
-        return (
-          <div key={solution.id} className={`relative ${hasSubs ? 'group/item' : ''}`}>
-            <Link
-              href={`/${currentCity}/solution/${solution.slug}`}
-              className="py-1 px-2 rounded-custom hover:bg-link/10 whitespace-nowrap block"
-            >
-              {solution.name}
-            </Link>
-            {hasSubs && renderSubservicesDropdown(solution)}
-          </div>
-        )
-      })}
-    </div>
-  )
+          return (
+            <div key={solution.id} className={`relative ${hasSubs ? 'group/item' : ''}`}>
+              <Link
+                href={`/${currentCity}/solution/${solution.slug}`}
+                className="py-1 px-2 rounded-custom hover:bg-link/10 whitespace-nowrap block"
+                onClick={() => setDropdownOpen(false)}
+              >
+                {solution.name}
+              </Link>
+              {hasSubs && renderSubservicesDropdown(solution)}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 
   return (
     <header className="container mx-auto flex justify-between fixed z-[1000] bg-back md:bg-transparent md:static items-center py-4 md:py-5 px-8 md:px-0">
@@ -150,10 +161,20 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
 
               if (link.label === 'Услуги') {
                 return (
-                  <div key={idx} className="relative group">
+                  <div
+                    key={idx}
+                    className="relative"
+                    onMouseEnter={() => setDropdownOpen(true)}
+                    onMouseLeave={() => setDropdownOpen(false)}
+                  >
                     <button
-                      onClick={() => setActiveIdx(idx)}
-                      className={`text-base ${isActive ? 'text-hoverText' : 'text-label'} hover:text-hoverText`}
+                      onClick={() => {
+                        setActiveIdx(idx)
+                        setDropdownOpen((prev) => !prev)
+                      }}
+                      className={`text-base ${
+                        isActive ? 'text-hoverText' : 'text-label'
+                      } hover:text-hoverText`}
                     >
                       {link.label}
                     </button>

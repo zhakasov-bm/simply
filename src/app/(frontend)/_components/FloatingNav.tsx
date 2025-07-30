@@ -3,6 +3,8 @@
 import Image from 'next/image'
 import { Navigation } from '@/payload-types'
 import ThemeSwitch from './ThemeSwitch/ThemeSwitch'
+import { IoArrowUpOutline } from 'react-icons/io5'
+import { motion } from 'framer-motion'
 import { handleScroll } from '@/app/utils/scroll'
 
 export default function FloatingNav({ nav }: { nav: Navigation }) {
@@ -32,6 +34,21 @@ export default function FloatingNav({ nav }: { nav: Navigation }) {
                     {item.nav}
                   </div>
                 ))}
+                <motion.div
+                  whileTap={{ scale: 0.8 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                  className="cursor-pointer relative group"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }
+                  }}
+                >
+                  <IoArrowUpOutline className="text-xl" />
+                  <span className="absolute left-1/2 -translate-x-1/2 -top-8 bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
+                    Наверх
+                  </span>
+                </motion.div>
                 <ThemeSwitch />
                 <button
                   className="text-sm font-unbounded text-primary bg-black hover:text-white rounded-custom px-3 py-2 cursor-pointer"
