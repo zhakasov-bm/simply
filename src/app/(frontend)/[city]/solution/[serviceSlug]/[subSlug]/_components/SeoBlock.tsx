@@ -12,7 +12,7 @@ export default function SeoBlock({ block }: Props) {
   if (!designType) return null
 
   return (
-    <section className="container-class">
+    <section id="seo" className="container-class">
       {header && <RichText data={header} />}
 
       <div
@@ -28,12 +28,16 @@ export default function SeoBlock({ block }: Props) {
           <div
             key={i}
             className={`flex flex-col gap-2 rounded-custom p-6 ${
-              designType === 'layout1' ? 'background' : designType === 'layout2' ? 'bg-primary' : ''
+              designType === 'layout1'
+                ? 'bg-background'
+                : designType === 'layout2'
+                  ? 'bg-primary'
+                  : ''
             }`}
           >
             {/* Layout 1 — Number badge */}
             {designType === 'layout1' && (
-              <div className="w-12 h-12 bg-primary mb-4 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-primary mb-4 text-black rounded-lg flex items-center justify-center">
                 {i + 1}
               </div>
             )}
@@ -54,8 +58,16 @@ export default function SeoBlock({ block }: Props) {
                 </div>
               )}
 
-            <h3 className="text-base">{item.title}</h3>
-            <p className="font-inter font-normal text-base text-black/60">{item.description}</p>
+            <span className={`text-base ${designType === 'layout2' ? 'text-black' : ''}`}>
+              {item.title}
+            </span>
+            <p
+              className={`font-inter font-normal text-base ${
+                designType === 'layout2' ? 'text-black/60' : 'text-link/60'
+              }`}
+            >
+              {item.description}
+            </p>
           </div>
         ))}
       </div>

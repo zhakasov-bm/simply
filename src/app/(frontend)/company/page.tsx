@@ -8,6 +8,7 @@ import About from './_components/About'
 import Mission from './_components/Mission'
 import RequestFormBlock from '../_components/RequestFormBlock'
 import LeadCaptureBlock from '../_components/LeadCaptureBlock'
+import FloatingNav from '../_components/FloatingNav'
 
 export const metadata = {
   title: { absolute: 'О компании Simply Digital' },
@@ -29,6 +30,7 @@ export default async function CompanyPage() {
   const component = await payload.findGlobal({ slug: 'component' })
   const formBlocks = component.globals.filter((block) => block.blockType === 'form')
   const requestForm = component.globals.find((block) => block.blockType === 'request-form')
+  const navigation = await payload.findGlobal({ slug: 'navigation' })
 
   if (!page) {
     return <div>Страница не найдена</div>
@@ -37,6 +39,8 @@ export default async function CompanyPage() {
   return (
     <div>
       <BGraphic />
+      <FloatingNav nav={navigation} />
+
       <Hero page={page} />
       <About page={page} />
       <Mission page={page} />

@@ -13,6 +13,7 @@ export default function InfoBlock({ solution, subservice }: Props) {
 
   return (
     <section
+      id="info"
       className="container-class md:py-20"
       style={{
         backgroundImage: 'url("/graphic.svg")',

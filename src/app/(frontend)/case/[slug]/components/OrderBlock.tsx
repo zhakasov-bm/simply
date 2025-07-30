@@ -4,7 +4,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 
 export default function OrderBLock({ caseData }: { caseData: Case }) {
   return (
-    <section className="container-class">
+    <section id="order" className="container-class">
       <div className="flex flex-col-reverse md:flex-row-reverse gap-8 md:gap-20 p-6 md:py-16 md:px-12 bg-background rounded-custom">
         <div className="flex flex-col gap-4 md:w-1/2">
           <h1 className="text-3xl">{caseData.title}</h1>

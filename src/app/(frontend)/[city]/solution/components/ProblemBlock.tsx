@@ -143,7 +143,7 @@ export default function ProblemBlock({ solution }: { solution: Solution }) {
   if (!solution.problem || solution.problem.length === 0) return null
 
   return (
-    <section className="container-class">
+    <section id="plan" className="container-class">
       <h2 className="text-[22px] md:text-4xl pb-6 md:pb-12 text-center">{solution.titleWhy}</h2>
 
       {dynamicType === 'mobile' ? (

@@ -15,6 +15,7 @@ export async function getHomePageData(): Promise<HomePageData> {
   const solutionsRes = await payload.find({ collection: 'solutions', limit: 20 })
   const casesRes = await payload.find({ collection: 'cases', limit: 10 })
   const navigation = await payload.findGlobal({ slug: 'navigation' })
+
   return {
     component,
     solutions: solutionsRes.docs,

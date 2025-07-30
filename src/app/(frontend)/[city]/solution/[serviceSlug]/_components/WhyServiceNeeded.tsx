@@ -13,7 +13,7 @@ export default function WhyServiceNeeded({ solution }: { solution: Solution }) {
   ]
 
   return (
-    <section className="container-class">
+    <section id="problems" className="container-class">
       {solution.whyServiceTitle && <RichText data={solution.whyServiceTitle} />}
 
       <div className="flex flex-col md:flex-row gap-3 pt-8">

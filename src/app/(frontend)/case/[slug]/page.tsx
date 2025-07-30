@@ -12,6 +12,7 @@ import CasesBlock from '../../_components/CasesBlock'
 import BGraphic from '../../_components/BGRaphic'
 import RequestFormBlock from '../../_components/RequestFormBlock'
 import { Metadata } from 'next'
+import FloatingNav from '../../_components/FloatingNav'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -35,6 +36,7 @@ async function getCase(slug: string) {
     const caseData = caseResult.docs[0]
     const formBlock = component?.globals?.find((block) => block.blockType === 'form')
     const requestForm = component.globals.find((block) => block.blockType === 'request-form')
+    const navigation = await payload.findGlobal({ slug: 'navigation' })
 
     const casesResult = await payload.find({
       collection: 'cases',
@@ -46,6 +48,7 @@ async function getCase(slug: string) {
       component,
       formBlock,
       requestForm,
+      navigation,
       casesList: casesResult.docs,
     }
   } catch (error) {
@@ -68,11 +71,13 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 export default async function CasePage({ params }: Props) {
   const { slug } = await params
   if (!slug) return notFound()
-  const { caseData, component, formBlock, requestForm, casesList } = await getCase(slug)
+  const { caseData, component, formBlock, requestForm, navigation, casesList } = await getCase(slug)
 
   return (
     <div>
       <BGraphic />
+      <FloatingNav nav={navigation} />
+
       <Hero caseData={caseData} />
       <BrandsBlock component={component} />
       <OrderBLock caseData={caseData} />

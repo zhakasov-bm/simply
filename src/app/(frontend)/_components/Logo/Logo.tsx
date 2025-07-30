@@ -4,6 +4,7 @@ import type { Navigation } from '@/payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
+import { usePathname } from 'next/navigation'
 
 export const Logo = ({ nav }: { nav: Navigation }) => {
   const { resolvedTheme } = useTheme()
@@ -15,8 +16,12 @@ export const Logo = ({ nav }: { nav: Navigation }) => {
         : nav.logo // fallback
       : nav.logo
 
+  const pathname = usePathname()
+  const city = pathname.split('/')[1] || ''
+  const cityUrl = city ? `/${city}` : '/'
+
   return (
-    <Link href="/">
+    <Link href={cityUrl}>
       {typeof logo === 'object' && logo?.url && (
         <Image src={logo.url} alt={logo.alt || ''} width={120} height={50} draggable={false} />
       )}

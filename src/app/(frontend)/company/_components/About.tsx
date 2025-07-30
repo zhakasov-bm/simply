@@ -5,6 +5,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 export default function About({ page }: { page: Page }) {
   return (
     <section
+      id="about-company"
       className="container-class"
       style={{
         backgroundImage: 'url("graphic.svg")',

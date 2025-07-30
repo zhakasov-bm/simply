@@ -4,7 +4,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 
 export default function Mission({ page }: { page: Page }) {
   return (
-    <section className="container-class">
+    <section id="mission" className="container-class">
       {(page.layout ?? []).map((block, id) => {
         if (block.blockType === 'mission') {
           return (

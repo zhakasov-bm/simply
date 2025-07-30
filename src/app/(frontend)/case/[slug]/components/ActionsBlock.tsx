@@ -34,6 +34,7 @@ export default function ActionsBlock({ caseData }: { caseData: Case }) {
 
   return (
     <section
+      id="actions"
       className="container-class"
       style={{
         backgroundImage: 'url("/graphic.svg")',
