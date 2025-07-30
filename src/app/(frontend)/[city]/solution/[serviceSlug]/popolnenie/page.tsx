@@ -12,6 +12,7 @@ import QABlock from '../_components/QABlock'
 import AdvantagesBlock from './components/AdvantagesBlock'
 import TarifBlock from './components/TarifBlock'
 import Calculator from './components/Calculator'
+import FloatingNav from '@/app/(frontend)/_components/FloatingNav'
 
 interface PageProps {
   params: Promise<{ serviceSlug: string }>
@@ -28,16 +29,9 @@ export default async function PopolneniePage({ params }: PageProps) {
 
   const payload = await getPayload({ config })
 
-  // Fetch the subservice "popolnenie"
-  // const  = await payload.find({
-  //   collection: 'subservices',
-  //   where: {
-  //     slug: { equals: 'popolnenie' },
-  //   },
-  // })
-
-  const [component, subReq] = await Promise.all([
+  const [component, navigation, subReq] = await Promise.all([
     payload.findGlobal({ slug: 'component' }),
+    payload.findGlobal({ slug: 'navigation' }),
     payload.find({
       collection: 'subservices',
       where: { slug: { equals: 'popolnenie' } },
@@ -63,6 +57,7 @@ export default async function PopolneniePage({ params }: PageProps) {
   return (
     <div>
       <BGraphic />
+      <FloatingNav nav={navigation} />
       <Hero component={component} subservice={sub} />
       <BrandsBlockBlock component={component} />
       {advBlock && <AdvantagesBlock block={advBlock} />}

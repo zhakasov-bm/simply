@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect } from 'react'
+import { X } from 'lucide-react'
 import clsx from 'clsx'
 
 export const Modal = ({
@@ -48,13 +49,10 @@ export const Modal = ({
           className,
         )}
       >
-        <button
-          className="absolute top-3 right-3 text-xl text-gray-500 hover:text-black cursor-pointer"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          ×
-        </button>
+        <div className="flex justify-end items-end mb-4">
+          <X onClick={onClose} size={28} className="cursor-pointer" />
+        </div>
+
         {children}
       </div>
     </div>

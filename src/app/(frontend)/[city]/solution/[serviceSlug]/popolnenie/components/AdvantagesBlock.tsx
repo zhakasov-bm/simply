@@ -10,7 +10,7 @@ type Props = {
 
 export default function AdvantagesBlock({ block }: Props) {
   return (
-    <section className="container-class pb-8">
+    <section id="advantages-block" className="container-class pb-8">
       <RichText data={block.advantagesTitle} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-8">
         {block.advantages?.map((adv, idx) => (

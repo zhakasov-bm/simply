@@ -1,7 +1,9 @@
 'use client'
 
+import { submitToTelegram } from '@/app/utils/submitToTelegram'
 import { Component, Solution, Form } from '@/payload-types'
 import { useState, useEffect, useMemo } from 'react'
+import PhoneInput from 'react-phone-input-2'
 
 type LeadCaptureProps = Extract<Component['globals'][0], { blockType: 'form' }>
 type FormState = {
@@ -12,7 +14,7 @@ type FormState = {
 
 type Props = {
   block: LeadCaptureProps
-  formId: string // 👈 Уникальный ID для каждой формы (например, 'form-0')
+  formId: string
 }
 
 export default function LeadCaptureBlock({ block, formId }: Props) {
@@ -47,6 +49,8 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
       }))
   }, [solutions])
 
+  const [phone, setPhone] = useState('')
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -56,30 +60,27 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
 
     setFormState({ loading: true, error: null, success: false })
 
-    const formData = new FormData(e.target as HTMLFormElement)
-    const data = Object.fromEntries(formData.entries())
-
     try {
-      const response = await fetch('/api/form-submissions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          form: block.form.id,
-          submissionData: Object.entries(data).map(([field, value]) => ({
-            field,
-            value: value as string,
-          })),
-        }),
-      })
+      const formData = new FormData(e.target as HTMLFormElement)
+      formData.set('phone', phone)
+      const data = Object.fromEntries(formData.entries()) as Record<string, string>
 
-      if (!response.ok) {
-        const err = await response.json().catch(() => ({}))
-        throw new Error(err.message || 'Ошибка отправки формы')
+      // Phone validation
+      const phoneValue = data.phone || ''
+      const phoneRegex = /^\+?\d{10,15}$/
+      if (!phoneRegex.test(phoneValue)) {
+        setFormState({ loading: false, error: 'Некорректный номер телефона', success: false })
+        return
       }
 
+      await submitToTelegram(data)
+
       setFormState({ loading: false, error: null, success: true })
+      setPhone('') // reset phone input
       ;(e.target as HTMLFormElement).reset()
-      setTimeout(() => setFormState((prev) => ({ ...prev, success: false })), 5000)
+      setTimeout(() => {
+        setFormState({ loading: false, error: null, success: false })
+      }, 3000)
     } catch (err) {
       console.error(err)
       setFormState({
@@ -134,6 +135,18 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
               </svg>
             </div>
           </>
+        ) : field.name === 'phone' ? (
+          <PhoneInput
+            country={'kz'}
+            inputProps={{
+              required: field.required,
+              placeholder: '+7 ',
+              className:
+                'peer w-full rounded-lg px-3 pt-5 pb-2 bg-inputBG text-lg focus:outline-none focus:ring-2 focus:ring-gray-500',
+            }}
+            value={phone}
+            onChange={setPhone}
+          />
         ) : (
           <input
             id={inputId}
@@ -164,7 +177,7 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
             <h3 className="text-xl md:text-2xl md:px-16 leadForm text-center">{block.heading}</h3>
 
             {formState.success && (
-              <p className="bg-green-100 border border-primary text-green-700 px-4 py-3 rounded-custom text-center">
+              <p className="bg-green-100 border border-green-500 text-green-500 px-4 py-3 rounded-custom text-center">
                 Спасибо! Ваша заявка успешно отправлена.
               </p>
             )}

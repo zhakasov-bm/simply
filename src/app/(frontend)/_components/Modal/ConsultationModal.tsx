@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Modal } from './Modal'
-import clsx from 'clsx'
+import { submitToTelegram } from '@/app/utils/submitToTelegram'
 
 export const ConsultationForm = ({
   open,
@@ -47,6 +47,7 @@ export const ConsultationForm = ({
     try {
       await onSubmit({ name, email, phone })
       setStatus('success')
+      await submitToTelegram({ name, email, phone })
       setTimeout(() => {
         resetForm()
         setStatus('idle')

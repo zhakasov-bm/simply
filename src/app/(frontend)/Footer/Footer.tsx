@@ -139,7 +139,7 @@ export default function Footer({ nav, solutions }: Props) {
                 {items.map((solution) => (
                   <li key={solution.id}>
                     <Link
-                      href={`/${currentCity}/solution/${solution.slug}`} // better use slug
+                      href={`/${currentCity}/solution/${solution.slug}`}
                       className={`text-sm font-light hover:text-link ${
                         pathname === `/${currentCity}/solution/${solution.slug}`
                           ? 'text-link'
