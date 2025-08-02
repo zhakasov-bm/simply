@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://simplydigital.kz
+
+# Sitemaps
+Sitemap: https://simplydigital.kz/sitemap.xml
