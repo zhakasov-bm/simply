@@ -3,7 +3,6 @@
 import { Component } from '@/payload-types'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import PhoneInput from 'react-phone-input-2'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import SuccessModal from './Modal/SuccessModal'
 import { submitToTelegram } from '@/app/utils/submitToTelegram'

@@ -1,4 +1,3 @@
-import { FormEvent } from 'react'
 import PhoneInput from 'react-phone-input-2'
 
 export default function FormBuilder({
