@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     solutions: Solution;
     subservices: Subservice;
+    posts: Post;
     cases: Case;
     pages: Page;
     vacancy: Vacancy;
@@ -86,6 +87,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     solutions: SolutionsSelect<false> | SolutionsSelect<true>;
     subservices: SubservicesSelect<false> | SubservicesSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     cases: CasesSelect<false> | CasesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     vacancy: VacancySelect<false> | VacancySelect<true>;
@@ -376,6 +378,35 @@ export interface Subservice {
           }
       )[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  image?: (string | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  includedInBlog?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -766,6 +797,10 @@ export interface PayloadLockedDocument {
         value: string | Subservice;
       } | null)
     | ({
+        relationTo: 'posts';
+        value: string | Post;
+      } | null)
+    | ({
         relationTo: 'cases';
         value: string | Case;
       } | null)
@@ -1009,6 +1044,20 @@ export interface SubservicesSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  image?: T;
+  content?: T;
+  includedInBlog?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1348,6 +1397,7 @@ export interface Component {
     | {
         heading: string;
         subheading: string;
+        button_title: string;
         image: string | Media;
         turing: string;
         cta_button: {
@@ -1494,6 +1544,26 @@ export interface Component {
         blockType: 'request-form';
       }
     | {
+        heading: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'posts';
+      }
+    | {
         title?: string | null;
         statistics: {
           value: string;
@@ -1593,6 +1663,7 @@ export interface ComponentSelect<T extends boolean = true> {
           | {
               heading?: T;
               subheading?: T;
+              button_title?: T;
               image?: T;
               turing?: T;
               cta_button?:
@@ -1740,6 +1811,13 @@ export interface ComponentSelect<T extends boolean = true> {
                     id?: T;
                   };
               form?: T;
+              id?: T;
+              blockName?: T;
+            };
+        posts?:
+          | T
+          | {
+              heading?: T;
               id?: T;
               blockName?: T;
             };

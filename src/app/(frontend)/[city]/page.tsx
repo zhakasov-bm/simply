@@ -16,6 +16,7 @@ import CasesBlock from '../_components/CasesBlock'
 import BGraphic from '../_components/BGRaphic'
 import RequestFormBlock from '../_components/RequestFormBlock'
 import FloatingNav from '../_components/FloatingNav'
+import PostsSection from '../_components/PostsSection'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -33,6 +34,9 @@ export default async function HomePage({ params }: PageProps) {
 
   const formBlocks = component.globals.filter((block) => block.blockType === 'form')
   const requestForm = component.globals.find((block) => block.blockType === 'request-form')
+
+  const postBlock = component.globals.find((block) => block.blockType === 'posts')
+  const postHeading = postBlock?.heading || 'Последнее из блога'
 
   return (
     <div>
@@ -54,6 +58,7 @@ export default async function HomePage({ params }: PageProps) {
       </div>
       <TeamBlock component={component} />
       <ReviewsBlock component={component} />
+      <PostsSection heading={postHeading} />
       {requestForm && <RequestFormBlock block={requestForm} />}
     </div>
   )

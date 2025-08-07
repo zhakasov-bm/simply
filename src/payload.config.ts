@@ -21,6 +21,7 @@ import { Navigation } from './globals/Navigation'
 import { Subservices } from './collections/solutions/Subservices'
 import { Pages } from './collections/Pages'
 import { Vacancy } from './collections/vacancy/Vacancy'
+import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,7 +34,7 @@ export default buildConfig({
     },
   },
   globals: [Navigation, Component],
-  collections: [Users, Media, Solutions, Subservices, Cases, Pages, Vacancy],
+  collections: [Users, Media, Solutions, Subservices, Posts, Cases, Pages, Vacancy],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
