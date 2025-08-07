@@ -7,7 +7,7 @@ export function CaseCard({ item }: { item: Case }) {
   return (
     <Link
       href={`/case/${item.slug}`}
-      className="group block w-full md:min-w-[280px] rounded-2xl overflow-hidden aspect-[4/3] relative flex-shrink-0"
+      className="group block w-full lg:min-w-[280px] rounded-2xl overflow-hidden aspect-[4/3] relative flex-shrink-0"
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-out scale-100 group-hover:scale-105"

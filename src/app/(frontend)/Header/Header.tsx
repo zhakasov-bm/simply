@@ -148,7 +148,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           <Logo nav={nav} />
         </Link>
         {/* Desktop Menu */}
-        <div className="hidden md:flex justify-around">
+        <div className="hidden lg:flex justify-around">
           <nav className="flex gap-6 relative">
             {nav.links?.map((link, idx) => {
               const cityRegex = /^\/[a-zа-я-]+/

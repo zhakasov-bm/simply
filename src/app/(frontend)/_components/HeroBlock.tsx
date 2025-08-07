@@ -57,7 +57,7 @@ export default function HeroBlock({ component }: { component: Component }) {
                 </h1>
 
                 <div
-                  className="hidden h-full px-9 pb-15 md:flex flex-col gap-5 justify-end overflow-hidden lg:relative rounded-custom"
+                  className="hidden h-full px-9 pb-15 sm:flex flex-col gap-5 justify-end overflow-hidden sm:relative rounded-custom"
                   style={{
                     backgroundImage: `url("${bgImage}")`,
                     width: '100%',
