@@ -41,6 +41,8 @@ export function getNavLinkProps(args: GetNavLinkPropsArgs) {
     href = isCasePage ? mainPageHref : `/${currentCity}${link.url}`
   } else if (link.url === '/company') {
     href = link.url
+  } else if (link.url === '/blogs') {
+    href = link.url
   } else if (link.url.startsWith('http')) {
     href = link.url
   } else if (link.url === '/case' || link.url.startsWith('/case/')) {
@@ -155,7 +157,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
               const isActive =
                 link.url === '/'
                   ? pathname === `/${currentCity}` || pathname === '/'
-                  : link.url === '/case' || link.url === '/company'
+                  : link.url === '/case' || link.url === '/company' || link.url === '/blogs'
                     ? pathname === link.url || pathname.startsWith(link.url + '/')
                     : cleanedPath === link.url || cleanedPath.startsWith(link.url + '/')
 

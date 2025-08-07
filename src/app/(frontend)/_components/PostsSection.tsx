@@ -3,6 +3,7 @@ import config from '@/payload.config'
 import { getPayload } from 'payload'
 import { RichText as SerializedRichText } from '@payloadcms/richtext-lexical/react'
 import { formatDate } from '@/app/utils/date'
+import { useCurrentCity } from '@/app/utils/useCurrentCity'
 
 type Props = {
   heading: any
