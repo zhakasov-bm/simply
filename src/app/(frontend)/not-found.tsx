@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <section className="pt-20 md:pt-0 container mx-auto my-16 px-6 lg:px-24">
+    <section className="container mx-auto my-16 px-6 lg:px-24">
       <div className="flex gap-16 justify-between items-center p-8 md:p-16 bg-background rounded-custom ">
         <div className="flex flex-col gap-6 md:gap-10 flex-1">
           <h1 className="font-unbounded text-3xl mb-4">Страница не найдена</h1>

@@ -51,7 +51,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body>
         <Providers>
           <Header nav={navigation} solutions={solutions} subservices={subservices} />
-          <main>{children}</main>
+          <main className="pt-20 md:pt-0">{children}</main>
           <Footer nav={navigation} solutions={solutions} />
         </Providers>
       </body>

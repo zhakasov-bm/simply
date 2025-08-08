@@ -14,7 +14,7 @@ export default async function page() {
   const heading = serviceBlock?.heading || ''
 
   return (
-    <div className="pt-20 md:pt-0">
+    <div>
       <BGraphic />
       <ServicesBlock heading={heading} solutions={solutions} />
     </div>

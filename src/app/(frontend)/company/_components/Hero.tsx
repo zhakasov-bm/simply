@@ -5,7 +5,7 @@ import Breadcrumbs from '../../_components/Breadcrumbs/Breadcrumbs'
 
 export default function Hero({ page }: { page: Page }) {
   return (
-    <section className="container mx-auto pt-28 md:pt-8 relative">
+    <section className="container mx-auto pt-8 relative">
       {Array.isArray(page.layout) &&
         page.layout.map((block, id) => {
           if (block.blockType === 'company') {

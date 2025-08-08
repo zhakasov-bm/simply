@@ -12,7 +12,7 @@ type Props = {
 
 export default function PostBlock({ posts, post }: Props) {
   return (
-    <section className="container mx-auto my-16 px-6 lg:px-24">
+    <section className="container mx-auto my-10 px-6 lg:px-24">
       <Breadcrumbs customLabels={{ blogs: 'Блог', [post.slug]: post.title }} />
       <div className="flex flex-col md:flex-row gap-8 pt-10">
         <div className="flex flex-col gap-8 md:gap-16 md:w-[75%] w-full">

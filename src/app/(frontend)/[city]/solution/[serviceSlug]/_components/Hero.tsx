@@ -44,7 +44,7 @@ export default function Hero(props: Props) {
   }
 
   return (
-    <section className="container mx-auto py-24 md:py-16 relative">
+    <section className="container mx-auto py-5 md:py-16 relative">
       <div className="absolute md:hidden -top-20 -left-16 -z-10">
         <Image
           src={bgImage}

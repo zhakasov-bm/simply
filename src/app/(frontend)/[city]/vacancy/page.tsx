@@ -46,7 +46,7 @@ export default async function page() {
     <div>
       <BGraphic />
 
-      <div className="mb-8 px-6 md:px-0 pt-28 md:pt-20 flex justify-center">
+      <div className="mb-8 px-6 md:px-0 pt-8 md:pt-20 flex justify-center">
         <Breadcrumbs customLabels={{ vacancy: page?.name || 'Вакансии' }} />
       </div>
 

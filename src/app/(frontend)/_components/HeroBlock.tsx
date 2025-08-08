@@ -24,7 +24,7 @@ export default function HeroBlock({ component }: { component: Component }) {
             <div key={id} className="flex gap-3 container mx-auto px-8 lg:px-16">
               {/* Mobile */}
               <div className="flex flex-col items-center justify-between gap-6 h-auto rounded-custom relative md:hidden bg-container">
-                <h1 className="special pt-32">
+                <h1 className="special pt-12">
                   {block.heading} {cityText && <span>{cityText}</span>}
                 </h1>
                 <div className="flex w-full h-100 justify-center  z-10">

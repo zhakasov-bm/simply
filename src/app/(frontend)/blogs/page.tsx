@@ -37,7 +37,7 @@ export default async function page() {
     <div>
       <BGraphic />
       <FloatingNav nav={navigation} />
-      <div className="px-6 md:px-0 pt-28 md:pt-8 flex justify-center">
+      <div className="px-6 md:px-0 pt-8 flex justify-center">
         <Breadcrumbs customLabels={{ blogs: blogLabel }} />
       </div>
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 p-6 mb-10 lg:px-24 md:auto-rows-fr">
