@@ -84,12 +84,11 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
     }
   }
 
-  const pathCity = pathname.split('/')[1] || ''
-  const isValidCity = ALLOWED_CITIES.includes(pathCity)
-  const cityUrl = isValidCity ? `/${pathCity}` : '/'
+  // const pathCity = pathname.split('/')[1] || ''
+  // const isValidCity = ALLOWED_CITIES.includes(pathCity)
+  // const cityUrl = isValidCity ? `/${pathCity}` : '/'
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  const dropdownRef = useRef<HTMLUListElement | null>(null)
 
   const [modalOpen, setModalOpen] = useState(false)
   const handleModalSubmit = (data: { name: string; email: string; phone: string }) => {

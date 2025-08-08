@@ -6,6 +6,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import { useState } from 'react'
 import { FaChevronRight, FaChevronUp } from 'react-icons/fa'
 import Image from 'next/image'
+import { ConsultationForm } from '@/app/(frontend)/_components/Modal/ConsultationModal'
 
 function formatDate(timestamp: string | number | Date): string {
   const date = new Date(timestamp)
@@ -24,6 +25,11 @@ export default function VacancyCard({ item }: { item: Vacancy }) {
     // If click is inside the details, do nothing
     if ((e.target as HTMLElement).closest('.vacancy-details')) return
     setIsOpen((prev) => !prev)
+  }
+
+  const [modalOpen, setModalOpen] = useState(false)
+  const handleModalSubmit = (data: { name: string; email: string; phone: string }) => {
+    setModalOpen(false)
   }
 
   return (
@@ -82,7 +88,15 @@ export default function VacancyCard({ item }: { item: Vacancy }) {
           <div className="font-inter mb-8">
             <RichText data={item.description} />
           </div>
-          <UniversalButton label={item.button || 'Откликнуться'} />
+          <UniversalButton
+            label={item.button || 'Откликнуться'}
+            onClick={() => setModalOpen(true)}
+          />
+          <ConsultationForm
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+            onSubmit={handleModalSubmit}
+          />
         </div>
       )}
     </div>
