@@ -1,14 +1,35 @@
 import { getHomePageData } from '@/app/utils/homeService'
 import BGraphic from '../../_components/BGRaphic'
 import ServicesBlock from '../../_components/ServicesBlock'
+import { ALLOWED_CITIES } from '@/app/utils/cities'
+import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: { absolute: 'Услуги компании Simply Digital' },
-  description:
-    'Услуги компании Simply Digital: комплексный digital-маркетинг, стратегия, реклама, SEO, SMM и аналитика.',
+type Props = {
+  params: Promise<{ city: string }>
 }
 
-export default async function page() {
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { city } = await params
+
+  if (!ALLOWED_CITIES.includes(city)) {
+    notFound()
+  }
+  return {
+    title: { absolute: 'Услуги компании Simply Digital' },
+    description:
+      'Услуги компании Simply Digital: комплексный digital-маркетинг, стратегия, реклама, SEO, SMM и аналитика.',
+    alternates: {
+      canonical: `https://popolnenie.kz/solution/${city}/`,
+    },
+  }
+}
+
+export default async function page({ params }: Props) {
+  const { city } = await params
+  if (!ALLOWED_CITIES.includes(city)) {
+    notFound()
+  }
   const { component, solutions } = await getHomePageData()
   const serviceBlock = component.globals.find((block) => block.blockType === 'services')
   const heading = serviceBlock?.heading || ''

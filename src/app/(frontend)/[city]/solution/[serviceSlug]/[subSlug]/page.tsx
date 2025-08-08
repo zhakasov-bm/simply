@@ -1,21 +1,30 @@
 import { getSubserviceData } from '@/app/utils/subservicesService'
 import { SubservicePageLayout } from './_components/SubservicePageLayout'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { ALLOWED_CITIES } from '@/app/utils/cities'
 
 interface PageProps {
-  params: Promise<{ serviceSlug: string; subSlug: string }>
+  params: Promise<{ city: string; serviceSlug: string; subSlug: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 // Метаданные страницы
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
-  const { serviceSlug, subSlug } = await params
+  const { city, serviceSlug, subSlug } = await params
+
+  if (!ALLOWED_CITIES.includes(city)) {
+    notFound()
+  }
 
   const { subservice } = await getSubserviceData(serviceSlug, subSlug)
 
   return {
     title: `${subservice.name}`,
     description: subservice.subtitle.substring(0, 160),
+    alternates: {
+      canonical: `https://simplydigital.kz/${city}/${serviceSlug}/${subSlug}`,
+    },
   }
 }
 
@@ -48,13 +57,6 @@ export default async function SubservicePage({ params }: PageProps) {
     )
   } catch (error) {
     console.error('Error in SubservicePage:', error)
-    return (
-      <div className="container mx-auto py-8">
-        <h1 className="text-2xl font-bold mb-4">Error loading subservice</h1>
-        <p className="text-red-600">
-          {error instanceof Error ? error.message : 'Unknown error occurred'}
-        </p>
-      </div>
-    )
+    notFound()
   }
 }

@@ -9,7 +9,7 @@ import { Menu } from 'lucide-react'
 import { MobileMenu } from './MobileMenu'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { PiMapPinFill } from 'react-icons/pi'
-import { CITY_RU, getCityRegex } from '@/app/utils/cities'
+import { ALLOWED_CITIES, CITY_RU, getCityRegex } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
 import { CityModal } from './CityModal'
 import ThemeSwitch from '../_components/ThemeSwitch/ThemeSwitch'
@@ -28,7 +28,7 @@ type GetNavLinkPropsArgs = {
   idx: number
   pathname: string
   activeIdx: number | null
-  currentCity: string
+  currentCity: string | null
   isCasePage: boolean
   mainPageHref: string
   setActiveIdx?: ((idx: number) => void) | undefined
@@ -58,12 +58,35 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   const pathname = usePathname()
   console.log(pathname)
   const router = useRouter()
+
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
 
   const [isCityModalOpen, setIsCityModalOpen] = useState(false)
 
-  const [currentCity, setCurrentCity] = useCurrentCity()
+  const [currentCity, setCurrentCity] = useCurrentCity() as readonly [
+    string | null,
+    React.Dispatch<React.SetStateAction<string | null>>,
+  ]
+
+  const changeCity = (city: string) => {
+    setCurrentCity(city)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('selectedCity', city)
+    }
+    // Если город не выбран в URL, редиректим на /city
+    const cityRegex = getCityRegex()
+    if (!cityRegex.test(pathname)) {
+      router.push(`/${city}`)
+    } else {
+      const replacedPath = pathname.replace(cityRegex, `/${city}`)
+      router.push(replacedPath)
+    }
+  }
+
+  const pathCity = pathname.split('/')[1] || ''
+  const isValidCity = ALLOWED_CITIES.includes(pathCity)
+  const cityUrl = isValidCity ? `/${pathCity}` : '/'
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLUListElement | null>(null)
@@ -77,20 +100,6 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   const isCasePage = pathname.startsWith('/case')
   // Helper for main page link
   const mainPageHref = `/${currentCity}`
-
-  const changeCity = (city: string) => {
-    setCurrentCity(city)
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('selectedCity', city)
-    }
-    const cityRegex = getCityRegex()
-    if (isCasePage) {
-      router.push(`/${city}`)
-    } else {
-      const replacedPath = pathname.replace(cityRegex, `/${city}`)
-      router.push(replacedPath)
-    }
-  }
 
   const toggleMobileMenu = () => setIsMobileOpen((prev) => !prev)
 
@@ -223,7 +232,9 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           onClick={() => setIsCityModalOpen(true)}
         >
           <PiMapPinFill />
-          {CITY_RU[currentCity]}
+          {typeof currentCity === 'string' && CITY_RU[currentCity]
+            ? CITY_RU[currentCity]
+            : 'Выберите город'}
         </button>
 
         <Link href="tel:+77752026010" className="hidden text-base md:flex items-center gap-2 group">
@@ -282,10 +293,11 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
 
       {isCityModalOpen && (
         <CityModal
-          currentCity={currentCity}
+          currentCity={currentCity ?? ''}
           onSelect={(city) => {
             changeCity(city)
             setIsCityModalOpen(false)
+            setIsMobileOpen(false)
           }}
           onClose={() => setIsCityModalOpen(false)}
         />

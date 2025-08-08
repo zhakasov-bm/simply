@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import { ALLOWED_CITIES } from '@/app/utils/cities'
 import { getHomePageData } from '@/app/utils/homeService'
-import '../styles.css'
 import HeroBlock from '../_components/HeroBlock'
 import AboutUsBlock from '../_components/AboutUsBlock'
 import TrustedByBlock from '../_components/TrustedByBlock'
@@ -23,9 +22,11 @@ interface PageProps {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export default async function HomePage({ params }: PageProps) {
+export default async function CityPage({ params }: PageProps) {
   const { city } = await params
-  if (!ALLOWED_CITIES.includes(city)) return notFound()
+  if (!ALLOWED_CITIES.includes(city)) {
+    notFound()
+  }
 
   const { component, solutions, cases, navigation } = await getHomePageData()
 

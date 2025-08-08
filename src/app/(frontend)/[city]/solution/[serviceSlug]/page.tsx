@@ -2,28 +2,35 @@ import { notFound } from 'next/navigation'
 import { getSolutionData } from '@/app/utils/solutionsService'
 import { SolutionPageLayout } from './_components/SolutionPageLayout'
 import { Metadata } from 'next'
+import { ALLOWED_CITIES } from '@/app/utils/cities'
 
 interface PageProps {
-  params: Promise<{ serviceSlug: string }>
+  params: Promise<{ city: string; serviceSlug: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 // Метаданные страницы
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
-  const { serviceSlug: slug } = await params
-  if (!slug) return notFound()
+  const { city, serviceSlug: slug } = await params
+
   const { solution } = await getSolutionData(slug)
 
   return {
     title: `${solution.name}`,
     description: solution.subtitle.substring(0, 160),
+    alternates: {
+      canonical: `https://simplydigital.kz/${city}/${slug}`,
+    },
   }
 }
 
 export default async function SolutionPage({ params }: PageProps) {
   try {
-    const { serviceSlug: slug } = await params
-    if (!slug) return notFound()
+    const { city, serviceSlug: slug } = await params
+
+    if (!ALLOWED_CITIES.includes(city)) {
+      notFound()
+    }
 
     const { component, solution, subservices, cases, formBlock, navigation } =
       await getSolutionData(slug)
@@ -40,13 +47,6 @@ export default async function SolutionPage({ params }: PageProps) {
     )
   } catch (error) {
     console.error('Error in SolutionPage:', error)
-    return (
-      <div className="container mx-auto py-8">
-        <h1 className="text-2xl font-bold mb-4">Error loading solution</h1>
-        <p className="text-red-600">
-          {error instanceof Error ? error.message : 'Unknown error occurred'}
-        </p>
-      </div>
-    )
+    notFound()
   }
 }

@@ -5,13 +5,24 @@ import BGraphic from '../../_components/BGRaphic'
 import Breadcrumbs from '../../_components/Breadcrumbs/Breadcrumbs'
 import VacancyCard from './components/VacancyCard'
 import { Vacancy } from '@/payload-types'
+import { ALLOWED_CITIES } from '@/app/utils/cities'
+import { notFound } from 'next/navigation'
+
+type Props = {
+  params: Promise<{ city: string }>
+}
 
 export const metadata = {
   title: 'Вакансии',
 }
 
-export default async function page() {
+export default async function page({ params }: Props) {
   const payload = await getPayload({ config })
+
+  const { city } = await params
+  if (!ALLOWED_CITIES.includes(city)) {
+    notFound()
+  }
 
   const res = await payload.find({
     collection: 'pages',

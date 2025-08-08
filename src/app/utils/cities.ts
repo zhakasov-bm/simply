@@ -1,50 +1,34 @@
-// src/app/utils/cities.ts
+type CityInfo = {
+  ru: string
+  prepositional: string
+}
 
-export const ALLOWED_CITIES = [
-  'almaty',
-  'astana',
-  'shymkent',
-  'aktobe',
-  'aktau',
-  'atyrau',
-  'taraz',
-  'talgar',
-  'kyzylorda',
-  'kostanay',
-  'dubai',
-  'batumi',
-]
+export const CITIES: Record<string, CityInfo> = {
+  default: { ru: '', prepositional: '' },
+  almaty: { ru: 'Алматы', prepositional: 'в Алматы' },
+  astana: { ru: 'Астана', prepositional: 'в Астане' },
+  shymkent: { ru: 'Шымкент', prepositional: 'в Шымкенте' },
+  aktobe: { ru: 'Актобе', prepositional: 'в Актобе' },
+  aktau: { ru: 'Актау', prepositional: 'в Актау' },
+  atyrau: { ru: 'Атырау', prepositional: 'в Атырау' },
+  taraz: { ru: 'Тараз', prepositional: 'в Таразе' },
+  talgar: { ru: 'Талгар', prepositional: 'в Талгаре' },
+  kyzylorda: { ru: 'Кызылорда', prepositional: 'в Кызылорде' },
+  kostanay: { ru: 'Костанай', prepositional: 'в Костанае' },
+  dubai: { ru: 'Дубай', prepositional: 'в Дубае' },
+  batumi: { ru: 'Батуми', prepositional: 'в Батуми' },
+}
+
+export const ALLOWED_CITIES = Object.keys(CITIES)
+
+export const CITY_RU = Object.fromEntries(
+  Object.entries(CITIES).map(([key, value]) => [key, value.ru]),
+)
+
+export const CITY_PREPOSITIONAL = Object.fromEntries(
+  Object.entries(CITIES).map(([key, value]) => [key, value.prepositional]),
+)
 
 export const getCityRegex = () => {
   return new RegExp(`^/(${ALLOWED_CITIES.join('|')})`)
-}
-
-export const CITY_RU: Record<string, string> = {
-  almaty: 'Алматы',
-  astana: 'Астана',
-  shymkent: 'Шымкент',
-  aktobe: 'Актобе',
-  aktau: 'Актау',
-  atyrau: 'Атырау',
-  taraz: 'Тараз',
-  talgar: 'Талгар',
-  kyzylorda: 'Кызылорда',
-  kostanay: 'Костанай',
-  dubai: 'Дубай',
-  batumi: 'Батуми',
-}
-
-export const CITY_PREPOSITIONAL: Record<string, string> = {
-  almaty: 'в Алматы',
-  astana: 'в Астане',
-  shymkent: 'в Шымкенте',
-  aktobe: 'в Актобе',
-  aktau: 'в Актау',
-  atyrau: 'в Атырау',
-  taraz: 'в Таразе',
-  talgar: 'в Талгаре',
-  kyzylorda: 'в Кызылорде',
-  kostanay: 'в Костанае',
-  dubai: 'в Дубае',
-  batumi: 'в Батуми',
 }
