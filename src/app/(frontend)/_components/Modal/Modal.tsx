@@ -41,7 +41,7 @@ export const Modal = ({
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div className="fixed px-6 inset-0 z-[1000] flex items-center justify-center bg-black/40 backdrop-blur-sm">
       <div
         ref={modalRef}
         className={clsx(

@@ -13,6 +13,8 @@ import { CITY_RU, getCityRegex } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
 import { CityModal } from './CityModal'
 import ThemeSwitch from '../_components/ThemeSwitch/ThemeSwitch'
+import UniversalButton from '../_components/UniversalButton'
+import { ConsultationForm } from '../_components/Modal/ConsultationModal'
 
 type NavProps = {
   nav: Navigation
@@ -65,6 +67,11 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLUListElement | null>(null)
+
+  const [modalOpen, setModalOpen] = useState(false)
+  const handleModalSubmit = (data: { name: string; email: string; phone: string }) => {
+    setModalOpen(false)
+  }
 
   // Determine if we are on a case page (either /case or /case/[slug])
   const isCasePage = pathname.startsWith('/case')
@@ -229,6 +236,18 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
         <div className="flex items-center justify-center w-10 h-10 cursor-pointer">
           <ThemeSwitch />
         </div>
+        <div className="flex gap-3 md:hidden z-50">
+          <UniversalButton
+            label="Заказать"
+            className="!m-0 !px-4 !py-1 !text-xs"
+            onClick={() => setModalOpen(true)}
+          />
+        </div>
+        <ConsultationForm
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          onSubmit={handleModalSubmit}
+        />
 
         {/* Burger button (mobile only) */}
         <button className="md:hidden z-50" onClick={toggleMobileMenu}>

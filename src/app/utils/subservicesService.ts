@@ -3,6 +3,7 @@ import config from '@/payload.config'
 import { extractFormBlocks } from '@/app/utils/formBlockUtils'
 import { Component, Solution, Subservice, Case, Navigation } from '@/payload-types'
 import { getHomePageData } from './homeService'
+import { notFound } from 'next/navigation'
 
 type FormBlockType = Extract<Component['globals'][0], { blockType: 'form' }>
 type RequestFormBlockType = Extract<Component['globals'][0], { blockType: 'request-form' }>
@@ -41,7 +42,7 @@ export async function getSubserviceData(
 
   const service = serviceRes.docs[0]
   if (!service) {
-    throw new Error('Service not found')
+    notFound()
   }
 
   const subRes = await payload.find({
@@ -51,7 +52,7 @@ export async function getSubserviceData(
 
   const subservice = subRes.docs[0]
   if (!subservice) {
-    throw new Error('Subservice not found')
+    notFound()
   }
 
   // Extract form blocks using shared utility

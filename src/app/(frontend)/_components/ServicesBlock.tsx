@@ -8,6 +8,7 @@ import { useCurrentCity } from '@/app/utils/useCurrentCity'
 import { Solution } from '@/payload-types'
 import UniversalButton from './UniversalButton'
 import { ConsultationForm } from './Modal/ConsultationModal'
+import Breadcrumbs from './Breadcrumbs/Breadcrumbs'
 
 type Props = {
   heading: string
@@ -47,6 +48,9 @@ export default function ServicesBlock({ heading, solutions }: Props) {
 
   return (
     <section className="container-class" id="services">
+      <div className="mb-8 px-6 md:px-0 flex justify-center">
+        <Breadcrumbs />
+      </div>
       <h1 className="text-4xl text-center mb-8 md:mb-12">{heading}</h1>
 
       {/* Mobile Select */}
