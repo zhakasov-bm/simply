@@ -15,11 +15,26 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 
   const { solution } = await getSolutionData(slug)
 
+  const imageUrl = typeof solution.icon === 'string' ? solution.icon : solution.icon?.url || ''
+
   return {
     title: `${solution.name}`,
     description: solution.subtitle.substring(0, 160),
     alternates: {
       canonical: `https://simplydigital.kz/${city}/solution/${slug}`,
+    },
+    openGraph: {
+      title: solution.name,
+      description: solution.subtitle ?? '',
+      url: `https://simplydigital.kz/${city}/solution/${slug}`,
+      images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630 }] : [],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: solution.name,
+      description: solution.subtitle ?? '',
+      images: imageUrl ? [imageUrl] : [],
     },
   }
 }
