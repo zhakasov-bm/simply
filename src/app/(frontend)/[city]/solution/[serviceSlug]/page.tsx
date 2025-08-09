@@ -19,7 +19,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     title: `${solution.name}`,
     description: solution.subtitle.substring(0, 160),
     alternates: {
-      canonical: `https://simplydigital.kz/${city}/${slug}`,
+      canonical: `https://simplydigital.kz/${city}/solution/${slug}`,
     },
   }
 }

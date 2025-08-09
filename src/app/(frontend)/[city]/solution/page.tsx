@@ -20,7 +20,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     description:
       'Услуги компании Simply Digital: комплексный digital-маркетинг, стратегия, реклама, SEO, SMM и аналитика.',
     alternates: {
-      canonical: `https://popolnenie.kz/solution/${city}/`,
+      canonical: `https://simplydigital.kz/${city}/solution/`,
     },
   }
 }

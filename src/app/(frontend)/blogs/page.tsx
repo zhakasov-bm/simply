@@ -8,11 +8,11 @@ import FloatingNav from '../_components/FloatingNav'
 import RequestFormBlock from '../_components/RequestFormBlock'
 
 export const metadata = {
-  title: { absolute: 'Блог компании Turing IT agency' },
+  title: { absolute: 'Блог компании Simply Digital' },
   description:
-    'Откройте IT-блог Казахстана на alanturing.app — полезные статьи, советы, обзоры. Нужна консультация? Звоните: +7 (775) 202 60 10.',
+    'Откройте Digital-блог Казахстана — полезные статьи, советы, обзоры. Нужна консультация? Звоните: +7 (775) 202 60 10.',
   alternates: {
-    canonical: `https://alanturing.app/blogs`,
+    canonical: `https://simplydigital.kz/blogs`,
   },
 }
 

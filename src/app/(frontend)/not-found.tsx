@@ -1,10 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export const metadata = {
-  title: '404 — Страница не найдена',
-}
-
 export default function NotFound() {
   return (
     <section className="container mx-auto my-16 px-6 lg:px-24">

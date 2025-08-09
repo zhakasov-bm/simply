@@ -84,9 +84,9 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
     }
   }
 
-  // const pathCity = pathname.split('/')[1] || ''
-  // const isValidCity = ALLOWED_CITIES.includes(pathCity)
-  // const cityUrl = isValidCity ? `/${pathCity}` : '/'
+  const pathCity = pathname.split('/')[1] || ''
+  const isValidCity = ALLOWED_CITIES.includes(pathCity)
+  const cityUrl = isValidCity ? `/${pathCity}` : '/'
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
@@ -159,9 +159,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
       {/* Left: Logo and Nav */}
       <div className="flex gap-6 md:gap-20 items-center">
         {/* Logo: go to /[city] if on /case or /case/[slug] */}
-        <Link href={isCasePage ? mainPageHref : `/${currentCity}`}>
-          <Logo nav={nav} />
-        </Link>
+        <Logo nav={nav} />
         {/* Desktop Menu */}
         <div className="hidden lg:flex justify-around">
           <nav className="flex gap-6 relative">

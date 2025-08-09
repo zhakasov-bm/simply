@@ -14,6 +14,9 @@ export const metadata = {
   title: { absolute: 'О компании Simply Digital' },
   description:
     'О компании Simply Digital: наши ценности, команда и подход к решению маркетинговых задач.',
+  alternates: {
+    canonical: `https://simplydigital.kz/company`,
+  },
 }
 
 export default async function CompanyPage() {

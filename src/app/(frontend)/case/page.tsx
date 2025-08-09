@@ -13,6 +13,9 @@ export const metadata = {
   title: { absolute: 'Кейсы Simply Digital — наши успешные проекты' },
   description:
     'Успешные кейсы компании Simply Digital. Реальные результаты и примеры роста бизнеса с помощью digital-решений.',
+  alternates: {
+    canonical: `https://simplydigital.kz/case`,
+  },
 }
 
 export default async function page() {

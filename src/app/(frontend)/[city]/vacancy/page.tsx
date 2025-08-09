@@ -7,13 +7,27 @@ import VacancyCard from './components/VacancyCard'
 import { Vacancy } from '@/payload-types'
 import { ALLOWED_CITIES } from '@/app/utils/cities'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 
 type Props = {
   params: Promise<{ city: string }>
 }
 
-export const metadata = {
-  title: 'Вакансии',
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { city } = await params
+
+  if (!ALLOWED_CITIES.includes(city)) {
+    notFound()
+  }
+
+  return {
+    title: 'Вакансии',
+    description:
+      'Актуальные вакансии в Simply Digital. Присоединяйтесь к нашей команде и развивайтесь вместе с нами.',
+    alternates: {
+      canonical: `https://simplydigital.kz/${city}/vacancy`,
+    },
+  }
 }
 
 export default async function page({ params }: Props) {

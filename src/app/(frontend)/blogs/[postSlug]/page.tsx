@@ -27,7 +27,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     title: `${post.title}`,
     description: post.description.substring(0, 160) || '',
     alternates: {
-      canonical: `https://alanturing.app/blogs/${slug}`,
+      canonical: `https://simplydigital.kz/blogs/${slug}`,
     },
   }
 }

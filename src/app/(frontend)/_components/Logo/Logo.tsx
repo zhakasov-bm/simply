@@ -16,12 +16,8 @@ export const Logo = ({ nav }: { nav: Navigation }) => {
         : nav.logo // fallback
       : nav.logo
 
-  const pathname = usePathname()
-  const city = pathname.split('/')[1] || ''
-  const cityUrl = city ? `/${city}` : '/'
-
   return (
-    <Link href={cityUrl}>
+    <Link href={'/'}>
       {typeof logo === 'object' && logo?.url && (
         <Image src={logo.url} alt={logo.alt || ''} width={120} height={50} draggable={false} />
       )}
