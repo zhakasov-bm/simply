@@ -21,6 +21,43 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        url: 'https://simplydigital.kz',
+        name: 'Simply Digital Marketing Agency',
+        description:
+          'Digital-маркетинг, создание и продвижение сайтов, SMM, таргетированная и контекстная реклама.',
+        publisher: { '@id': 'https://simplydigital.kz/#organization' },
+      },
+      {
+        '@type': 'Organization',
+        '@id': 'https://simplydigital.kz//#organization',
+        name: 'Simply Digital Marketing Agency',
+        url: 'https://simplydigital.kz/',
+        logo: 'https://simplydigital.kz//company-og.jpg',
+        sameAs: ['https://www.instagram.com/simplydigital.kz'],
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'ул. Маркова, д. 24а',
+          addressLocality: 'Алматы',
+          postalCode: '050000',
+          addressCountry: 'KZ',
+        },
+
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            telephone: '+7 775 202 60 10',
+            contactType: 'customer support',
+          },
+        ],
+      },
+    ],
+  }
+
   const { children } = props
 
   const { navigation, solutions } = await getHomePageData()
@@ -30,6 +67,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="ru" suppressHydrationWarning className="dark">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         <Providers>
