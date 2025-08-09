@@ -10,11 +10,34 @@ import { getHomePageData } from '@/app/utils/homeService'
 import LeadCaptureBlock from '../_components/LeadCaptureBlock'
 
 export const metadata = {
-  title: { absolute: 'Кейсы Simply Digital — наши успешные проекты' },
+  title: {
+    absolute: 'Кейсы Simply Digital — наши успешные проекты',
+  },
   description:
     'Успешные кейсы компании Simply Digital. Реальные результаты и примеры роста бизнеса с помощью digital-решений.',
   alternates: {
-    canonical: `https://simplydigital.kz/case`,
+    canonical: 'https://simplydigital.kz/case',
+  },
+  openGraph: {
+    title: 'Кейсы Simply Digital — наши успешные проекты',
+    description:
+      'Успешные кейсы компании Simply Digital. Реальные результаты и примеры роста бизнеса с помощью digital-решений.',
+    url: 'https://simplydigital.kz/case',
+    images: [
+      {
+        url: 'https://simplydigital.kz/company-og.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Кейсы Simply Digital — наши успешные проекты',
+    description:
+      'Успешные кейсы компании Simply Digital. Реальные результаты и примеры роста бизнеса с помощью digital-решений.',
+    images: ['https://simplydigital.kz/company-og.jpg'],
   },
 }
 

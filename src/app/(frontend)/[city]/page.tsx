@@ -16,10 +16,43 @@ import BGraphic from '../_components/BGRaphic'
 import RequestFormBlock from '../_components/RequestFormBlock'
 import FloatingNav from '../_components/FloatingNav'
 import PostsSection from '../_components/PostsSection'
+import { Metadata } from 'next'
 
 interface PageProps {
   params: Promise<{ city: string }>
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
+  const { city } = await params
+
+  if (!ALLOWED_CITIES.includes(city)) {
+    notFound()
+  }
+
+  return {
+    openGraph: {
+      title: 'Simply Digital — Маркетинговое агентство полного цикла',
+      description:
+        'Simply Digital — это маркетинговое агентство, которое помогает бизнесу расти через комплексные digital-решения: стратегия, реклама, контент и аналитика.',
+      url: `https://simplydigital.kz/${city}`,
+      images: [
+        {
+          url: 'https://simplydigital.kz/company-og.jpg',
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Simply Digital — Маркетинговое агентство полного цикла',
+      description:
+        'Simply Digital — это маркетинговое агентство, которое помогает бизнесу расти через комплексные digital-решения: стратегия, реклама, контент и аналитика.',
+      images: ['https://simplydigital.kz/company-og.jpg'],
+    },
+  }
 }
 
 export default async function CityPage({ params }: PageProps) {

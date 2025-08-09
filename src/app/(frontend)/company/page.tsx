@@ -17,6 +17,27 @@ export const metadata = {
   alternates: {
     canonical: `https://simplydigital.kz/company`,
   },
+  openGraph: {
+    title: 'О компании Simply Digital',
+    description:
+      'О компании Simply Digital: наши ценности, команда и подход к решению маркетинговых задач.',
+    url: 'https://simplydigital.kz/company',
+    images: [
+      {
+        url: 'https://simplydigital.kz/company-og.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'О компании Simply Digital',
+    description:
+      'О компании Simply Digital: наши ценности, команда и подход к решению маркетинговых задач.',
+    images: ['https://simplydigital.kz/company-og.jpg'],
+  },
 }
 
 export default async function CompanyPage() {

@@ -15,6 +15,30 @@ import RequestFormBlock from './_components/RequestFormBlock'
 import FloatingNav from './_components/FloatingNav'
 import PostsSection from './_components/PostsSection'
 
+export const metadata = {
+  openGraph: {
+    title: 'Simply Digital — Маркетинговое агентство полного цикла',
+    description:
+      'Simply Digital — это маркетинговое агентство, которое помогает бизнесу расти через комплексные digital-решения: стратегия, реклама, контент и аналитика.',
+    url: 'https://simplydigital.kz',
+    images: [
+      {
+        url: 'https://simplydigital.kz/company-og.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Simply Digital — Маркетинговое агентство полного цикла',
+    description:
+      'Simply Digital — это маркетинговое агентство, которое помогает бизнесу расти через комплексные digital-решения: стратегия, реклама, контент и аналитика.',
+    images: ['https://simplydigital.kz/company-og.jpg'],
+  },
+}
+
 export default async function HomePage() {
   const { component, solutions, cases, navigation } = await getHomePageData()
 

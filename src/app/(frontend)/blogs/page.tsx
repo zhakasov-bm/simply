@@ -12,7 +12,28 @@ export const metadata = {
   description:
     'Откройте Digital-блог Казахстана — полезные статьи, советы, обзоры. Нужна консультация? Звоните: +7 (775) 202 60 10.',
   alternates: {
-    canonical: `https://simplydigital.kz/blogs`,
+    canonical: 'https://simplydigital.kz/blogs',
+  },
+  openGraph: {
+    title: 'Блог компании Simply Digital',
+    description:
+      'Откройте Digital-блог Казахстана — полезные статьи, советы, обзоры. Нужна консультация? Звоните: +7 (775) 202 60 10.',
+    url: 'https://simplydigital.kz/blogs',
+    images: [
+      {
+        url: 'https://simplydigital.kz/company-og.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Блог компании Simply Digital',
+    description:
+      'Откройте Digital-блог Казахстана — полезные статьи, советы, обзоры. Нужна консультация? Звоните: +7 (775) 202 60 10.',
+    images: ['https://simplydigital.kz/company-og.jpg'],
   },
 }
 

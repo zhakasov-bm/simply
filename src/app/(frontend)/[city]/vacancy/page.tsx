@@ -27,6 +27,27 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     alternates: {
       canonical: `https://simplydigital.kz/${city}/vacancy`,
     },
+    openGraph: {
+      title: 'Вакансии компании Simply Digital',
+      description:
+        'Актуальные вакансии в Simply Digital. Присоединяйтесь к нашей команде и развивайтесь вместе с нами.',
+      url: `https://simplydigital.kz/${city}/vacancy`,
+      images: [
+        {
+          url: 'https://simplydigital.kz/company-og.jpg',
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Вакансии компании Simply Digital',
+      description:
+        'Актуальные вакансии в Simply Digital. Присоединяйтесь к нашей команде и развивайтесь вместе с нами.',
+      images: ['https://simplydigital.kz/company-og.jpg'],
+    },
   }
 }
 
