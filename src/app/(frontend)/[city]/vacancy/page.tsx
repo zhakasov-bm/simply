@@ -50,7 +50,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     },
   }
 }
-
+//
 export default async function page({ params }: Props) {
   const payload = await getPayload({ config })
 
