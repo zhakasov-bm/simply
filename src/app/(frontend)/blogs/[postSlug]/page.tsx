@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import config from '@/payload.config'
 import { getPayload } from 'payload'
+import { headers as getHeaders } from 'next/headers.js'
+
 import PostBlock from './components/PostBlock'
 import { getHomePageData } from '@/app/utils/homeService'
 import { getPost } from '@/app/utils/getPostData'
@@ -61,6 +63,9 @@ export default async function Page({ params }: Props) {
 
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
+  const headers = await getHeaders()
+  const { user } = await payload.auth({ headers })
+
   const posts = await payload.find({
     collection: 'posts',
     limit: 8,
@@ -70,6 +75,7 @@ export default async function Page({ params }: Props) {
         equals: true,
       },
     },
+    user,
   })
 
   return (

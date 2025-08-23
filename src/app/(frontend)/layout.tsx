@@ -1,6 +1,5 @@
 import React from 'react'
 import './styles.css'
-import { headers } from 'next/headers'
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import { Providers } from './_components/providers/providers'

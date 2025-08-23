@@ -1,4 +1,6 @@
 import { getPayload } from 'payload'
+import { headers as getHeaders } from 'next/headers.js'
+
 import { Case } from '@/payload-types'
 import config from '@/payload.config'
 import { CaseCard } from './_components/CaseCard'
@@ -45,10 +47,14 @@ export default async function page() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
+  const headers = await getHeaders()
+  const { user } = await payload.auth({ headers })
+
   const res = await payload.find({
     collection: 'pages',
     where: { slug: { equals: 'case' } },
     limit: 1,
+    user,
   })
   const page = res.docs[0]
   let cases: Case[] = []
@@ -57,6 +63,7 @@ export default async function page() {
     let casesRes = await payload.find({
       collection: 'cases',
       limit: 10,
+      user,
     })
     cases = casesRes.docs
   } catch (e) {

@@ -1,4 +1,6 @@
 import { getPayload } from 'payload'
+import { headers as getHeaders } from 'next/headers.js'
+
 import config from '@/payload.config'
 import Hero from './_components/Hero'
 import TeamBlock from '../_components/TeamBlock'
@@ -41,13 +43,16 @@ export const metadata = {
 }
 
 export default async function CompanyPage() {
+  const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
+  const { user } = await payload.auth({ headers })
 
   const res = await payload.find({
     collection: 'pages',
     where: { slug: { equals: 'company' } },
     limit: 1,
+    user,
   })
   const page = res.docs[0]
 

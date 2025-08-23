@@ -1,4 +1,6 @@
 import { getPayload } from 'payload'
+import { headers as getHeaders } from 'next/headers.js'
+
 import config from '@/payload.config'
 import BGraphic from '../_components/BGRaphic'
 import Breadcrumbs from '../_components/Breadcrumbs/Breadcrumbs'
@@ -40,6 +42,9 @@ export const metadata = {
 export default async function page() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
+  const headers = await getHeaders()
+  const { user } = await payload.auth({ headers })
+
   const posts = await payload.find({
     collection: 'posts',
     sort: '-createdAt',
@@ -48,6 +53,7 @@ export default async function page() {
         equals: true,
       },
     },
+    user,
   })
 
   const { component, navigation } = await getHomePageData()

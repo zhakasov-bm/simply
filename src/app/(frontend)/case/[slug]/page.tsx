@@ -1,6 +1,7 @@
 import configPromise from '@/payload.config'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
+import { headers as getHeaders } from 'next/headers.js'
 
 import BrandsBlock from '../../_components/BrandsBlock'
 import Hero from './components/Hero'
@@ -24,11 +25,15 @@ async function getCase(slug: string) {
   try {
     const payload = await getPayload({ config: configPromise })
 
-    const component = await payload.findGlobal({ slug: 'component' })
+    const headers = await getHeaders()
+    const { user } = await payload.auth({ headers })
+
+    const component = await payload.findGlobal({ slug: 'component', user })
 
     const caseResult = await payload.find({
       collection: 'cases',
       where: { slug: { equals: slug } },
+      user,
     })
 
     if (!caseResult.docs?.length) return notFound()
@@ -36,11 +41,12 @@ async function getCase(slug: string) {
     const caseData = caseResult.docs[0]
     const formBlock = component?.globals?.find((block) => block.blockType === 'form')
     const requestForm = component.globals.find((block) => block.blockType === 'request-form')
-    const navigation = await payload.findGlobal({ slug: 'navigation' })
+    const navigation = await payload.findGlobal({ slug: 'navigation', user })
 
     const casesResult = await payload.find({
       collection: 'cases',
       limit: 10,
+      user,
     })
 
     return {

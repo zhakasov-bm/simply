@@ -1,4 +1,6 @@
 import { getPayload } from 'payload'
+import { headers as getHeaders } from 'next/headers.js'
+
 import config from '@/payload.config'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import BGraphic from '../../_components/BGRaphic'
@@ -53,6 +55,8 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 //
 export default async function page({ params }: Props) {
   const payload = await getPayload({ config })
+  const headers = await getHeaders()
+  const { user } = await payload.auth({ headers })
 
   const { city } = await params
   if (!ALLOWED_CITIES.includes(city)) {
@@ -63,6 +67,7 @@ export default async function page({ params }: Props) {
     collection: 'pages',
     where: { slug: { equals: 'vacancy' } },
     limit: 1,
+    user,
   })
 
   const page = res.docs[0]
@@ -71,6 +76,7 @@ export default async function page({ params }: Props) {
     collection: 'vacancy',
     sort: '-createdAt',
     limit: 100,
+    user,
   })
 
   const vacancies: Vacancy[] = vacancyRes.docs

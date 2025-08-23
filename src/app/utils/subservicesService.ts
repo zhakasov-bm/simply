@@ -1,4 +1,6 @@
 import { getPayload } from 'payload'
+import { headers as getHeaders } from 'next/headers.js'
+
 import config from '@/payload.config'
 import { extractFormBlocks } from '@/app/utils/formBlockUtils'
 import { Component, Solution, Subservice, Case, Navigation } from '@/payload-types'
@@ -23,7 +25,9 @@ export async function getSubserviceData(
   serviceSlug: string,
   subSlug: string,
 ): Promise<SubserviceData> {
+  const headers = await getHeaders()
   const payload = await getPayload({ config })
+  const { user } = await payload.auth({ headers })
 
   const { navigation } = await getHomePageData()
 
@@ -32,11 +36,13 @@ export async function getSubserviceData(
     payload.find({
       collection: 'solutions',
       where: { slug: { equals: serviceSlug } },
+      user,
     }),
     payload.find({
       collection: 'cases',
       limit: 3,
       sort: '-createdAt',
+      user,
     }),
   ])
 
@@ -48,6 +54,7 @@ export async function getSubserviceData(
   const subRes = await payload.find({
     collection: 'subservices',
     where: { slug: { equals: subSlug }, service: { equals: service.id } },
+    user,
   })
 
   const subservice = subRes.docs[0]
