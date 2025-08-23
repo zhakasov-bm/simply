@@ -1,20 +1,14 @@
-// components/Header.tsx
-
-'use client'
-
+// components/Footer/Footer.tsx
 import type { Navigation, Solution } from '@/payload-types'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
-import { useCurrentCity } from '@/app/utils/useCurrentCity'
-import { getNavLinkProps } from '../Header/Header'
-
 import { FaFacebook, FaInstagram, FaTelegram, FaLinkedin, FaYoutube } from 'react-icons/fa'
 import { Logo } from '../_components/Logo/Logo'
 
 type Props = {
   nav: Navigation
   solutions: Solution[]
+  currentCity: string
+  pathname: string
 }
 
 // Helper: returns true if the link should be active for the current path
@@ -29,11 +23,7 @@ function isNavLinkActive(linkUrl: string, pathname: string, currentCity: string)
   return regex.test(cleanedPath)
 }
 
-export default function Footer({ nav, solutions }: Props) {
-  const pathname = usePathname()
-  const [activeIdx, setActiveIdx] = useState<number | null>(null)
-  const [currentCity] = useCurrentCity()
-
+export default function Footer({ nav, solutions, currentCity, pathname }: Props) {
   const icons = {
     facebook: FaFacebook,
     instagram: FaInstagram,
@@ -49,7 +39,6 @@ export default function Footer({ nav, solutions }: Props) {
       brand: 'Стратегия и Бренд',
       website: 'Сайты и Технологии',
     }
-
     return labels[value] || value
   }
 
@@ -69,23 +58,21 @@ export default function Footer({ nav, solutions }: Props) {
   return (
     <footer className="py-8 border-t border-link/10">
       <div className="container mx-auto flex flex-wrap justify-between px-8 py-8">
+        {/* Left column */}
         <div className="flex flex-col gap-4">
-          {/* Logo */}
           <div className="hidden md:block">
             <Logo nav={nav} />
           </div>
 
-          {/* Contact */}
           <div className="flex flex-col gap-2">
             <h3 className="text-2xl py-2">{nav.contactTitle}</h3>
             {nav.contacts?.map((contact, id) => (
-              <div key={id}>
-                <p className="font-light text-base text-link/40">{contact.item}</p>
-              </div>
+              <p key={id} className="font-light text-base text-link/40">
+                {contact.item}
+              </p>
             ))}
           </div>
 
-          {/* SocialMedia */}
           <div className="flex gap-3">
             {nav.socialMedia?.map(({ platform, url }) => {
               const Icon = icons[platform]
@@ -106,20 +93,10 @@ export default function Footer({ nav, solutions }: Props) {
           <h3 className="text-2xl py-2">Компания</h3>
           {nav.links?.map((link, idx) => {
             const isActive = isNavLinkActive(link.url, pathname, currentCity)
-            const props = getNavLinkProps({
-              link,
-              idx,
-              pathname,
-              activeIdx,
-              currentCity,
-              isCasePage: pathname.startsWith('/case'),
-              mainPageHref: `/${currentCity}`,
-              setActiveIdx,
-            })
             return (
               <Link
                 key={idx}
-                {...props}
+                href={link.url}
                 className={`text-sm font-light hover:text-link ${isActive ? 'text-link' : 'text-link/40'}`}
               >
                 {link.label}
@@ -131,7 +108,6 @@ export default function Footer({ nav, solutions }: Props) {
         {/* Services */}
         <div className="hidden pt-16 md:pt-0 md:flex flex-col gap-4">
           <h3 className="text-2xl py-2">Услуги</h3>
-
           {Object.entries(groupedSolutions).map(([category, items]) => (
             <div key={category}>
               <h2 className="text-sm font-normal text-link">{getCategoryLabel(category)}</h2>

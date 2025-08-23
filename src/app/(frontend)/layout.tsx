@@ -1,15 +1,17 @@
 import React from 'react'
 import './styles.css'
-import config from '@/payload.config'
-import { getPayload } from 'payload'
+import { headers } from 'next/headers'
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
-import { Solution, Subservice } from '@/payload-types'
-import { getSolutionData } from '@/app/utils/solutionsService'
 import { Providers } from './_components/providers/providers'
 import { Metadata } from 'next'
 import { getHomePageData } from '../utils/homeService'
 import { getAllSubservices } from '../utils/getAllSubservices'
+
+interface RootLayoutProps {
+  children: React.ReactNode
+  params: { city: string }
+}
 
 export const metadata: Metadata = {
   title: {
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     'Simply Digital — это маркетинговое агентство, которое помогает бизнесу расти через комплексные digital-решения: стратегия, реклама, контент и аналитика.',
 }
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
+export default async function RootLayout({ children, params }: RootLayoutProps) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -58,10 +60,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     ],
   }
 
-  const { children } = props
-
   const { navigation, solutions } = await getHomePageData()
   const subservices = await getAllSubservices()
+
+  const currentCity = params.city || 'almaty'
+  const pathname = `/${currentCity}`
 
   return (
     <html lang="ru" suppressHydrationWarning className="dark">
@@ -76,7 +79,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <Providers>
           <Header nav={navigation} solutions={solutions} subservices={subservices} />
           <main className="pt-20 md:pt-0">{children}</main>
-          <Footer nav={navigation} solutions={solutions} />
+          <Footer
+            nav={navigation}
+            solutions={solutions}
+            currentCity={currentCity}
+            pathname={pathname}
+          />
         </Providers>
       </body>
     </html>
