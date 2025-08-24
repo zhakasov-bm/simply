@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { FaChevronRight, FaChevronUp } from 'react-icons/fa'
 import Image from 'next/image'
 import { ConsultationForm } from '@/app/(frontend)/_components/Modal/ConsultationModal'
+import VacancyModal from '@/app/(frontend)/_components/Modal/VacancyModal'
 
 function formatDate(timestamp: string | number | Date): string {
   const date = new Date(timestamp)
@@ -88,15 +89,7 @@ export default function VacancyCard({ item }: { item: Vacancy }) {
           <div className="font-inter mb-8">
             <RichText data={item.description} />
           </div>
-          <UniversalButton
-            label={item.button || 'Откликнуться'}
-            onClick={() => setModalOpen(true)}
-          />
-          <ConsultationForm
-            open={modalOpen}
-            onClose={() => setModalOpen(false)}
-            onSubmit={handleModalSubmit}
-          />
+          <VacancyModal buttonTitle={item.button || 'Откликнуться'} vacancyName={item.title} />
         </div>
       )}
     </div>

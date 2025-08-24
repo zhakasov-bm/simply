@@ -178,3 +178,7 @@ body {
     .vacancy-richtext p {
       @apply text-base md:text-xl font-light font-inter
     }
+
+    .inputBase {
+      @apply w-full rounded-2xl p-3 border border-gray-300 text-black bg-white focus:outline-none focus:ring-2
+   }
