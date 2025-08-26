@@ -98,5 +98,22 @@ export const Cases: CollectionConfig = {
       relationTo: 'media',
       // required: true,
     },
+    {
+      name: 'videos',
+      type: 'array',
+      fields: [
+        {
+          name: 'video',
+          type: 'upload',
+          relationTo: 'media',
+          filterOptions: {
+            mediaType: { equals: 'video' },
+          },
+          admin: {
+            description: 'Выберите видео для этой страницы',
+          },
+        },
+      ],
+    },
   ],
 }

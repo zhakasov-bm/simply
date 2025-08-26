@@ -14,6 +14,7 @@ import BGraphic from '../../_components/BGRaphic'
 import RequestFormBlock from '../../_components/RequestFormBlock'
 import { Metadata } from 'next'
 import FloatingNav from '../../_components/FloatingNav'
+import VideoBlock from './components/VideoBlock'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -108,6 +109,7 @@ export default async function CasePage({ params }: Props) {
       <ActionsBlock caseData={caseData} />
       <ResultsBlock caseData={caseData} />
       {formBlock && <LeadCaptureBlock block={formBlock} formId="case-detail-form" />}
+      <VideoBlock caseData={caseData} />
       <CasesBlock
         heading="Посмотрите другие кейсы"
         cases={casesList}

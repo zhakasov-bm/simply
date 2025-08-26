@@ -159,6 +159,7 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
+  mediaType: 'image' | 'video';
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -459,6 +460,15 @@ export interface Case {
       }[]
     | null;
   'result-image'?: (string | null) | Media;
+  videos?:
+    | {
+        /**
+         * Выберите видео для этой страницы
+         */
+        video?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -883,6 +893,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  mediaType?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1095,6 +1106,12 @@ export interface CasesSelect<T extends boolean = true> {
         id?: T;
       };
   'result-image'?: T;
+  videos?:
+    | T
+    | {
+        video?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
