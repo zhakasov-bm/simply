@@ -25,6 +25,12 @@ export const commonFieldsIfNoSubservices: Field[] = [
         type: 'text',
         required: true,
       },
+      {
+        name: 'icon',
+        type: 'upload',
+        relationTo: 'media',
+        defaultValue: '684eae4c99f2b795a5ba8a2c',
+      },
     ],
   },
 ].map((field) => ({

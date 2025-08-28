@@ -220,6 +220,7 @@ export interface Solution {
   availableServices?:
     | {
         title: string;
+        icon?: (string | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -940,6 +941,7 @@ export interface SolutionsSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
+        icon?: T;
         id?: T;
       };
   titleWhy?: T;
