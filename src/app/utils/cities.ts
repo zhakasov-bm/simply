@@ -28,7 +28,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Almaty',
     prepositional: {
       ru: 'в Алматы',
-      kk: 'Алматыда',
+      kk: 'Алматы',
       en: 'in Almaty',
     },
   },
@@ -38,7 +38,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Astana',
     prepositional: {
       ru: 'в Астане',
-      kk: 'Астанада',
+      kk: 'Астана',
       en: 'in Astana',
     },
   },
@@ -48,7 +48,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Shymkent',
     prepositional: {
       ru: 'в Шымкенте',
-      kk: 'Шымкентте',
+      kk: 'Шымкент',
       en: 'in Shymkent',
     },
   },
@@ -58,7 +58,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Aktobe',
     prepositional: {
       ru: 'в Актобе',
-      kk: 'Ақтөбеде',
+      kk: 'Ақтөбе',
       en: 'in Aktobe',
     },
   },
@@ -68,7 +68,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Aktau',
     prepositional: {
       ru: 'в Актау',
-      kk: 'Ақтауда',
+      kk: 'Ақтау',
       en: 'in Aktau',
     },
   },
@@ -78,7 +78,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Atyrau',
     prepositional: {
       ru: 'в Атырау',
-      kk: 'Атырауда',
+      kk: 'Атырау',
       en: 'in Atyrau',
     },
   },
@@ -88,7 +88,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Taraz',
     prepositional: {
       ru: 'в Таразе',
-      kk: 'Таразда',
+      kk: 'Тараз',
       en: 'in Taraz',
     },
   },
@@ -98,7 +98,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Talgar',
     prepositional: {
       ru: 'в Талгаре',
-      kk: 'Талғарда',
+      kk: 'Талғар',
       en: 'in Talgar',
     },
   },
@@ -108,7 +108,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Kyzylorda',
     prepositional: {
       ru: 'в Кызылорде',
-      kk: 'Қызылордада',
+      kk: 'Қызылорда',
       en: 'in Kyzylorda',
     },
   },
@@ -118,7 +118,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Kostanay',
     prepositional: {
       ru: 'в Костанае',
-      kk: 'Қостанайда',
+      kk: 'Қостанай',
       en: 'in Kostanay',
     },
   },
@@ -128,7 +128,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Dubai',
     prepositional: {
       ru: 'в Дубае',
-      kk: 'Дубайда',
+      kk: 'Дубай',
       en: 'in Dubai',
     },
   },
@@ -138,7 +138,7 @@ export const CITIES: Record<string, CityInfo> = {
     en: 'Batumi',
     prepositional: {
       ru: 'в Батуми',
-      kk: 'Батумиде',
+      kk: 'Батуми',
       en: 'in Batumi',
     },
   },

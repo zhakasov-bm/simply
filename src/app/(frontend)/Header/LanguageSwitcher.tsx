@@ -7,9 +7,9 @@ import { useAppLocale } from '../_components/providers/providers'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
 const LABELS: Record<AppLocale, string> = {
-  ru: 'RU',
-  kk: 'KZ',
-  en: 'EN',
+  ru: '🇷🇺 RU',
+  kk: '🇰🇿 KZ',
+  en: '🇬🇧 EN',
 }
 
 function setLocaleCookie(locale: AppLocale) {
@@ -33,7 +33,7 @@ export function LanguageSwitcher() {
     <div className="relative inline-flex">
       <select
         aria-label="Выбор языка"
-        className="appearance-none px-3 py-1 text-xs font-medium uppercase rounded-md border border-inputBG bg-background text-label focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-60"
+        className="appearance-none px-3 py-1 text-sm uppercase rounded-md border border-inputBG text-link focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-80"
         value={currentLocale}
         onChange={(event: ChangeEvent<HTMLSelectElement>) =>
           handleSelect(event.target.value as AppLocale)

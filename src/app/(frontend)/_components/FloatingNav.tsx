@@ -1,5 +1,5 @@
 'use client'
-import Image from 'next/image'
+
 import { Navigation } from '@/payload-types'
 import ThemeSwitch from './ThemeSwitch/ThemeSwitch'
 import { IoArrowUpOutline } from 'react-icons/io5'
@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { handleScroll } from '@/app/utils/scroll'
 import { useEffect, useState } from 'react'
 import { Logo } from './Logo/Logo'
+import { LanguageSwitcher } from '../Header/LanguageSwitcher'
 
 export default function FloatingNav({ nav }: { nav: Navigation }) {
   const [visibleNavItems, setVisibleNavItems] = useState<
@@ -60,6 +61,7 @@ export default function FloatingNav({ nav }: { nav: Navigation }) {
           </span>
         </motion.div>
 
+        {nav.languageSwitcher && <LanguageSwitcher />}
         <ThemeSwitch />
         <button
           className="text-sm font-unbounded text-primary bg-black hover:text-white rounded-custom px-3 py-2 cursor-pointer"
