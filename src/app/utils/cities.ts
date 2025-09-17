@@ -1,33 +1,164 @@
+import { AppLocale } from './locale'
+
 type CityInfo = {
   ru: string
-  prepositional: string
+  kk: string
+  en: string
+  prepositional: {
+    ru: string
+    kk: string
+    en: string
+  }
 }
 
 export const CITIES: Record<string, CityInfo> = {
-  default: { ru: '', prepositional: '' },
-  almaty: { ru: 'Алматы', prepositional: 'в Алматы' },
-  astana: { ru: 'Астана', prepositional: 'в Астане' },
-  shymkent: { ru: 'Шымкент', prepositional: 'в Шымкенте' },
-  aktobe: { ru: 'Актобе', prepositional: 'в Актобе' },
-  aktau: { ru: 'Актау', prepositional: 'в Актау' },
-  atyrau: { ru: 'Атырау', prepositional: 'в Атырау' },
-  taraz: { ru: 'Тараз', prepositional: 'в Таразе' },
-  talgar: { ru: 'Талгар', prepositional: 'в Талгаре' },
-  kyzylorda: { ru: 'Кызылорда', prepositional: 'в Кызылорде' },
-  kostanay: { ru: 'Костанай', prepositional: 'в Костанае' },
-  dubai: { ru: 'Дубай', prepositional: 'в Дубае' },
-  batumi: { ru: 'Батуми', prepositional: 'в Батуми' },
+  default: {
+    ru: '',
+    kk: '',
+    en: '',
+    prepositional: {
+      ru: '',
+      kk: '',
+      en: '',
+    },
+  },
+  almaty: {
+    ru: 'Алматы',
+    kk: 'Алматы',
+    en: 'Almaty',
+    prepositional: {
+      ru: 'в Алматы',
+      kk: 'Алматыда',
+      en: 'in Almaty',
+    },
+  },
+  astana: {
+    ru: 'Астана',
+    kk: 'Астана',
+    en: 'Astana',
+    prepositional: {
+      ru: 'в Астане',
+      kk: 'Астанада',
+      en: 'in Astana',
+    },
+  },
+  shymkent: {
+    ru: 'Шымкент',
+    kk: 'Шымкент',
+    en: 'Shymkent',
+    prepositional: {
+      ru: 'в Шымкенте',
+      kk: 'Шымкентте',
+      en: 'in Shymkent',
+    },
+  },
+  aktobe: {
+    ru: 'Актобе',
+    kk: 'Ақтөбе',
+    en: 'Aktobe',
+    prepositional: {
+      ru: 'в Актобе',
+      kk: 'Ақтөбеде',
+      en: 'in Aktobe',
+    },
+  },
+  aktau: {
+    ru: 'Актау',
+    kk: 'Ақтау',
+    en: 'Aktau',
+    prepositional: {
+      ru: 'в Актау',
+      kk: 'Ақтауда',
+      en: 'in Aktau',
+    },
+  },
+  atyrau: {
+    ru: 'Атырау',
+    kk: 'Атырау',
+    en: 'Atyrau',
+    prepositional: {
+      ru: 'в Атырау',
+      kk: 'Атырауда',
+      en: 'in Atyrau',
+    },
+  },
+  taraz: {
+    ru: 'Тараз',
+    kk: 'Тараз',
+    en: 'Taraz',
+    prepositional: {
+      ru: 'в Таразе',
+      kk: 'Таразда',
+      en: 'in Taraz',
+    },
+  },
+  talgar: {
+    ru: 'Талгар',
+    kk: 'Талғар',
+    en: 'Talgar',
+    prepositional: {
+      ru: 'в Талгаре',
+      kk: 'Талғарда',
+      en: 'in Talgar',
+    },
+  },
+  kyzylorda: {
+    ru: 'Кызылорда',
+    kk: 'Қызылорда',
+    en: 'Kyzylorda',
+    prepositional: {
+      ru: 'в Кызылорде',
+      kk: 'Қызылордада',
+      en: 'in Kyzylorda',
+    },
+  },
+  kostanay: {
+    ru: 'Костанай',
+    kk: 'Қостанай',
+    en: 'Kostanay',
+    prepositional: {
+      ru: 'в Костанае',
+      kk: 'Қостанайда',
+      en: 'in Kostanay',
+    },
+  },
+  dubai: {
+    ru: 'Дубай',
+    kk: 'Дубай',
+    en: 'Dubai',
+    prepositional: {
+      ru: 'в Дубае',
+      kk: 'Дубайда',
+      en: 'in Dubai',
+    },
+  },
+  batumi: {
+    ru: 'Батуми',
+    kk: 'Батуми',
+    en: 'Batumi',
+    prepositional: {
+      ru: 'в Батуми',
+      kk: 'Батумиде',
+      en: 'in Batumi',
+    },
+  },
 }
 
 export const ALLOWED_CITIES = Object.keys(CITIES)
 
-export const CITY_RU = Object.fromEntries(
-  Object.entries(CITIES).map(([key, value]) => [key, value.ru]),
-)
+function getCityInfo(city: string): CityInfo {
+  return CITIES[city] ?? CITIES.default
+}
 
-export const CITY_PREPOSITIONAL = Object.fromEntries(
-  Object.entries(CITIES).map(([key, value]) => [key, value.prepositional]),
-)
+export function getCityLabel(city: string, locale: AppLocale): string {
+  const info = getCityInfo(city)
+  return info[locale] || info.ru
+}
+
+export function getCityPrepositionalLabel(city: string, locale: AppLocale): string {
+  const info = getCityInfo(city)
+  return info.prepositional[locale] || info.prepositional.ru
+}
 
 export const getCityRegex = () => {
   return new RegExp(`^/(${ALLOWED_CITIES.join('|')})`)

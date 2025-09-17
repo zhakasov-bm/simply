@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
-import { ALLOWED_CITIES, CITY_RU } from '@/app/utils/cities'
+import { ALLOWED_CITIES, getCityLabel } from '@/app/utils/cities'
 import { X } from 'lucide-react'
+import { useAppLocale } from '../_components/providers/providers'
 
 type CityModalProps = {
   currentCity: string
@@ -9,6 +10,8 @@ type CityModalProps = {
 }
 
 export const CityModal = ({ currentCity, onSelect, onClose }: CityModalProps) => {
+  const locale = useAppLocale()
+
   useEffect(() => {
     // Lock scroll
     document.body.style.overflow = 'hidden'
@@ -35,7 +38,7 @@ export const CityModal = ({ currentCity, onSelect, onClose }: CityModalProps) =>
                 }`}
                 onClick={() => onSelect(city)}
               >
-                {CITY_RU[city]}
+                {getCityLabel(city, locale)}
               </button>
             </li>
           ))}

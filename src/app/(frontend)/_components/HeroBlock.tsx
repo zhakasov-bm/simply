@@ -4,13 +4,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Component } from '@/payload-types'
 import UniversalButton from './UniversalButton'
-import { CITY_PREPOSITIONAL } from '@/app/utils/cities'
+import { getCityPrepositionalLabel } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
 import { useTheme } from 'next-themes'
+import { useAppLocale } from './providers/providers'
 
 export default function HeroBlock({ component }: { component: Component }) {
   const [currentCity] = useCurrentCity()
-  const cityText = CITY_PREPOSITIONAL[currentCity] || ''
+  const locale = useAppLocale()
+  const cityText =
+    typeof currentCity === 'string' ? getCityPrepositionalLabel(currentCity, locale) : ''
 
   const { resolvedTheme } = useTheme()
 

@@ -7,6 +7,7 @@ export const WhyUsBlock: Block = {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'items',
@@ -16,10 +17,12 @@ export const WhyUsBlock: Block = {
         {
           name: 'title',
           type: 'text',
+          localized: true,
         },
         {
           name: 'description',
           type: 'text',
+          localized: true,
         },
         {
           name: 'icon',

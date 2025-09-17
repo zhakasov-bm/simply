@@ -10,6 +10,8 @@ import Breadcrumbs from '../_components/Breadcrumbs/Breadcrumbs'
 import RequestFormBlock from '../_components/RequestFormBlock'
 import { getHomePageData } from '@/app/utils/homeService'
 import LeadCaptureBlock from '../_components/LeadCaptureBlock'
+import { cookies } from 'next/headers'
+import { resolveLocale } from '@/app/utils/locale'
 
 export const metadata = {
   title: {
@@ -44,17 +46,23 @@ export const metadata = {
 }
 
 export default async function page() {
+  const cookieStore = await cookies()
+  const locale = resolveLocale(cookieStore.get('lang')?.value)
+
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
   const headers = await getHeaders()
   const { user } = await payload.auth({ headers })
 
+  const payloadLocale = locale
+
   const res = await payload.find({
     collection: 'pages',
     where: { slug: { equals: 'case' } },
     limit: 1,
     user,
+    locale: payloadLocale,
   })
   const page = res.docs[0]
   let cases: Case[] = []
@@ -64,6 +72,7 @@ export default async function page() {
       collection: 'cases',
       limit: 10,
       user,
+      locale: payloadLocale,
     })
     cases = casesRes.docs
   } catch (e) {
@@ -73,7 +82,7 @@ export default async function page() {
   const filteredCases = cases.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   )
-  const { component } = await getHomePageData()
+  const { component } = await getHomePageData(locale)
 
   const formBlocks = component.globals.filter((block) => block.blockType === 'form')
   const requestForm = component.globals.find((block) => block.blockType === 'request-form')

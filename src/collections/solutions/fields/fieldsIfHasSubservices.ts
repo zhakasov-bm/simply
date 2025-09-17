@@ -6,6 +6,7 @@ export const fieldsIfHasSubservices: Field[] = [
     type: 'richText',
     label: 'Почему ваш сайт нуждается в',
     required: true,
+    localized: true,
   },
   {
     name: 'whyList',
@@ -15,6 +16,7 @@ export const fieldsIfHasSubservices: Field[] = [
         name: 'title',
         type: 'text',
         required: true,
+        localized: true,
       },
       {
         name: 'icon',

@@ -7,11 +7,13 @@ export const TeamBlock: Block = {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'description',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'avatars',

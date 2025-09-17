@@ -1,5 +1,7 @@
 import React from 'react'
 import { getHomePageData } from '@/app/utils/homeService'
+import { cookies } from 'next/headers'
+import { resolveLocale } from '@/app/utils/locale'
 import HeroBlock from './_components/HeroBlock'
 import AboutUsBlock from './_components/AboutUsBlock'
 import TrustedByBlock from './_components/TrustedByBlock'
@@ -40,7 +42,10 @@ export const metadata = {
 }
 
 export default async function HomePage() {
-  const { component, solutions, cases, navigation } = await getHomePageData()
+  const cookieStore = await cookies()
+  const locale = resolveLocale(cookieStore.get('lang')?.value)
+
+  const { component, solutions, cases, navigation } = await getHomePageData(locale)
 
   const serviceBlock = component.globals.find((block) => block.blockType === 'services')
   const heading = serviceBlock?.heading || ''

@@ -12,7 +12,7 @@ export const FloatingNavBlock: Block = {
       type: 'array',
       required: false,
       fields: [
-        { name: 'nav', type: 'text' },
+        { name: 'nav', type: 'text', localized: true },
         { name: 'scrollTo', type: 'text' },
       ],
     },
@@ -20,6 +20,7 @@ export const FloatingNavBlock: Block = {
       name: 'button',
       type: 'text',
       defaultValue: 'Заказать',
+      localized: true,
     },
   ],
 }

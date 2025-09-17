@@ -7,6 +7,7 @@ export const ReviewsBlock: Block = {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'reviews',
@@ -19,18 +20,21 @@ export const ReviewsBlock: Block = {
           type: 'text',
           label: 'Имя клиента',
           required: true,
+          localized: true,
         },
         {
           name: 'position',
           type: 'text',
           label: 'Должность или компания',
           required: true,
+          localized: true,
         },
         {
           name: 'message',
           type: 'textarea',
           label: 'Сообщение отзыва',
           required: true,
+          localized: true,
         },
         {
           name: 'avatar',

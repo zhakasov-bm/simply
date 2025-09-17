@@ -3,6 +3,8 @@ import { SubservicePageLayout } from './_components/SubservicePageLayout'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ALLOWED_CITIES } from '@/app/utils/cities'
+import { cookies } from 'next/headers'
+import { resolveLocale } from '@/app/utils/locale'
 
 interface PageProps {
   params: Promise<{ city: string; serviceSlug: string; subSlug: string }>
@@ -17,7 +19,10 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     notFound()
   }
 
-  const { subservice } = await getSubserviceData(serviceSlug, subSlug)
+  const cookieStore = await cookies()
+  const locale = resolveLocale(cookieStore.get('lang')?.value)
+
+  const { subservice } = await getSubserviceData(serviceSlug, subSlug, locale)
 
   const imageUrl =
     typeof subservice.icon === 'string' ? subservice.icon : subservice.icon?.url || ''
@@ -48,6 +53,9 @@ export default async function SubservicePage({ params }: PageProps) {
   try {
     const { serviceSlug, subSlug } = await params
 
+    const cookieStore = await cookies()
+    const locale = resolveLocale(cookieStore.get('lang')?.value)
+
     const {
       component,
       service,
@@ -57,7 +65,7 @@ export default async function SubservicePage({ params }: PageProps) {
       requestFormBlock,
       seoBlocks,
       navigation,
-    } = await getSubserviceData(serviceSlug, subSlug)
+    } = await getSubserviceData(serviceSlug, subSlug, locale)
 
     return (
       <SubservicePageLayout

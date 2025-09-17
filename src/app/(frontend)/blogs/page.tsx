@@ -8,6 +8,8 @@ import { getHomePageData } from '@/app/utils/homeService'
 import BlogCard from './components/BlogCard'
 import FloatingNav from '../_components/FloatingNav'
 import RequestFormBlock from '../_components/RequestFormBlock'
+import { cookies } from 'next/headers'
+import { resolveLocale } from '@/app/utils/locale'
 
 export const metadata = {
   title: { absolute: 'Блог компании Simply Digital' },
@@ -40,10 +42,15 @@ export const metadata = {
 }
 
 export default async function page() {
+  const cookieStore = await cookies()
+  const locale = resolveLocale(cookieStore.get('lang')?.value)
+
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const headers = await getHeaders()
   const { user } = await payload.auth({ headers })
+
+  const payloadLocale = locale
 
   const posts = await payload.find({
     collection: 'posts',
@@ -54,9 +61,10 @@ export default async function page() {
       },
     },
     user,
+    locale: payloadLocale,
   })
 
-  const { component, navigation } = await getHomePageData()
+  const { component, navigation } = await getHomePageData(locale)
   const blogLabel = navigation?.links?.find((link) => link.url === '/blogs')?.label || 'Блог'
   const requestForm = component.globals.find((block) => block.blockType === 'request-form')
 

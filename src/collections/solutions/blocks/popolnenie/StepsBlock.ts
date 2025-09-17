@@ -3,11 +3,12 @@ import { Block } from 'payload'
 export const StepsBlock: Block = {
   slug: 'stepsblock',
   fields: [
-    {
-      name: 'stepTitle',
-      type: 'text',
-      defaultValue: 'Этапы работ',
-    },
+  {
+    name: 'stepTitle',
+    type: 'text',
+    defaultValue: 'Этапы работ',
+    localized: true,
+  },
     {
       name: 'steps',
       type: 'array',
@@ -20,10 +21,12 @@ export const StepsBlock: Block = {
         {
           name: 'title',
           type: 'text',
+          localized: true,
         },
         {
           name: 'message',
           type: 'text',
+          localized: true,
         },
       ],
     },

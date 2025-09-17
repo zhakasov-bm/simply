@@ -28,6 +28,7 @@ export const Navigation: GlobalConfig = {
           name: 'label',
           type: 'text',
           required: true,
+          localized: true,
         },
         {
           name: 'url',
@@ -41,11 +42,18 @@ export const Navigation: GlobalConfig = {
       type: 'text',
       required: true,
       defaultValue: 'Контакты',
+      localized: true,
     },
     {
       name: 'contacts',
       type: 'array',
-      fields: [{ name: 'item', type: 'text' }],
+      fields: [
+        {
+          name: 'item',
+          type: 'text',
+          localized: true,
+        },
+      ],
       required: true,
     },
     {

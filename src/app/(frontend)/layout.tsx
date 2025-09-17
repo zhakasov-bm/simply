@@ -4,12 +4,14 @@ import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import { Providers } from './_components/providers/providers'
 import { Metadata } from 'next'
+import { cookies } from 'next/headers'
 import { getHomePageData } from '../utils/homeService'
 import { getAllSubservices } from '../utils/getAllSubservices'
+import { resolveLocale } from '../utils/locale'
 
 interface RootLayoutProps {
   children: React.ReactNode
-  params: { city: string }
+  params?: Promise<{ city?: string }>
 }
 
 export const metadata: Metadata = {
@@ -22,6 +24,11 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children, params }: RootLayoutProps) {
+  const cookieStore = await cookies()
+  const locale = resolveLocale(cookieStore.get('lang')?.value)
+
+  const resolvedParams = params ? await params : {}
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -59,14 +66,14 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
     ],
   }
 
-  const { navigation, solutions } = await getHomePageData()
-  const subservices = await getAllSubservices()
+  const { navigation, solutions } = await getHomePageData(locale)
+  const subservices = await getAllSubservices(locale)
 
-  const currentCity = params.city || 'almaty'
+  const currentCity = resolvedParams.city || 'almaty'
   const pathname = `/${currentCity}`
 
   return (
-    <html lang="ru" suppressHydrationWarning className="dark">
+    <html lang={locale} suppressHydrationWarning className="dark">
       <head>
         <link rel="icon" href="/favicon.ico" />
         <script
@@ -75,7 +82,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
         />
       </head>
       <body>
-        <Providers>
+        <Providers locale={locale}>
           <Header nav={navigation} solutions={solutions} subservices={subservices} />
           <main className="pt-20 md:pt-0">{children}</main>
           <Footer

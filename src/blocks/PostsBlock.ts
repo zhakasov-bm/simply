@@ -11,6 +11,7 @@ export const PostsBlock: Block = {
       name: 'heading',
       type: 'richText',
       required: true,
+      localized: true,
     },
   ],
 }

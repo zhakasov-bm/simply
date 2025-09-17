@@ -3,12 +3,13 @@ import { Block } from 'payload'
 export const AdvantagesBlock: Block = {
   slug: 'advantagesblock',
   fields: [
-    {
-      name: 'advantagesTitle',
-      type: 'richText',
-      required: true,
-      label: 'Преимущества',
-    },
+  {
+    name: 'advantagesTitle',
+    type: 'richText',
+    required: true,
+    label: 'Преимущества',
+    localized: true,
+  },
     {
       name: 'advantages',
       type: 'array',
@@ -16,6 +17,7 @@ export const AdvantagesBlock: Block = {
         {
           name: 'advantage',
           type: 'richText',
+          localized: true,
         },
       ],
     },

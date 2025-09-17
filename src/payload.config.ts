@@ -43,18 +43,28 @@ export default buildConfig({
   localization: {
     locales: [
       {
-        label: {
-          ru: 'Руский',
-          kz: 'Орысша',
-        },
         code: 'ru',
+        label: {
+          ru: 'Русский',
+          kk: 'Орыс тілі',
+          en: 'Russian',
+        },
       },
       {
+        code: 'kk',
         label: {
           ru: 'Казахский',
-          kz: 'Қазақша',
+          kk: 'Қазақша',
+          en: 'Kazakh',
         },
-        code: 'kz',
+      },
+      {
+        code: 'en',
+        label: {
+          ru: 'Английский',
+          kk: 'Ағылшын тілі',
+          en: 'English',
+        },
       },
     ],
     defaultLocale: 'ru',

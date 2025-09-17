@@ -17,11 +17,13 @@ export const Solutions: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Название услуги',
+      localized: true,
     },
     {
       name: 'subtitle',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'slug',
@@ -61,6 +63,7 @@ export const Solutions: CollectionConfig = {
         {
           name: 'name',
           type: 'text',
+          localized: true,
         },
       ],
     },
@@ -69,6 +72,7 @@ export const Solutions: CollectionConfig = {
       type: 'text',
       defaultValue: 'Какие услуги можно заказать у нас?',
       required: true,
+      localized: true,
     },
     {
       name: 'hasSubservices',
@@ -81,6 +85,7 @@ export const Solutions: CollectionConfig = {
       name: 'titleWhy',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'problem',
@@ -91,11 +96,13 @@ export const Solutions: CollectionConfig = {
           name: 'title',
           type: 'text',
           required: true,
+          localized: true,
         },
         {
           name: 'subtitle',
           type: 'text',
           required: true,
+          localized: true,
         },
       ],
       required: true,
@@ -105,13 +112,14 @@ export const Solutions: CollectionConfig = {
       type: 'text',
       defaultValue: 'Частые вопросы',
       required: true,
+      localized: true,
     },
     {
       name: 'questions',
       type: 'array',
       fields: [
-        { name: 'question', type: 'text' },
-        { name: 'answer', type: 'text' },
+        { name: 'question', type: 'text', localized: true },
+        { name: 'answer', type: 'text', localized: true },
       ],
       required: true,
     },
@@ -119,6 +127,7 @@ export const Solutions: CollectionConfig = {
       name: 'lead',
       type: 'richText',
       required: true,
+      localized: true,
     },
   ],
 }

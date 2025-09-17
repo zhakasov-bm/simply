@@ -10,6 +10,8 @@ import { getPost } from '@/app/utils/getPostData'
 import FloatingNav from '../../_components/FloatingNav'
 import PostsSection from '../../_components/PostsSection'
 import RequestFormBlock from '../../_components/RequestFormBlock'
+import { cookies } from 'next/headers'
+import { resolveLocale } from '@/app/utils/locale'
 
 type Props = {
   params: Promise<{ postSlug: string }>
@@ -19,7 +21,10 @@ type Props = {
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { postSlug: slug } = await params
 
-  const post = await getPost(slug)
+  const cookieStore = await cookies()
+  const locale = resolveLocale(cookieStore.get('lang')?.value)
+
+  const post = await getPost(slug, locale)
 
   const imageUrl = typeof post.image === 'string' ? post.image : post.image?.url || ''
 
@@ -52,19 +57,24 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 export default async function Page({ params }: Props) {
   const { postSlug: slug } = await params
 
-  const post = await getPost(slug)
+  const cookieStore = await cookies()
+  const locale = resolveLocale(cookieStore.get('lang')?.value)
+
+  const post = await getPost(slug, locale)
 
   if (!post) {
     notFound()
   }
 
-  const { component, navigation } = await getHomePageData()
+  const { component, navigation } = await getHomePageData(locale)
   const requestForm = component.globals.find((block) => block.blockType === 'request-form')
 
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const headers = await getHeaders()
   const { user } = await payload.auth({ headers })
+
+  const payloadLocale = locale
 
   const posts = await payload.find({
     collection: 'posts',
@@ -76,6 +86,7 @@ export default async function Page({ params }: Props) {
       },
     },
     user,
+    locale: payloadLocale,
   })
 
   return (

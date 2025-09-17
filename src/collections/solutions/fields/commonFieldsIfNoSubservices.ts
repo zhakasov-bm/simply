@@ -6,14 +6,17 @@ export const commonFieldsIfNoSubservices: Field[] = [
     type: 'text',
     required: true,
     label: 'Title of Block',
+    localized: true,
   },
   {
     name: 'title',
     type: 'text',
+    localized: true,
   },
   {
     name: 'description',
     type: 'textarea',
+    localized: true,
   },
   {
     name: 'availableServices',
@@ -24,6 +27,7 @@ export const commonFieldsIfNoSubservices: Field[] = [
         name: 'title',
         type: 'text',
         required: true,
+        localized: true,
       },
       {
         name: 'icon',

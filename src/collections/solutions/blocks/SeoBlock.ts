@@ -3,11 +3,12 @@ import { Block } from 'payload'
 export const SeoBlock: Block = {
   slug: 'seoblock',
   fields: [
-    {
-      name: 'header',
-      type: 'richText',
-      required: true,
-    },
+  {
+    name: 'header',
+    type: 'richText',
+    required: true,
+    localized: true,
+  },
     {
       name: 'designType',
       type: 'select',
@@ -21,14 +22,16 @@ export const SeoBlock: Block = {
       name: 'steps',
       type: 'array',
       fields: [
-        {
-          name: 'title',
-          type: 'text',
-        },
-        {
-          name: 'description',
-          type: 'text',
-        },
+      {
+        name: 'title',
+        type: 'text',
+        localized: true,
+      },
+      {
+        name: 'description',
+        type: 'text',
+        localized: true,
+      },
         {
           name: 'icon',
           type: 'upload',

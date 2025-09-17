@@ -9,12 +9,14 @@ import { Menu } from 'lucide-react'
 import { MobileMenu } from './MobileMenu'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { PiMapPinFill } from 'react-icons/pi'
-import { ALLOWED_CITIES, CITY_RU, getCityRegex } from '@/app/utils/cities'
+import { ALLOWED_CITIES, getCityLabel, getCityRegex } from '@/app/utils/cities'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
 import { CityModal } from './CityModal'
 import ThemeSwitch from '../_components/ThemeSwitch/ThemeSwitch'
 import UniversalButton from '../_components/UniversalButton'
 import { ConsultationForm } from '../_components/Modal/ConsultationModal'
+import { useAppLocale } from '../_components/providers/providers'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 type NavProps = {
   nav: Navigation
@@ -58,6 +60,8 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
   const pathname = usePathname()
   console.log(pathname)
   const router = useRouter()
+
+  const locale = useAppLocale()
 
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
@@ -229,8 +233,8 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           onClick={() => setIsCityModalOpen(true)}
         >
           <PiMapPinFill />
-          {typeof currentCity === 'string' && CITY_RU[currentCity]
-            ? CITY_RU[currentCity]
+          {typeof currentCity === 'string'
+            ? getCityLabel(currentCity, locale) || 'Выберите город'
             : 'Выберите город'}
         </button>
 
@@ -241,6 +245,11 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
           />
           +7 775 202 60 10
         </Link>
+        {nav.languageSwitcher && (
+          <div className="hidden md:flex items-center">
+            <LanguageSwitcher />
+          </div>
+        )}
         <div className="flex items-center justify-center w-10 h-10 cursor-pointer">
           <ThemeSwitch />
         </div>

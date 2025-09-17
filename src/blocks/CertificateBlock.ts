@@ -7,6 +7,7 @@ export const CertificateBlock: Block = {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'descriptions',
@@ -18,11 +19,13 @@ export const CertificateBlock: Block = {
           name: 'title',
           type: 'text',
           required: true,
+          localized: true,
         },
         {
           name: 'message',
           type: 'text',
           required: true,
+          localized: true,
         },
       ],
     },

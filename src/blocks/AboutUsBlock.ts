@@ -7,11 +7,13 @@ export const AboutUsBlock: Block = {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'content',
       type: 'richText',
       required: true,
+      localized: true,
     },
     {
       name: 'statistics',
@@ -22,11 +24,13 @@ export const AboutUsBlock: Block = {
           name: 'title',
           type: 'text',
           required: true,
+          localized: true,
         },
         {
           name: 'description',
           type: 'text',
           required: true,
+          localized: true,
         },
       ],
     },

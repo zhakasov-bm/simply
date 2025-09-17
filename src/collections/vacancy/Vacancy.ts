@@ -11,15 +11,18 @@ export const Vacancy: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'subtitle',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'city',
       type: 'text',
+      localized: true,
     },
     {
       name: 'category',
@@ -31,6 +34,7 @@ export const Vacancy: CollectionConfig = {
         { label: 'IT-вакансии', value: 'IT' },
         { label: 'Маркетинг', value: 'marketing' },
       ],
+      localized: true,
     },
     {
       name: 'tags',
@@ -39,6 +43,7 @@ export const Vacancy: CollectionConfig = {
         {
           name: 'name',
           type: 'text',
+          localized: true,
         },
         {
           name: 'icon',
@@ -52,11 +57,13 @@ export const Vacancy: CollectionConfig = {
       name: 'description',
       type: 'richText',
       required: true,
+      localized: true,
     },
     {
       name: 'button',
       type: 'text',
       defaultValue: 'Откликнуться',
+      localized: true,
     },
   ],
 }

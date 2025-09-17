@@ -11,6 +11,7 @@ export const ServicesBlock: Block = {
       name: 'heading',
       type: 'text',
       required: false,
+      localized: true,
     },
   ],
 }

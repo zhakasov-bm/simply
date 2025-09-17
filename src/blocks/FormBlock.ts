@@ -7,6 +7,7 @@ export const FormBlock: Block = {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'form',

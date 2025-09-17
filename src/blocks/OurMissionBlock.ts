@@ -8,6 +8,7 @@ export const OurMissionBlock: Block = {
       label: 'Наша миссия',
       type: 'richText',
       required: true,
+      localized: true,
     },
     {
       name: 'values',
@@ -15,9 +16,9 @@ export const OurMissionBlock: Block = {
       type: 'array',
       required: true,
       fields: [
-        { name: 'adv', type: 'text', required: true },
+        { name: 'adv', type: 'text', required: true, localized: true },
         { name: 'icon', type: 'upload', relationTo: 'media' },
-        { name: 'title', type: 'text', required: true },
+        { name: 'title', type: 'text', required: true, localized: true },
       ],
     },
   ],

@@ -5,6 +5,7 @@ export const brandFields: Field[] = [
     name: 'heading',
     type: 'text',
     required: true,
+    localized: true,
   },
   {
     name: 'logos',

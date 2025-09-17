@@ -4,6 +4,7 @@ import { headers as getHeaders } from 'next/headers.js'
 import config from '@/payload.config'
 import { extractFormBlocks } from '@/app/utils/formBlockUtils'
 import { Component, Solution, Subservice, Case, Navigation } from '@/payload-types'
+import { AppLocale } from './locale'
 import { getHomePageData } from './homeService'
 import { notFound } from 'next/navigation'
 
@@ -24,25 +25,30 @@ export interface SubserviceData {
 export async function getSubserviceData(
   serviceSlug: string,
   subSlug: string,
+  locale: AppLocale | 'all',
 ): Promise<SubserviceData> {
   const headers = await getHeaders()
   const payload = await getPayload({ config })
   const { user } = await payload.auth({ headers })
 
-  const { navigation } = await getHomePageData()
+  const { navigation } = await getHomePageData(locale)
+
+  const payloadLocale = locale === 'all' ? 'all' : locale
 
   const [component, serviceRes, casesResult] = await Promise.all([
-    payload.findGlobal({ slug: 'component' }),
+    payload.findGlobal({ slug: 'component', locale: payloadLocale, user }),
     payload.find({
       collection: 'solutions',
       where: { slug: { equals: serviceSlug } },
       user,
+      locale: payloadLocale,
     }),
     payload.find({
       collection: 'cases',
       limit: 3,
       sort: '-createdAt',
       user,
+      locale: payloadLocale,
     }),
   ])
 
@@ -55,6 +61,7 @@ export async function getSubserviceData(
     collection: 'subservices',
     where: { slug: { equals: subSlug }, service: { equals: service.id } },
     user,
+    locale: payloadLocale,
   })
 
   const subservice = subRes.docs[0]

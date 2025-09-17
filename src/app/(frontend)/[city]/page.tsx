@@ -17,6 +17,8 @@ import RequestFormBlock from '../_components/RequestFormBlock'
 import FloatingNav from '../_components/FloatingNav'
 import PostsSection from '../_components/PostsSection'
 import { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import { resolveLocale } from '@/app/utils/locale'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -61,7 +63,10 @@ export default async function CityPage({ params }: PageProps) {
     notFound()
   }
 
-  const { component, solutions, cases, navigation } = await getHomePageData()
+  const cookieStore = await cookies()
+  const locale = resolveLocale(cookieStore.get('lang')?.value)
+
+  const { component, solutions, cases, navigation } = await getHomePageData(locale)
 
   const serviceBlock = component.globals.find((block) => block.blockType === 'services')
   const heading = serviceBlock?.heading || ''

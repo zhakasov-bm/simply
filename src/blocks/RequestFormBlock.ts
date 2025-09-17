@@ -7,11 +7,13 @@ export const RequestFormBlock: Block = {
       name: 'heading',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'contacts',
@@ -21,6 +23,7 @@ export const RequestFormBlock: Block = {
         {
           name: 'item',
           type: 'text',
+          localized: true,
         },
         {
           name: 'icon',

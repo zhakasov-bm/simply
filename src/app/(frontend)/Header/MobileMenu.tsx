@@ -7,9 +7,11 @@ import type { Navigation, Solution, Subservice } from '@/payload-types'
 import { useCurrentCity } from '@/app/utils/useCurrentCity'
 import { getNavLinkProps } from './Header'
 import { CityModal } from './CityModal'
-import { CITY_RU } from '@/app/utils/cities'
+import { getCityLabel } from '@/app/utils/cities'
 import { PiMapPinFill } from 'react-icons/pi'
 import { useRouter, usePathname } from 'next/navigation'
+import { useAppLocale } from '../_components/providers/providers'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 type Props = {
   nav: Navigation
@@ -33,6 +35,7 @@ export function MobileMenu({
   const [currentCity, setCurrentCity] = useCurrentCity()
   const router = useRouter()
   const pathname = usePathname()
+  const locale = useAppLocale()
 
   // Prevent page scroll when menu is open
   useEffect(() => {
@@ -73,11 +76,15 @@ export function MobileMenu({
             onClick={onOpenCityModal}
           >
             <PiMapPinFill />
-            {typeof currentCity === 'string' && CITY_RU[currentCity]
-              ? CITY_RU[currentCity]
+            {typeof currentCity === 'string'
+              ? getCityLabel(currentCity, locale) || 'Выберите город'
               : 'Выберите город'}
-            {/* {CITY_RU[currentCity]} */}
           </button>
+          {nav.languageSwitcher && (
+            <div className="mt-2">
+              <LanguageSwitcher />
+            </div>
+          )}
           {/* {isCityModalOpen && (
             <CityModal
               currentCity={currentCity}

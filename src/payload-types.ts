@@ -108,7 +108,7 @@ export interface Config {
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     component: ComponentSelect<false> | ComponentSelect<true>;
   };
-  locale: 'ru' | 'kz';
+  locale: 'ru' | 'kk' | 'en';
   user: User & {
     collection: 'users';
   };

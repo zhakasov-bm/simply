@@ -10,12 +10,14 @@ export const Pages: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Название страницы',
+      localized: true,
     },
     {
       name: 'heading',
       type: 'richText',
       required: true,
       label: 'Заголовок',
+      localized: true,
     },
     {
       name: 'image',

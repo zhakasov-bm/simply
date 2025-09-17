@@ -14,6 +14,7 @@ export const Posts: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'slug',
@@ -26,6 +27,7 @@ export const Posts: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Мета-описание',
+      localized: true,
     },
     {
       name: 'image',
@@ -37,6 +39,7 @@ export const Posts: CollectionConfig = {
     {
       name: 'content',
       type: 'richText',
+      localized: true,
     },
     {
       name: 'includedInBlog',
