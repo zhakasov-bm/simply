@@ -11,7 +11,7 @@ interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-// Метаданные страницы
+// Метаданные страницы 23.09
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { city, serviceSlug: slug } = await params
 
