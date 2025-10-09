@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
-import { headers as getHeaders } from 'next/headers.js'
+import { headers as getHeaders, cookies } from 'next/headers.js'
+import { resolveLocale } from '@/app/utils/locale'
 
 import config from '@/payload.config'
 import { RichText } from '@payloadcms/richtext-lexical/react'
@@ -57,6 +58,7 @@ export default async function page({ params }: Props) {
   const payload = await getPayload({ config })
   const headers = await getHeaders()
   const { user } = await payload.auth({ headers })
+  const locale = resolveLocale((await cookies()).get('lang')?.value)
 
   const { city } = await params
   if (!ALLOWED_CITIES.includes(city)) {
@@ -68,6 +70,7 @@ export default async function page({ params }: Props) {
     where: { slug: { equals: 'vacancy' } },
     limit: 1,
     user,
+    locale,
   })
 
   const page = res.docs[0]
@@ -77,6 +80,7 @@ export default async function page({ params }: Props) {
     sort: '-createdAt',
     limit: 100,
     user,
+    locale,
   })
 
   const vacancies: Vacancy[] = vacancyRes.docs

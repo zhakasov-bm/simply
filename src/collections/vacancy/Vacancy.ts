@@ -34,7 +34,6 @@ export const Vacancy: CollectionConfig = {
         { label: 'IT-вакансии', value: 'IT' },
         { label: 'Маркетинг', value: 'marketing' },
       ],
-      localized: true,
     },
     {
       name: 'tags',
