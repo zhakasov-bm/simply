@@ -178,7 +178,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                     ? pathname === link.url || pathname.startsWith(link.url + '/')
                     : cleanedPath === link.url || cleanedPath.startsWith(link.url + '/')
 
-              if (link.label === 'Услуги') {
+              if (link.url === '/solution') {
                 return (
                   <div
                     key={idx}
@@ -191,7 +191,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                         setActiveIdx(idx)
                         setDropdownOpen((prev) => !prev)
                       }}
-                      className={`text-base ${
+                      className={`text-sm ${
                         isActive ? 'text-hoverText' : 'text-label'
                       } hover:text-hoverText`}
                     >
@@ -217,7 +217,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                 <Link
                   key={idx}
                   {...props}
-                  className={`text-base ${isActive ? 'text-hoverText' : 'text-label'} hover:text-hoverText`}
+                  className={`text-sm ${isActive ? 'text-hoverText' : 'text-label'} hover:text-hoverText`}
                 >
                   {link.label}
                 </Link>
@@ -238,9 +238,9 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
             : 'Выберите город'}
         </button>
 
-        <Link href="tel:+77752026010" className="hidden text-base md:flex items-center gap-2 group">
+        <Link href="tel:+77752026010" className="hidden text-sm md:flex items-center gap-2 group">
           <FaPhoneAlt
-            size={20}
+            size={16}
             className="transition-transform duration-300 group-hover:rotate-12"
           />
           +7 775 202 60 10
