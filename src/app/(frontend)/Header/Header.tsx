@@ -166,7 +166,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
         <Logo nav={nav} />
         {/* Desktop Menu */}
         <div className="hidden lg:flex justify-around">
-          <nav className="flex gap-6 relative">
+          <nav className="flex items-center gap-6 relative">
             {nav.links?.map((link, idx) => {
               const cityRegex = /^\/[a-zа-я-]+/
               const cleanedPath = pathname.replace(cityRegex, '') || '/'
@@ -182,7 +182,7 @@ export default function Header({ nav, solutions, subservices }: NavProps) {
                 return (
                   <div
                     key={idx}
-                    className="relative"
+                    className="relative flex items-center"
                     onMouseEnter={() => setDropdownOpen(true)}
                     onMouseLeave={() => setDropdownOpen(false)}
                   >

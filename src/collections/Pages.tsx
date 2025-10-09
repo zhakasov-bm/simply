@@ -15,7 +15,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'heading',
       type: 'richText',
-      required: true,
+      // required: true,
       label: 'Заголовок',
       localized: true,
     },
