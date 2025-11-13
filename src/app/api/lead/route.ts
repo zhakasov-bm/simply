@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 type LeadFields = Record<string, string>
+type UploadedFile = Blob & { name?: string }
 
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024
 
@@ -64,17 +65,19 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function parseIncomingPayload(request: NextRequest) {
+async function parseIncomingPayload(
+  request: NextRequest,
+): Promise<{ fields: LeadFields; file: UploadedFile | null }> {
   const contentType = request.headers.get('content-type') || ''
   const fields: LeadFields = {}
-  let file: File | null = null
+  let file: UploadedFile | null = null
 
   if (contentType.includes('multipart/form-data')) {
     const formData = await request.formData()
     formData.forEach((value, key) => {
-      if (value instanceof File) {
+      if (value instanceof Blob) {
         if (!file && value.size > 0) {
-          file = value
+          file = value as UploadedFile
         }
         return
       }
@@ -153,7 +156,7 @@ async function sendToTelegram({
   chatId: string
   formName: string
   fields: LeadFields
-  file: File | null
+  file: UploadedFile | null
 }) {
   const message = buildTelegramMessage(formName, fields)
 
@@ -176,7 +179,7 @@ async function sendToTelegram({
     const formData = new FormData()
     formData.append('chat_id', chatId)
     formData.append('caption', `Форма: ${formName}`)
-    formData.append('document', file, file.name)
+    formData.append('document', file, file.name || 'attachment')
 
     const fileResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendDocument`, {
       method: 'POST',
