@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import SuccessModal from './Modal/SuccessModal'
-import { submitToTelegram } from '@/app/utils/submitToTelegram'
+import { submitLead } from '@/app/utils/submitLead'
 import FormBuilder from './FormBuilder'
 
 type RequestFormProps = Extract<Component['globals'][0], { blockType: 'request-form' }>
@@ -60,7 +60,10 @@ export default function RequestFormBlock({ block }: { block: RequestFormProps })
         return
       }
 
-      await submitToTelegram(data)
+      await submitLead({
+        form: block.form?.title || 'request-form',
+        data,
+      })
 
       setFormState({ loading: false, error: null, success: true })
       setPhone('+7 ') // reset phone input

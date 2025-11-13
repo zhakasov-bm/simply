@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { submitToTelegram } from '@/app/utils/submitToTelegram'
+import { submitLead } from '@/app/utils/submitLead'
 import UniversalButton from '../UniversalButton'
 import { X } from 'lucide-react'
 
@@ -42,7 +42,11 @@ export default function VacancyModal({ vacancyName, buttonTitle }: Props) {
       }
 
       const file = formData.get('resume') as File
-      await submitToTelegram(data, file && file.size ? file : undefined)
+      await submitLead({
+        form: 'vacancy-response',
+        data,
+        file: file && file.size ? file : null,
+      })
 
       setFormState({ loading: false, error: null, success: true })
 

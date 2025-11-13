@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Modal } from './Modal'
-import { submitToTelegram } from '@/app/utils/submitToTelegram'
+import { submitLead } from '@/app/utils/submitLead'
 
 export const ConsultationForm = ({
   open,
@@ -45,9 +45,12 @@ export const ConsultationForm = ({
     e.preventDefault()
     setStatus('idle')
     try {
+      await submitLead({
+        form: 'consultation-modal',
+        data: { name, email, phone },
+      })
       await onSubmit({ name, email, phone })
       setStatus('success')
-      await submitToTelegram({ name, email, phone })
       setTimeout(() => {
         resetForm()
         setStatus('idle')

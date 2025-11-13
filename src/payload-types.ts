@@ -480,7 +480,7 @@ export interface Case {
 export interface Page {
   id: string;
   name: string;
-  heading: {
+  heading?: {
     root: {
       type: string;
       children: {
@@ -494,7 +494,7 @@ export interface Page {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   image?: (string | null) | Media;
   slug: string;
   layout?:

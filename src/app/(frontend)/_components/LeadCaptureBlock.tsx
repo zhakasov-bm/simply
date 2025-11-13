@@ -1,6 +1,6 @@
 'use client'
 
-import { submitToTelegram } from '@/app/utils/submitToTelegram'
+import { submitLead } from '@/app/utils/submitLead'
 import { Component, Solution, Form } from '@/payload-types'
 import { useState, useEffect, useMemo } from 'react'
 import PhoneInput from 'react-phone-input-2'
@@ -73,7 +73,10 @@ export default function LeadCaptureBlock({ block, formId }: Props) {
         return
       }
 
-      await submitToTelegram(data)
+      await submitLead({
+        form: block.form?.title || 'lead-capture-form',
+        data,
+      })
 
       setFormState({ loading: false, error: null, success: true })
       setPhone('') // reset phone input
