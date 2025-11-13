@@ -128,7 +128,13 @@ function getFieldValue(fields: LeadFields, aliases: string[]) {
   return ''
 }
 
-function getServerEnv() {
+type ServerEnv = {
+  telegramBotToken: string
+  telegramChatId: string
+  bitrixWebhookUrl: string
+}
+
+function getServerEnv(): ServerEnv {
   const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN
   const telegramChatId = process.env.TELEGRAM_CHAT_ID
   const bitrixWebhookUrl = process.env.BITRIX_WEBHOOK_URL
@@ -142,7 +148,11 @@ function getServerEnv() {
     throw new Error(`Проверьте серверные переменные окружения: ${missing.join(', ')}`)
   }
 
-  return { telegramBotToken, telegramChatId, bitrixWebhookUrl }
+  return {
+    telegramBotToken: telegramBotToken!,
+    telegramChatId: telegramChatId!,
+    bitrixWebhookUrl: bitrixWebhookUrl!,
+  }
 }
 
 async function sendToTelegram({
