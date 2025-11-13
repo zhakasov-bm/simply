@@ -107,7 +107,7 @@ export default async function page({ params }: Props) {
       </div>
 
       <div className="px-8 md:px-40">
-        <RichText data={page?.heading} className="vacancy-richtext" />
+        {page?.heading ? <RichText data={page.heading} className="vacancy-richtext" /> : null}
 
         {Object.entries(groupedByCategory).map(([category, vacancies]) => (
           <div key={category} className="py-8 md:py-12">
